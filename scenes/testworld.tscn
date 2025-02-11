@@ -43,6 +43,6 @@ scale = Vector2(0.270833, 0.306944)
 texture = ExtResource("3_grbfx")
 
 [node name="Floating-hearts-background" type="Sprite2D" parent="Floating-hearts-background"]
-position = Vector2(4430.77, 9.77371)
-scale = Vector2(0.934615, 0.918552)
+position = Vector2(4536, 71.6742)
+scale = Vector2(1.04423, 1.00452)
 texture = ExtResource("3_grbfx")
