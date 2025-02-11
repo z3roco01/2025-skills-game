@@ -20,3 +20,4 @@ offset_bottom = 32.0
 color = Color(0.443979, 0.56276, 0.315865, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.3, 0.3)
