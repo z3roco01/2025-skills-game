@@ -1,0 +1,83 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvf2p4gkggk0n"]
+
+[ext_resource type="Script" path="res://scripts/identity_screen.gd" id="1_520kf"]
+
+[node name="identityScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_520kf")
+
+[node name="nameInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 17.0
+offset_right = 742.0
+offset_bottom = 48.0
+placeholder_text = "name"
+
+[node name="subjectiveInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 227.0
+offset_top = 111.0
+offset_right = 744.0
+offset_bottom = 142.0
+placeholder_text = "subjective"
+
+[node name="objectiveInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 159.0
+offset_right = 746.0
+offset_bottom = 190.0
+placeholder_text = "objective"
+
+[node name="determinerInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 203.0
+offset_right = 747.0
+offset_bottom = 234.0
+placeholder_text = "determiner"
+
+[node name="possessiveInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 233.0
+offset_top = 248.0
+offset_right = 750.0
+offset_bottom = 279.0
+placeholder_text = "possessive"
+
+[node name="reflexiveInput" type="LineEdit" parent="."]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 295.0
+offset_right = 732.0
+offset_bottom = 326.0
+placeholder_text = "reflexive"
+
+[node name="descriptersSelect" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 63.0
+offset_right = 739.0
+offset_bottom = 83.0
+item_count = 3
+popup/item_0/text = "feminine"
+popup/item_1/text = "masculine"
+popup/item_1/id = 1
+popup/item_2/text = "neutral"
+popup/item_2/id = 2
+
+[node name="save button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 366.0
+offset_top = 572.0
+offset_right = 714.0
+offset_bottom = 635.0
+text = "save"
+
+[connection signal="pressed" from="save button" to="." method="_on_save_button_pressed"]

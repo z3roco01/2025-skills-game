@@ -9,6 +9,7 @@ var pronounSubjective = "they"
 var pronounObjective  = "them"
 var pronounDeterminer = "their"
 var pronounPossessive = "theirs"
+var pronounReflexive  = "themself"
 
 # an enum for the types of descriptors ( compliments, titles, etc ) 
 enum Descriptors {FEMININE, MASCULINE, NEUTRAL}
@@ -20,6 +21,7 @@ const _PRONOUN_SUBJECTIVE = "pronounSubjective"
 const _PRONOUN_OBJECTIVE  = "pronounObjective"
 const _PRONOUN_DETERMINER = "pronounDeterminer"
 const _PRONOUN_POSSESSIVE = "pronounPossessive"
+const _PRONOUN_REFLEXIVE  = "pronounReflexive"
 
 # saves this identity object to a passed ConfigFile
 func saveToConfig(config: ConfigFile, path: String) -> void:
@@ -29,6 +31,7 @@ func saveToConfig(config: ConfigFile, path: String) -> void:
 	config.set_value(_CONFIG_SECTION, _PRONOUN_OBJECTIVE,  pronounObjective)
 	config.set_value(_CONFIG_SECTION, _PRONOUN_DETERMINER, pronounDeterminer)
 	config.set_value(_CONFIG_SECTION, _PRONOUN_POSSESSIVE, pronounPossessive)
+	config.set_value(_CONFIG_SECTION, _PRONOUN_REFLEXIVE, pronounReflexive)
 	
 	config.save(path)
 
@@ -40,7 +43,8 @@ func loadFromConfig(config: ConfigFile) -> void:
 	pronounObjective  = config.get_value(_CONFIG_SECTION, _PRONOUN_OBJECTIVE)
 	pronounDeterminer = config.get_value(_CONFIG_SECTION, _PRONOUN_DETERMINER)
 	pronounPossessive = config.get_value(_CONFIG_SECTION, _PRONOUN_POSSESSIVE)
+	pronounReflexive = config.get_value(_CONFIG_SECTION, _PRONOUN_REFLEXIVE)
 
 # override the to string function, used mostley for testing
 func _to_string() -> String:
-	return playerName + " " + str(descriptors) + " " + pronounSubjective + " " + pronounObjective + " " + pronounDeterminer + " " + pronounPossessive
+	return playerName + " " + str(descriptors) + " " + pronounSubjective + " " + pronounObjective + " " + pronounDeterminer + " " + pronounPossessive + " " + pronounReflexive
