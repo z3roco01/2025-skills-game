@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=5 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Texture2D" uid="uid://dbynhn3afuqpa" path="res://scenes/485b60d7-628c-4763-8717-b0b0f7a0f7f5.jpg" id="1_sb6wm"]
 [ext_resource type="Texture2D" uid="uid://bkp28cr4okgla" path="res://floating-hearts-background.jpg" id="3_grbfx"]
+[ext_resource type="Texture2D" uid="uid://btc1vrsqutj1w" path="res://thumbnail4.png" id="4_kw64x"]
 
 [node name="testworld" type="Node2D"]
 
@@ -46,3 +47,8 @@ texture = ExtResource("3_grbfx")
 position = Vector2(4536, 71.6742)
 scale = Vector2(1.04423, 1.00452)
 texture = ExtResource("3_grbfx")
+
+[node name="Thumbnail4" type="Sprite2D" parent="Floating-hearts-background"]
+position = Vector2(4354.47, -2098.92)
+scale = Vector2(2.53077, 2.35521)
+texture = ExtResource("4_kw64x")
