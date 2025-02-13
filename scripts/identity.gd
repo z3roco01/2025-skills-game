@@ -45,6 +45,11 @@ func loadFromConfig(config: ConfigFile) -> void:
 	pronounPossessive = config.get_value(_CONFIG_SECTION, _PRONOUN_POSSESSIVE)
 	pronounReflexive = config.get_value(_CONFIG_SECTION, _PRONOUN_REFLEXIVE)
 
+# used to check if "is" or "are" will be used for the player, returns true if "is" will be used, false otherwise
+func usesIs() -> bool:
+	if(pronounSubjective == "they"): return false
+	return true
+
 # override the to string function, used mostley for testing
 func _to_string() -> String:
 	return playerName + " " + str(descriptors) + " " + pronounSubjective + " " + pronounObjective + " " + pronounDeterminer + " " + pronounPossessive + " " + pronounReflexive

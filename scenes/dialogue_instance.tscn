@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcne32iho2ohv"]
+[gd_scene load_steps=5 format=3 uid="uid://dcne32iho2ohv"]
 
 [ext_resource type="Texture2D" uid="uid://bqx0tym0o41tj" path="res://485b60d7-628c-4763-8717-b0b0f7a0f7f5.jpg" id="1_8pde1"]
 [ext_resource type="Script" path="res://scripts/dialogue_instance.gd" id="1_g7hym"]
+[ext_resource type="Texture2D" uid="uid://bkp28cr4okgla" path="res://floating-hearts-background.jpg" id="2_7yakg"]
 [ext_resource type="Texture2D" uid="uid://btc1vrsqutj1w" path="res://thumbnail4.png" id="2_lsq6u"]
 
 [node name="dialogueInstance" type="Control"]
@@ -13,8 +14,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g7hym")
+expressions = {
+"anger": ExtResource("1_8pde1"),
+"content": ExtResource("2_7yakg")
+}
+defaultExpression = "content"
 
 [node name="background" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -81.0
 offset_top = -21.0
 offset_right = 1199.0
@@ -31,12 +38,14 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 0.619608)
 
-[node name="speakerTexture" type="TextureRect" parent="."]
+[node name="characterTexture" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 805.0
 offset_top = 35.0
 offset_right = 1084.0
 offset_bottom = 584.0
 texture = ExtResource("1_8pde1")
+expand_mode = 1
 
 [node name="dialoguePanel" type="Panel" parent="."]
 layout_mode = 1
