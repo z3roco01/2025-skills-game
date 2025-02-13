@@ -83,7 +83,6 @@ func lookupVar(varName: String, returnArray: Array) -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if(event is InputEventMouseButton):
 		if(curDialogueBox < dialogueBoxCount):
-			print(curDialogueBox)
 			dialogueBoxes[curDialogueBox].show()
 			curDialogueBox += 1
 		
@@ -134,7 +133,6 @@ class DialogueBox:
 				# then remove the tag by replacing it with nothing
 				dialogueText = dialogueText.replace("[" + matched + "]", "")
 			elif(matched.begins_with("dec ")): # if the tag begins with "dec " then its a decider
-				print(matched)
 				# strip the tag type off of the left, then split by | up to 3 options
 				var choices = matched.lstrip("dec ").split("|", true, 3)
 				# choose the one that lines up with the players descriptor choice
