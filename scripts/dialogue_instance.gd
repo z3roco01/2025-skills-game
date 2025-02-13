@@ -44,7 +44,6 @@ func _ready() -> void:
 	
 	# create a dialogue box for each box text
 	for boxText in boxTexts:
-		print(boxText)
 		# create the new dialogue box
 		var newDialogueBox = DialogueBox.new()
 		# connect the two signals to the dialogue instance
@@ -74,7 +73,6 @@ func changeExpression(expressionId: String) -> void:
 
 # called by a dialogue box, will show its text and expression
 func showBox(text: String, expressionId: String) -> void:
-	print(text)
 	dialogueTextNode.text = text
 	changeExpression(expressionId)
 
@@ -135,6 +133,14 @@ class DialogueBox:
 				expressionId = matched.lstrip("expr ")
 				# then remove the tag by replacing it with nothing
 				dialogueText = dialogueText.replace("[" + matched + "]", "")
+			elif(matched.begins_with("dec ")): # if the tag begins with "dec " then its a decider
+				print(matched)
+				# strip the tag type off of the left, then split by | up to 3 options
+				var choices = matched.lstrip("dec ").split("|", true, 3)
+				# choose the one that lines up with the players descriptor choice
+				var choice = choices[Identity.descriptors]
+				# then replace the instance of this tag with the decided string
+				dialogueText = dialogueText.replace("[" + matched + "]", choice)
 			
 	
 	# replaces the passed variable with the value from the dictionary, replaces in the dialogue texture
