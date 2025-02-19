@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=8 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Texture2D" uid="uid://dbynhn3afuqpa" path="res://scenes/485b60d7-628c-4763-8717-b0b0f7a0f7f5.jpg" id="1_sb6wm"]
 [ext_resource type="Texture2D" uid="uid://bkp28cr4okgla" path="res://floating-hearts-background.jpg" id="3_grbfx"]
 [ext_resource type="Texture2D" uid="uid://btc1vrsqutj1w" path="res://thumbnail4.png" id="4_kw64x"]
+[ext_resource type="PackedScene" uid="uid://caxogx3xyeisf" path="res://scenes/Enemy.tscn" id="5_d0su0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq4gp"]
+size = Vector2(1358, 51)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwcb3"]
+size = Vector2(324, 653)
 
 [node name="testworld" type="Node2D"]
 
@@ -31,24 +38,55 @@ offset_right = 145.0
 offset_bottom = -49.0
 
 [node name="ColorRect4" type="ColorRect" parent="."]
-offset_left = -1461.0
-offset_top = -588.0
-offset_right = -109.0
-offset_bottom = -95.0
+offset_left = -617.0
+offset_top = -373.0
+offset_right = 771.0
+offset_bottom = 395.0
+color = Color(0.136826, 0.136826, 0.136826, 1)
 
 [node name="player" parent="." instance=ExtResource("1_52pld")]
 
-[node name="Floating-hearts-background" type="Sprite2D" parent="."]
-position = Vector2(-604, 253)
-scale = Vector2(0.270833, 0.306944)
+[node name="Floating-hearts-background2" type="Sprite2D" parent="."]
+position = Vector2(586, -296)
+scale = Vector2(0.085156, 0.0923602)
 texture = ExtResource("3_grbfx")
 
-[node name="Floating-hearts-background" type="Sprite2D" parent="Floating-hearts-background"]
-position = Vector2(4536, 71.6742)
-scale = Vector2(1.04423, 1.00452)
-texture = ExtResource("3_grbfx")
-
-[node name="Thumbnail4" type="Sprite2D" parent="Floating-hearts-background"]
-position = Vector2(4354.47, -2098.92)
-scale = Vector2(2.53077, 2.35521)
+[node name="Thumbnail4" type="Sprite2D" parent="."]
+position = Vector2(-1336, -457)
+scale = Vector2(0.685416, 0.722918)
 texture = ExtResource("4_kw64x")
+
+[node name="Floating-hearts-background" type="Sprite2D" parent="."]
+position = Vector2(-1163, 37)
+scale = Vector2(0.269796, 0.303586)
+texture = ExtResource("3_grbfx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="wall2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall2"]
+position = Vector2(67, -345.5)
+shape = SubResource("RectangleShape2D_kq4gp")
+
+[node name="wall1" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall1"]
+position = Vector2(48, 350)
+shape = SubResource("RectangleShape2D_kq4gp")
+
+[node name="wall4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall4"]
+position = Vector2(-740, 6)
+shape = SubResource("RectangleShape2D_iwcb3")
+
+[node name="wall3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall3"]
+position = Vector2(738, 10)
+scale = Vector2(1.00174, 1)
+shape = SubResource("RectangleShape2D_iwcb3")
+
+[node name="RigidBody2D" parent="." instance=ExtResource("5_d0su0")]
+position = Vector2(-420, -144)

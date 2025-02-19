@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://caxogx3xyeisf"]
+
+[ext_resource type="Texture2D" uid="uid://dbynhn3afuqpa" path="res://scenes/485b60d7-628c-4763-8717-b0b0f7a0f7f5.jpg" id="1_jks1p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33w5u"]
+size = Vector2(39.4378, 20.5165)
+
+[node name="Anemone" type="RigidBody2D"]
+freeze = true
+
+[node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]
+texture = ExtResource("1_jks1p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.999998, 0)
+rotation = -3.14159
+scale = Vector2(3.04276, -5.84895)
+shape = SubResource("RectangleShape2D_33w5u")

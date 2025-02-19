@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 3000.0
+const SPEED = 700.0
 # gets the main node, which contains the players preferences
 @onready var mainNode = get_node("/root/main")
 
