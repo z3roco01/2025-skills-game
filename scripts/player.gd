@@ -14,17 +14,20 @@ var speed = DEFAULT_SPEED
 # gets the health label from the parent, hardcoded bc has to be
 @onready var healthLabel = get_node("/root/main/testworld/health")
 @onready var dashCooldown = $dashCooldown
-@onready var slashArea = $slashArea
-@onready var slashAreaColour = $slashArea/CollisionShape2D/ColorRect
+@onready var rotators = $rotators
+@onready var slashAreaColour = $rotators/slashArea/CollisionShape2D/ColorRect
+@onready var stabArea = $rotators/stabArea
+@onready var stabAreaColour = $rotators/stabArea/CollisionShape2D/ColorRect
 @onready var slashTimer = $slashTimer
 # create a tween
 @onready var tween = get_tree().create_tween()
 
 # damage that should be delt to the enemey each physics tick
 var enemyDamage = 0
+var stabbing = false
 
 func _physics_process(delta: float) -> void:
-	slashArea.look_at(get_global_mouse_position())
+	rotators.look_at(get_global_mouse_position())
 	var direction := Input.get_vector("left", "right", "up", "back")
 	
 	# only dash when the dash key has been pressed, the cooldown is done and the player is moving in a direction
@@ -32,8 +35,7 @@ func _physics_process(delta: float) -> void:
 		# ensure the speed is at default so tween will work
 		speed = DEFAULT_SPEED
 		
-		# kill the old tween then start a new one 
-		tween.kill()
+		# create a new tween since it was just killed
 		tween = get_tree().create_tween()
 		# start tweening the speed to the final speed
 		tween.tween_property(self, "speed", DASH_SPEED, 0.2).set_trans(Tween.TRANS_EXPO)
@@ -50,6 +52,13 @@ func _physics_process(delta: float) -> void:
 		# set the alpha to full
 		slashAreaColour.color.a = 1
 		slashTimer.start()
+	if(Input.is_action_just_pressed("secondaryAttack") and !stabbing):
+		stabbing = true
+		stabAreaColour.color.a = 1
+		print(stabArea.scale.x)
+		var tween2 = get_tree().create_tween()
+		tween2.tween_property(stabArea, "scale:x", 1.0, 0.25).set_trans(Tween.TRANS_EXPO)
+		tween2.tween_callback(stabTweenFinish)
 	
 	enemy.decrementHealth(enemyDamage)
 
@@ -68,11 +77,27 @@ func decrementHealth(amount:int):
 # called once the tween for the dash speed has finished
 func dashTweenFinish():
 	speed = DEFAULT_SPEED
+	tween.kill()
+
+func stabTweenFinish():
+	print(stabArea.scale.x)
+	var timer = get_tree().create_timer(0.125)
+	await timer.timeout
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(stabArea, "scale:x", 0.0, 0.25).set_trans(Tween.TRANS_EXPO)
+	tween2.tween_callback(stabTweenFinishFinish)
+
+func stabTweenFinishFinish():
+	stabbing = false
 
 func _on_slash_area_body_entered(body: Node2D) -> void:
 	if(enemy == body and !slashTimer.is_stopped()):
-		enemyDamage = 1
+		enemyDamage = 2
 
 func _on_slash_timer_timeout() -> void:
 	enemyDamage = 0
 	slashAreaColour.color.a = 0.5
+
+func _on_stab_area_body_entered(body: Node2D) -> void:
+	if(body == enemy):
+		enemy.decrementHealth(10)
