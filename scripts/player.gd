@@ -23,8 +23,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "back")
 	
-	# check for dash input and able to use
-	if(Input.is_action_just_pressed("dash") and dashCooldown.is_stopped()):
+	# only dash when the dash key has been pressed, the cooldown is done and the player is moving in a direction
+	if(Input.is_action_just_pressed("dash") and dashCooldown.is_stopped() and direction != Vector2.ZERO):
 		# ensure the speed is at default so tween will work
 		speed = DEFAULT_SPEED
 		
