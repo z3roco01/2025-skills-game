@@ -19,11 +19,5 @@ offset_right = 32.0
 offset_bottom = 32.0
 color = Color(0.443979, 0.56276, 0.315865, 1)
 
-[node name="dashTimer" type="Timer" parent="."]
-wait_time = 0.111
-one_shot = true
-
 [node name="dashCooldown" type="Timer" parent="."]
 one_shot = true
-
-[connection signal="timeout" from="dashTimer" to="." method="_on_dash_timer_timeout"]

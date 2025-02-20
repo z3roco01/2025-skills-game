@@ -4,45 +4,45 @@ var startHealth = 100
 var currentHealth
 
 const DEFAULT_SPEED = 700.0
-const DASH_SPEED = 2000
+const DASH_SPEED = 3000
 
 var speed = DEFAULT_SPEED
-var dashOnCD = false
 
 # gets the main node, which contains the players preferences
 @onready var mainNode = get_node("/root/main")
+# gets the health label from the parent, hardcoded bc has to be
 @onready var healthLabel = get_node("/root/main/testworld/health")
-@onready var dashTimer = $dashTimer
 @onready var dashCooldown = $dashCooldown
+# create a tween
+@onready var tween = get_tree().create_tween()
 
 func _ready() -> void:
 	# set current health to the starting health
 	currentHealth = startHealth
-	
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_vector("left", "right", "up", "back")
 	
-	velocity = direction * speed
-	
 	# check for dash input and able to use
 	if(Input.is_action_just_pressed("dash") and dashCooldown.is_stopped()):
+		# ensure the speed is at default so tween will work
+		speed = DEFAULT_SPEED
 		
-		# start dash
-		speed = DASH_SPEED
-		dashTimer.start()
-		
-		# start dash cooldown
+		# kill the old tween then start a new one 
+		tween.kill()
+		tween = get_tree().create_tween()
+		# start tweening the speed to the final speed
+		tween.tween_property(self, "speed", DASH_SPEED, 0.2).set_trans(Tween.TRANS_EXPO)
+		tween.tween_callback(dashTweenFinish)
+		# start dash cooldown timer
 		dashCooldown.start()
 	
+	# apply the speed based on the inputted direction
+	velocity = direction * speed
 	
 	move_and_slide()
-	
-	
-	
 
 func decrementHealth(amount:int):
-	
 	# check for death
 	if(currentHealth - amount > 0):
 		currentHealth -= amount
@@ -52,10 +52,12 @@ func decrementHealth(amount:int):
 	
 	# update health :)
 	healthLabel.text = str(currentHealth)
-	
-	pass #ts pmo
-
+	#ts pmo
 
 func _on_dash_timer_timeout() -> void:
 	# go back to normal speed
+	speed = DEFAULT_SPEED
+
+# called once the tween for the dash speed has finished
+func dashTweenFinish():
 	speed = DEFAULT_SPEED
