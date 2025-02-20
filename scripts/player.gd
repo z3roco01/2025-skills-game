@@ -55,7 +55,6 @@ func _physics_process(delta: float) -> void:
 	if(Input.is_action_just_pressed("secondaryAttack") and !stabbing):
 		stabbing = true
 		stabAreaColour.color.a = 1
-		print(stabArea.scale.x)
 		var tween2 = get_tree().create_tween()
 		tween2.tween_property(stabArea, "scale:x", 1.0, 0.25).set_trans(Tween.TRANS_EXPO)
 		tween2.tween_callback(stabTweenFinish)
@@ -80,7 +79,6 @@ func dashTweenFinish():
 	tween.kill()
 
 func stabTweenFinish():
-	print(stabArea.scale.x)
 	var timer = get_tree().create_timer(0.125)
 	await timer.timeout
 	var tween2 = get_tree().create_tween()
@@ -99,5 +97,5 @@ func _on_slash_timer_timeout() -> void:
 	slashAreaColour.color.a = 0.5
 
 func _on_stab_area_body_entered(body: Node2D) -> void:
-	if(body == enemy):
-		enemy.decrementHealth(10)
+	if(body == enemy and stabbing):
+		enemy.decrementHealth(6)
