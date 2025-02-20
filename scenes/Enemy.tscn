@@ -7,6 +7,7 @@
 size = Vector2(39.4378, 20.5165)
 
 [node name="Anemone" type="RigidBody2D"]
+freeze = true
 script = ExtResource("1_r78x5")
 
 [node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]

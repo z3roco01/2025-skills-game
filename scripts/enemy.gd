@@ -7,13 +7,18 @@ var currentHealth = startHealth
 var vel = Vector2.ZERO
 # get the player from the parent
 @onready var player = get_parent().get_node("./player")
+@onready var healthText = get_parent().get_node("./enemyHealth")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var collision = move_and_collide(position.direction_to(player.position) * SPEED)
-	
-	if(collision and collision.get_collider() == player):
-		player.decrementHealth(1)
+	if(alive()):
+		var collision = move_and_collide(position.direction_to(player.position) * SPEED)
+		
+		if(collision and collision.get_collider() == player):
+			player.decrementHealth(1)
+
+func alive() -> bool:
+	return currentHealth > 0
 
 func decrementHealth(amount: int):
 	# check for death
@@ -22,6 +27,6 @@ func decrementHealth(amount: int):
 	else:
 		currentHealth = 0
 		# TODO death stuff
-	
+	healthText.text = str(currentHealth)
 	# update health :)
 	# TODO make health label

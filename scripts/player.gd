@@ -1,26 +1,30 @@
 extends CharacterBody2D
 
 var startHealth = 100
-var currentHealth
+var currentHealth = startHealth
 
 const DEFAULT_SPEED = 700.0
 const DASH_SPEED = 3000
 
 var speed = DEFAULT_SPEED
+@export var enemy: Node2D
 
 # gets the main node, which contains the players preferences
 @onready var mainNode = get_node("/root/main")
 # gets the health label from the parent, hardcoded bc has to be
 @onready var healthLabel = get_node("/root/main/testworld/health")
 @onready var dashCooldown = $dashCooldown
+@onready var slashArea = $slashArea
+@onready var slashAreaColour = $slashArea/CollisionShape2D/ColorRect
+@onready var slashTimer = $slashTimer
 # create a tween
 @onready var tween = get_tree().create_tween()
 
-func _ready() -> void:
-	# set current health to the starting health
-	currentHealth = startHealth
+# damage that should be delt to the enemey each physics tick
+var enemyDamage = 0
 
 func _physics_process(delta: float) -> void:
+	slashArea.look_at(get_global_mouse_position())
 	var direction := Input.get_vector("left", "right", "up", "back")
 	
 	# only dash when the dash key has been pressed, the cooldown is done and the player is moving in a direction
@@ -41,6 +45,13 @@ func _physics_process(delta: float) -> void:
 	velocity = direction * speed
 	
 	move_and_slide()
+	
+	if(Input.is_action_just_pressed("primaryAttack")):
+		# set the alpha to full
+		slashAreaColour.color.a = 1
+		slashTimer.start()
+	
+	enemy.decrementHealth(enemyDamage)
 
 func decrementHealth(amount:int):
 	# check for death
@@ -54,10 +65,14 @@ func decrementHealth(amount:int):
 	healthLabel.text = str(currentHealth)
 	#ts pmo
 
-func _on_dash_timer_timeout() -> void:
-	# go back to normal speed
-	speed = DEFAULT_SPEED
-
 # called once the tween for the dash speed has finished
 func dashTweenFinish():
 	speed = DEFAULT_SPEED
+
+func _on_slash_area_body_entered(body: Node2D) -> void:
+	if(enemy == body and !slashTimer.is_stopped()):
+		enemyDamage = 1
+
+func _on_slash_timer_timeout() -> void:
+	enemyDamage = 0
+	slashAreaColour.color.a = 0.5
