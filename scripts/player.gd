@@ -94,7 +94,7 @@ func _on_slash_area_body_entered(body: Node2D) -> void:
 
 func _on_slash_timer_timeout() -> void:
 	enemyDamage = 0
-	slashAreaColour.color.a = 0.5
+	slashAreaColour.color.a = 0
 
 func _on_stab_area_body_entered(body: Node2D) -> void:
 	if(body == enemy and stabbing):
