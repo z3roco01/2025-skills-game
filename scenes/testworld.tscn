@@ -88,5 +88,13 @@ position = Vector2(738, 10)
 scale = Vector2(1.00174, 1)
 shape = SubResource("RectangleShape2D_iwcb3")
 
+[node name="health" type="Label" parent="."]
+offset_left = -573.0
+offset_top = -339.0
+offset_right = -248.0
+offset_bottom = -236.0
+theme_override_font_sizes/font_size = 75
+text = "ts pmo"
+
 [node name="RigidBody2D" parent="." instance=ExtResource("5_d0su0")]
 position = Vector2(-420, -144)
