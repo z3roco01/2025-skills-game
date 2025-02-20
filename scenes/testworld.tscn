@@ -98,3 +98,5 @@ text = "ts pmo"
 
 [node name="RigidBody2D" parent="." instance=ExtResource("5_d0su0")]
 position = Vector2(-420, -144)
+freeze = true
+freeze_mode = 1
