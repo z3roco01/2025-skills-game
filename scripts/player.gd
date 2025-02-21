@@ -26,6 +26,12 @@ var speed = DEFAULT_SPEED
 var enemyDamage = 0
 var stabbing = false
 
+#tracks if enemy is going to be hit by slash
+#tracks if slash has already hit the enemy
+var slashOnEnemy = false
+var slashHitEnemy = false 
+var slashing = false
+
 func _physics_process(delta: float) -> void:
 	rotators.look_at(get_global_mouse_position())
 	var direction := Input.get_vector("left", "right", "up", "back")
@@ -48,7 +54,11 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-	if(Input.is_action_just_pressed("primaryAttack")):
+	if(Input.is_action_just_pressed("primaryAttack") and !slashing):
+		# track slashing
+		slashing = true
+		# set slashhitenemy to false to track when its been hit
+		slashHitEnemy = false
 		# set the alpha to full
 		slashAreaColour.color.a = 1
 		slashTimer.start()
@@ -58,6 +68,12 @@ func _physics_process(delta: float) -> void:
 		var tween2 = get_tree().create_tween()
 		tween2.tween_property(stabArea, "scale:x", 1.0, 0.25).set_trans(Tween.TRANS_EXPO)
 		tween2.tween_callback(stabTweenFinish)
+	
+	# if slash is running and hasnt already done dmg, and on enemy, do damage
+	if(!slashTimer.is_stopped() and slashOnEnemy and !slashHitEnemy):
+		enemy.decrementHealth(10)
+		# slash hit variable to true
+		slashHitEnemy = true
 	
 	enemy.decrementHealth(enemyDamage)
 
@@ -89,12 +105,18 @@ func stabTweenFinishFinish():
 	stabbing = false
 
 func _on_slash_area_body_entered(body: Node2D) -> void:
-	if(enemy == body and !slashTimer.is_stopped()):
-		enemyDamage = 2
+	if(enemy == body):
+		slashOnEnemy = true
+		
+
+func _on_slash_area_body_exited(body: Node2D) -> void:
+	if(enemy == body):
+		slashOnEnemy = false
 
 func _on_slash_timer_timeout() -> void:
 	enemyDamage = 0
 	slashAreaColour.color.a = 0
+	slashing = false
 
 func _on_stab_area_body_entered(body: Node2D) -> void:
 	if(body == enemy and stabbing):

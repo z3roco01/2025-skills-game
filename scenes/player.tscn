@@ -27,6 +27,7 @@ shape = SubResource("RectangleShape2D_d2wxn")
 one_shot = true
 
 [node name="slashTimer" type="Timer" parent="."]
+wait_time = 0.282
 one_shot = true
 
 [node name="rotators" type="Node2D" parent="."]
