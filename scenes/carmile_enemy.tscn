@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2i7pjju13kv1"]
+
+[ext_resource type="Script" path="res://scripts/carmile_enemy.gd" id="1_iinlb"]
+[ext_resource type="Texture2D" uid="uid://bkp28cr4okgla" path="res://floating-hearts-background.jpg" id="2_msxws"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
+size = Vector2(121, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mntct"]
+size = Vector2(200, 60)
+
+[node name="carmileEnemy" type="RigidBody2D"]
+freeze = true
+script = ExtResource("1_iinlb")
+
+[node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]
+scale = Vector2(-0.063, 0.083)
+texture = ExtResource("2_msxws")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7rqhy")
+
+[node name="rotators" type="Node2D" parent="."]
+
+[node name="backstabArea" type="Area2D" parent="rotators"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rotators/backstabArea"]
+position = Vector2(161, 0)
+shape = SubResource("RectangleShape2D_mntct")
+debug_color = Color(0.524103, 0.573212, 3.85046e-07, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="rotators/backstabArea/CollisionShape2D"]
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 100.0
+offset_bottom = 30.0
+color = Color(0.898039, 0.760784, 0.282353, 0)
+
+[node name="backstabTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true

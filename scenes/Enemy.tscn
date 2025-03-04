@@ -18,3 +18,5 @@ position = Vector2(0.999998, 0)
 rotation = -3.14159
 scale = Vector2(3.04276, -5.84895)
 shape = SubResource("RectangleShape2D_33w5u")
+
+[node name="rotators" type="Node2D" parent="."]
