@@ -19,6 +19,7 @@ var speed = DEFAULT_SPEED
 @onready var stabArea = $rotators/stabArea
 @onready var stabAreaColour = $rotators/stabArea/CollisionShape2D/ColorRect
 @onready var slashTimer = $slashTimer
+@onready var slashArea = $rotators/slashArea
 # create a tween
 @onready var tween = get_tree().create_tween()
 
@@ -61,6 +62,7 @@ func _physics_process(delta: float) -> void:
 		slashHitEnemy = false
 		# set the alpha to full
 		slashAreaColour.color.a = 1
+		# start slash timer
 		slashTimer.start()
 	if(Input.is_action_just_pressed("secondaryAttack") and !stabbing):
 		stabbing = true
@@ -69,10 +71,9 @@ func _physics_process(delta: float) -> void:
 		tween2.tween_property(stabArea, "scale:x", 1.0, 0.25).set_trans(Tween.TRANS_EXPO)
 		tween2.tween_callback(stabTweenFinish)
 	
-	# if slash is running and hasnt already done dmg, and on enemy, do damage
-	if(!slashTimer.is_stopped() and slashOnEnemy and !slashHitEnemy):
-		enemy.decrementHealth(10)
-		# slash hit variable to true
+	# if the enemy is inside the slash area and has not already been hit, hit it
+	if(slashArea.overlaps_body(enemy) and !slashHitEnemy):
+		enemy.decrementHealth(5)
 		slashHitEnemy = true
 	
 	enemy.decrementHealth(enemyDamage)
@@ -104,20 +105,14 @@ func stabTweenFinish():
 func stabTweenFinishFinish():
 	stabbing = false
 
-func _on_slash_area_body_entered(body: Node2D) -> void:
-	if(enemy == body):
-		slashOnEnemy = true
-		
-
-func _on_slash_area_body_exited(body: Node2D) -> void:
-	if(enemy == body):
-		slashOnEnemy = false
-
-func _on_slash_timer_timeout() -> void:
-	enemyDamage = 0
-	slashAreaColour.color.a = 0
-	slashing = false
-
 func _on_stab_area_body_entered(body: Node2D) -> void:
 	if(body == enemy and stabbing):
 		enemy.decrementHealth(6)
+
+# fired when the slash timer ends
+func _on_slash_timer_timeout() -> void:
+	# hide the slash area
+	slashAreaColour.color.a = 0
+	# reset slash tracking vars
+	slashing = false
+	slashHitEnemy = false
