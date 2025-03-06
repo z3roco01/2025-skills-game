@@ -36,7 +36,8 @@ func attack() -> void:
 			attackCooldown = 100
 		else:
 			earthquake()
-			attackCooldown = 150
+			print("EARTH END")
+			attackCooldown = 250
 
 # an attack that will trigger once chosen
 # will teleport behind player then stab them
@@ -91,25 +92,34 @@ func earthquake() -> void:
 	
 	playerEarthquakeDamage = false
 	earthquakeTimer.start()
+	# wait a little bit before earthquaking
+	await earthquakeTimer.timeout
+	earthquakeTimer.start()
 	# do first check of inner circle
 	while(!earthquakeTimer.is_stopped() and !playerEarthquakeDamage):
-		if(distanceToPlayer() <= INNER_RADIUS and !playerEarthquakeDamage):
+		if(distanceToPlayer() <= INNER_RADIUS):
 			player.decrementHealth(INNER_DAMAGE)
+			print("in dam")
 			playerEarthquakeDamage = true
+	print("in fin")
 	# then check middle
 	playerEarthquakeDamage = false
 	earthquakeTimer.start()
-	while(!earthquakeTimer.is_stopped()):
-		if(distanceToPlayer() > INNER_RADIUS and distanceToPlayer() <= MIDDLE_RADIUS and !playerEarthquakeDamage):
+	while(!earthquakeTimer.is_stopped() and !playerEarthquakeDamage):
+		if(distanceToPlayer() > INNER_RADIUS and distanceToPlayer() <= MIDDLE_RADIUS):
 			player.decrementHealth(MIDDLE_DAMAGE)
+			print(" mid dam")
 			playerEarthquakeDamage = true
+	print("mid fin")
 	# then check outer
 	playerEarthquakeDamage = false
 	earthquakeTimer.star()
-	while(!earthquakeTimer.is_stopped()):
-		if(distanceToPlayer() > MIDDLE_RADIUS and distanceToPlayer() <= OUTER_RADIUS and !playerEarthquakeDamage):
+	while(!earthquakeTimer.is_stopped() and !playerEarthquakeDamage):
+		if(!distanceToPlayer() > MIDDLE_RADIUS and distanceToPlayer() <= OUTER_RADIUS):
 			player.decrementHealth(OUTER_DAMAGE)
+			print("out dam")
 			playerEarthquakeDamage = true
+	print("out fin")
 	
 	setEarthquakes(false)
 

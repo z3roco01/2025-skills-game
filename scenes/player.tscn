@@ -24,9 +24,11 @@ texture = ExtResource("2_1egyq")
 shape = SubResource("RectangleShape2D_d2wxn")
 
 [node name="dashCooldown" type="Timer" parent="."]
+process_callback = 0
 one_shot = true
 
 [node name="slashTimer" type="Timer" parent="."]
+process_callback = 0
 wait_time = 0.282
 one_shot = true
 
