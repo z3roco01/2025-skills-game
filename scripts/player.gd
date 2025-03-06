@@ -12,7 +12,7 @@ var speed = DEFAULT_SPEED
 # gets the main node, which contains the players preferences
 @onready var mainNode = get_node("/root/main")
 # gets the health label from the parent, hardcoded bc has to be
-@onready var healthLabel = get_node("/root/main/testworld/ColorRect4/health")
+@onready var healthLabel = get_node("/root/main/testworld/health")
 @onready var dashCooldown = $dashCooldown
 @onready var rotators = $rotators
 @onready var slashAreaColour = $rotators/slashArea/CollisionShape2D/ColorRect
@@ -29,7 +29,6 @@ var stabbing = false
 
 #tracks if enemy is going to be hit by slash
 #tracks if slash has already hit the enemy
-var slashOnEnemy = false
 var slashHitEnemy = false 
 var slashing = false
 
@@ -72,13 +71,12 @@ func _physics_process(delta: float) -> void:
 		tween2.tween_callback(stabTweenFinish)
 	
 	# if the enemy is inside the slash area and has not already been hit, hit it
-	if(slashArea.overlaps_body(enemy) and !slashHitEnemy):
+	if(slashArea.overlaps_body(enemy) and !slashHitEnemy and slashing):
 		enemy.decrementHealth(5)
 		slashHitEnemy = true
-	
-	enemy.decrementHealth(enemyDamage)
 
 func decrementHealth(amount:int):
+	print("asd " + str(amount))
 	# check for death
 	if(currentHealth - amount > 0):
 		currentHealth -= amount

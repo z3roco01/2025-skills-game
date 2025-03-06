@@ -1,7 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2i7pjju13kv1"]
+[gd_scene load_steps=10 format=3 uid="uid://b2i7pjju13kv1"]
 
 [ext_resource type="Script" path="res://scripts/carmile_enemy.gd" id="1_iinlb"]
 [ext_resource type="Texture2D" uid="uid://bkp28cr4okgla" path="res://floating-hearts-background.jpg" id="2_msxws"]
+[ext_resource type="Shader" path="res://tmp.gdshader" id="2_vycuw"]
+[ext_resource type="Texture2D" uid="uid://grdaroaq76a1" path="res://textures/circle.png" id="3_vsimn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shkmk"]
+shader = ExtResource("2_vycuw")
+shader_parameter/colour = Color(0.66708, 0.68, 0.2924, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dila5"]
+shader = ExtResource("2_vycuw")
+shader_parameter/colour = Color(0.81, 0.60588, 0.2268, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_86cq6"]
+shader = ExtResource("2_vycuw")
+shader_parameter/colour = Color(0.64, 0.195733, 0.096, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
 size = Vector2(121, 120)
@@ -10,8 +24,31 @@ size = Vector2(121, 120)
 size = Vector2(200, 60)
 
 [node name="carmileEnemy" type="RigidBody2D"]
-freeze = true
+gravity_scale = 0.0
 script = ExtResource("1_iinlb")
+
+[node name="earthquakeOuter" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_shkmk")
+position = Vector2(2, 0)
+scale = Vector2(4.059, 4.059)
+texture = ExtResource("3_vsimn")
+
+[node name="earthquakeMiddle" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_dila5")
+position = Vector2(0, 3)
+scale = Vector2(2.448, 2.448)
+texture = ExtResource("3_vsimn")
+
+[node name="earthquakeInner" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_86cq6")
+scale = Vector2(1.222, 1.222)
+texture = ExtResource("3_vsimn")
 
 [node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]
 scale = Vector2(-0.063, 0.083)
@@ -39,3 +76,21 @@ color = Color(0.898039, 0.760784, 0.282353, 0)
 [node name="backstabTimer" type="Timer" parent="."]
 wait_time = 0.25
 one_shot = true
+
+[node name="shieldTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="earthquakeTimer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="shieldColour" type="ColorRect" parent="."]
+visible = false
+offset_left = -71.0
+offset_top = -70.0
+offset_right = 71.0
+offset_bottom = 70.0
+color = Color(0.388235, 0.545098, 1, 0.431373)
+
+[connection signal="timeout" from="shieldTimer" to="." method="_on_shield_timer_timeout"]
