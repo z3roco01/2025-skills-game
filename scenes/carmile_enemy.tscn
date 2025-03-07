@@ -85,7 +85,7 @@ one_shot = true
 
 [node name="earthquakeTimer" type="Timer" parent="."]
 process_callback = 0
-wait_time = 0.25
+wait_time = 0.4
 one_shot = true
 
 [node name="shieldColour" type="ColorRect" parent="."]
@@ -97,3 +97,4 @@ offset_bottom = 70.0
 color = Color(0.388235, 0.545098, 1, 0.431373)
 
 [connection signal="timeout" from="shieldTimer" to="." method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="earthquakeTimer" to="." method="_on_earthquake_timer_timeout"]

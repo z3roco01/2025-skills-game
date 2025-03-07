@@ -72,10 +72,10 @@ func _physics_process(delta: float) -> void:
 	
 	# if the enemy is inside the slash area and has not already been hit, hit it
 	if(slashArea.overlaps_body(enemy) and !slashHitEnemy and slashing):
-		enemy.decrementHealth(5)
+		enemy.damage(5)
 		slashHitEnemy = true
 
-func decrementHealth(amount:int):
+func damage(amount:int):
 	print("asd " + str(amount))
 	# check for death
 	if(currentHealth - amount > 0):
@@ -105,7 +105,7 @@ func stabTweenFinishFinish():
 
 func _on_stab_area_body_entered(body: Node2D) -> void:
 	if(body == enemy and stabbing):
-		enemy.decrementHealth(6)
+		enemy.damage(6)
 
 # fired when the slash timer ends
 func _on_slash_timer_timeout() -> void:

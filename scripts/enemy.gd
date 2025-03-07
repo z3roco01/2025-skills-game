@@ -36,7 +36,7 @@ func idleAction() -> void:
 func alive() -> bool:
 	return currentHealth > 0
 
-func decrementHealth(amount: int):
+func damage(amount: int):
 	# check for death
 	if(currentHealth - amount > 0):
 		currentHealth -= amount

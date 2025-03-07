@@ -20,24 +20,36 @@ const OUTER_DAMAGE = 5
 # keep track if were using the shield
 var shielding = false
 var tookSheildDamage = false
-var playerEarthquakeDamage = false
+# 0 = not earthquaking, 1/2/3 = phase 1/2/3, 4 = done earthquake
+var earthquakePhase = 0
+# if this earthquake phase should be a wait or not
+var earthquakeWait = false
+# when set, no attacks will happen
+var attackBlocking = false
+# if the earthquake dealt damage this phase
+var earthquakeDamaged = false
 
 func idleAction() -> void:
 	pass 
 
 func attack() -> void:
-	if(distanceToPlayer() >= 400):
-		backstab()
-		attackCooldown = 100
-	elif(distanceToPlayer() <= 400):
-		if(!shielding):
-			shield()
-			# set attack cooldown
+	if(attackBlocking):
+		# if we are earthquaking, then do the damage
+		if(earthquakePhase > 0 and earthquakePhase < 4):
+			earthquakeDamage()
+	else:
+		if(distanceToPlayer() >= 400):
+			backstab()
 			attackCooldown = 100
-		else:
-			earthquake()
-			print("EARTH END")
-			attackCooldown = 250
+		elif(distanceToPlayer() <= 400):
+			if(!shielding):
+				shield()
+				# set attack cooldown
+				attackCooldown = 100
+			else:
+				earthquake()
+				# block attacks while earthquaking
+				attackBlocking = true
 
 # an attack that will trigger once chosen
 # will teleport behind player then stab them
@@ -59,7 +71,7 @@ func backstab() -> void:
 	# actually do attack 
 	backstabTestColour.color.a = 0.75
 	if(backstabArea.overlaps_body(player)):
-		player.decrementHealth(10)
+		player.damage(10)
 
 # holds all the logic that runs when the shield is enabled
 func shield() -> void:
@@ -69,12 +81,12 @@ func shield() -> void:
 	shieldTimer.start()
 	shieldColour.visible = true
 
-func decrementHealth(health: int) -> void:
+func damage(health: int) -> void:
 	if(!shielding):
-		super.decrementHealth(health)
+		super.damage(health)
 	else:
 		# reflect 1/2 damage back to player
-		player.decrementHealth(health/2)
+		player.damage(health/2)
 		disableShield()
 
 # when this times out and the sheild has not already been broken by the player, break the shield
@@ -89,41 +101,53 @@ func disableShield() -> void:
 func earthquake() -> void:
 	print("EARTH")
 	setEarthquakes(true)
-	
-	playerEarthquakeDamage = false
+	# make the first earthquake pahse a wait
+	earthquakeWait = true
 	earthquakeTimer.start()
-	# wait a little bit before earthquaking
-	await earthquakeTimer.timeout
-	earthquakeTimer.start()
-	# do first check of inner circle
-	while(!earthquakeTimer.is_stopped() and !playerEarthquakeDamage):
-		if(distanceToPlayer() <= INNER_RADIUS):
-			player.decrementHealth(INNER_DAMAGE)
-			print("in dam")
-			playerEarthquakeDamage = true
-	print("in fin")
-	# then check middle
-	playerEarthquakeDamage = false
-	earthquakeTimer.start()
-	while(!earthquakeTimer.is_stopped() and !playerEarthquakeDamage):
-		if(distanceToPlayer() > INNER_RADIUS and distanceToPlayer() <= MIDDLE_RADIUS):
-			player.decrementHealth(MIDDLE_DAMAGE)
-			print(" mid dam")
-			playerEarthquakeDamage = true
-	print("mid fin")
-	# then check outer
-	playerEarthquakeDamage = false
-	earthquakeTimer.star()
-	while(!earthquakeTimer.is_stopped() and !playerEarthquakeDamage):
-		if(!distanceToPlayer() > MIDDLE_RADIUS and distanceToPlayer() <= OUTER_RADIUS):
-			player.decrementHealth(OUTER_DAMAGE)
-			print("out dam")
-			playerEarthquakeDamage = true
-	print("out fin")
-	
-	setEarthquakes(false)
+	earthquakeDamaged = false
 
 func setEarthquakes(visibility: bool) -> void:
 	earthquakeOuter.visible = visibility
 	earthqakeMiddle.visible = visibility
 	earthquakeInner.visible = visibility
+
+# handles switching earthquake zones
+func _on_earthquake_timer_timeout() -> void:
+	# increment phase
+	earthquakePhase += 1
+	earthquakeDamaged = false
+	print(str(earthquakePhase))
+	if(earthquakeWait):
+		# do nothing except stop waiting and start timer again
+		earthquakeWait = false
+		earthquakeTimer.start()
+	elif(earthquakePhase <= 3):
+		# start timer again 
+		earthquakeTimer.start()
+	elif(earthquakePhase == 4):
+		print("EARHT OVER")
+		attackBlocking = false
+		setEarthquakes(false)
+		earthquakePhase = 0
+		attackCooldown = 200
+
+# helper function that checks if the player is in the current earthquake range
+# and then does the damage if applicable
+func earthquakeDamage() -> void:
+	var distToPlayer = distanceToPlayer()
+	# damage that will be dealt
+	var damageToDeal = 0
+	match(earthquakePhase):
+		1: # in the inner ring
+			if(distToPlayer <= INNER_RADIUS):
+				damageToDeal = INNER_DAMAGE
+		2: # in the middle ring
+			if(distToPlayer > INNER_RADIUS and distToPlayer <= MIDDLE_RADIUS):
+				damageToDeal = MIDDLE_DAMAGE
+		3: # in the outer ring
+			if(distToPlayer > MIDDLE_RADIUS and distToPlayer <= OUTER_RADIUS):
+				damageToDeal = OUTER_DAMAGE
+	# actually do the damage if they havent already been damaged
+	if(!earthquakeDamaged):
+		player.damage(damageToDeal)
+		earthquakeDamaged = true
