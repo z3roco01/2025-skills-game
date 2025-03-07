@@ -1,4 +1,4 @@
-extends "enemy.gd"
+extends Enemy
 
 @onready var shieldTimer = $shieldTimer
 @onready var backstabTimer = $backstabTimer
@@ -99,7 +99,6 @@ func disableShield() -> void:
 	shieldColour.visible = false
 
 func earthquake() -> void:
-	print("EARTH")
 	setEarthquakes(true)
 	# make the first earthquake pahse a wait
 	earthquakeWait = true
@@ -116,7 +115,6 @@ func _on_earthquake_timer_timeout() -> void:
 	# increment phase
 	earthquakePhase += 1
 	earthquakeDamaged = false
-	print(str(earthquakePhase))
 	if(earthquakeWait):
 		# do nothing except stop waiting and start timer again
 		earthquakeWait = false
@@ -125,7 +123,6 @@ func _on_earthquake_timer_timeout() -> void:
 		# start timer again 
 		earthquakeTimer.start()
 	elif(earthquakePhase == 4):
-		print("EARHT OVER")
 		attackBlocking = false
 		setEarthquakes(false)
 		earthquakePhase = 0

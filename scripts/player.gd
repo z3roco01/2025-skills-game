@@ -76,7 +76,6 @@ func _physics_process(delta: float) -> void:
 		slashHitEnemy = true
 
 func damage(amount:int):
-	print("asd " + str(amount))
 	# check for death
 	if(currentHealth - amount > 0):
 		currentHealth -= amount

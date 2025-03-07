@@ -1,3 +1,4 @@
+@icon("res://485b60d7-628c-4763-8717-b0b0f7a0f7f5")
 extends RigidBody2D
 
 class_name Enemy
