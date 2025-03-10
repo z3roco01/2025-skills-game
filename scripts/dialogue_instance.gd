@@ -10,6 +10,7 @@ extends Control
 @onready var dialogueTextNode = $dialoguePanel/text
 # gets the node that holds the characters image
 @onready var characterTexture = $characterTexture
+@onready var nextCharTimer = $nextCharTimer
 
 # the script containing the script with the markup
 @export var dialogueScript = "i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] but i hate [$object] [expr anger]"
@@ -22,6 +23,10 @@ var dialogueBoxes = []
 var dialogueBoxCount = 0
 # the current dialogue box we are showing
 var curDialogueBox = 0
+# text to show, needed so we can have the typing effect
+var textToShow = ""
+# how far we are into showing out text
+var curTextIdx = 0
 
 func _ready() -> void:
 	# set the characters expression to the default
@@ -73,8 +78,11 @@ func changeExpression(expressionId: String) -> void:
 
 # called by a dialogue box, will show its text and expression
 func showBox(text: String, expressionId: String) -> void:
-	dialogueTextNode.text = text
+	dialogueTextNode.text = ""
+	textToShow = text
+	curTextIdx = 0
 	changeExpression(expressionId)
+	nextCharTimer.start()
 
 # called by a dialogue box, will get the variables value then put it in the array
 func lookupVar(varName: String, returnArray: Array) -> void:
@@ -154,3 +162,11 @@ class DialogueBox:
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
 		showBox.emit(dialogueText, expressionId)
+
+# means we are ready to show the next character
+func _on_next_char_timer_timeout() -> void:
+	if(!textToShow.is_empty() and dialogueTextNode.text != textToShow and curTextIdx < textToShow.length()):
+		dialogueTextNode.text += textToShow[curTextIdx]
+		curTextIdx += 1
+	if(curTextIdx < textToShow.length()):
+		nextCharTimer.start()

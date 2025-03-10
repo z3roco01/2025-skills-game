@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcne32iho2ohv"]
+[gd_scene load_steps=4 format=3 uid="uid://dcne32iho2ohv"]
 
-[ext_resource type="Texture2D" uid="uid://bqx0tym0o41tj" path="res://485b60d7-628c-4763-8717-b0b0f7a0f7f5.jpg" id="1_8pde1"]
 [ext_resource type="Script" path="res://scripts/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Texture2D" uid="uid://c4cyfofvw5xop" path="res://textures/emil/Émil_Angry_1.png" id="5_qsmhr"]
 
@@ -17,11 +16,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g7hym")
 expressions = {
-"anger": ExtResource("1_8pde1"),
+"anger": ExtResource("5_qsmhr"),
 "content": ExtResource("5_qsmhr")
 }
 defaultExpression = "content"
-dialogueScript = "asdasd"
+dialogueScript = "test text wow omg hello[nb]im ohios sigmest rizzler !!"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -88,4 +87,9 @@ theme_override_font_sizes/font_size = 40
 text = "peepee poopoo test text
 omg its some text that he is saying woah"
 
+[node name="nextCharTimer" type="Timer" parent="."]
+wait_time = 0.025
+one_shot = true
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="timeout" from="nextCharTimer" to="." method="_on_next_char_timer_timeout"]
