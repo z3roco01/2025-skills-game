@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
-[ext_resource type="Texture2D" uid="uid://btc1vrsqutj1w" path="res://thumbnail4.png" id="4_kw64x"]
+[ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
 [ext_resource type="PackedScene" uid="uid://b2i7pjju13kv1" path="res://scenes/carmile_enemy.tscn" id="5_ok8dc"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
@@ -16,6 +16,7 @@ normal = Vector2(1, 0)
 normal = Vector2(-1, 0)
 
 [node name="testworld" type="Node2D"]
+script = ExtResource("1_jgkv1")
 
 [node name="ColorRect4" type="ColorRect" parent="."]
 offset_left = -960.0
@@ -45,6 +46,7 @@ position = Vector2(-960, 0)
 shape = SubResource("WorldBoundaryShape2D_lhy7v")
 
 [node name="wall3" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(960, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall3"]
@@ -57,27 +59,34 @@ position = Vector2(-575, -31)
 position = Vector2(170, -15)
 enemy = NodePath("../carmileEnemy")
 
-[node name="Thumbnail4" type="Sprite2D" parent="."]
-position = Vector2(-690, -453)
-scale = Vector2(0.422, 0.242)
-texture = ExtResource("4_kw64x")
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -589.0
+offset_bottom = -445.0
+color = Color(0.25, 0.25, 0.25, 1)
 
 [node name="health" type="Label" parent="."]
 offset_left = -960.0
 offset_top = -540.0
-offset_right = -710.0
+offset_right = -832.0
 offset_bottom = -437.0
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 75
-text = "ts pmo"
+text = "100
+"
 
 [node name="enemyHealth" type="Label" parent="."]
 offset_left = -723.0
 offset_top = -540.0
-offset_right = -422.0
+offset_right = -589.0
 offset_bottom = -437.0
 theme_override_colors/font_color = Color(1, 0.32, 0.32, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 75
-text = "fartballs"
+text = "100
+"
+
+[node name="waittimer" type="Timer" parent="."]
+one_shot = true

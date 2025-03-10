@@ -15,8 +15,10 @@ var vel = Vector2.ZERO
 # node that holds everything that will rotates around the enemy when they rotate
 @onready var rotators = $rotators
 
+signal death()
+
 # Called every physics tick
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if(alive()):
 		# if we can attack then run attack selection logic
 		if(attackCooldown <= 0):
@@ -43,10 +45,15 @@ func damage(amount: int):
 		currentHealth -= amount
 	else:
 		currentHealth = 0
-		# TODO death stuff
+	
+	if(currentHealth <= 0):
+		onDie()
 	healthText.text = str(currentHealth)
 	# update health :)
 	# TODO make health label
+
+func onDie() -> void:
+	emit_signal("death")
 
 # a helper function, used by enemies that inherit this
 func distanceToPlayer() -> float:

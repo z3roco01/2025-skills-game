@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://b2i7pjju13kv1"]
 
 [ext_resource type="Script" path="res://scripts/carmile_enemy.gd" id="1_iinlb"]
-[ext_resource type="Texture2D" uid="uid://bkp28cr4okgla" path="res://floating-hearts-background.jpg" id="2_msxws"]
 [ext_resource type="Shader" path="res://tmp.gdshader" id="2_vycuw"]
 [ext_resource type="Texture2D" uid="uid://grdaroaq76a1" path="res://textures/circle.png" id="3_vsimn"]
+[ext_resource type="Texture2D" uid="uid://c4cyfofvw5xop" path="res://textures/emil/Émil_Angry_1.png" id="4_5a0jk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shkmk"]
 shader = ExtResource("2_vycuw")
@@ -18,7 +18,7 @@ shader = ExtResource("2_vycuw")
 shader_parameter/colour = Color(0.64, 0.195733, 0.096, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
-size = Vector2(121, 120)
+size = Vector2(60, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mntct"]
 size = Vector2(200, 60)
@@ -51,15 +51,19 @@ scale = Vector2(1.222, 1.222)
 texture = ExtResource("3_vsimn")
 
 [node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]
-scale = Vector2(-0.063, 0.083)
-texture = ExtResource("2_msxws")
+position = Vector2(-9.53674e-07, -2.14577e-06)
+scale = Vector2(0.0497592, 0.0375587)
+texture = ExtResource("4_5a0jk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_7rqhy")
 
 [node name="rotators" type="Node2D" parent="."]
 
 [node name="backstabArea" type="Area2D" parent="rotators"]
+position = Vector2(-31, 0)
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rotators/backstabArea"]
 position = Vector2(161, 0)

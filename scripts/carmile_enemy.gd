@@ -68,10 +68,11 @@ func backstab() -> void:
 	# start timer to count towards attack
 	backstabTimer.start()
 	await backstabTimer.timeout
-	# actually do attack 
+	# actually do attack
 	backstabTestColour.color.a = 0.75
 	if(backstabArea.overlaps_body(player)):
 		player.damage(10)
+	backstabTestColour.color.a = 0
 
 # holds all the logic that runs when the shield is enabled
 func shield() -> void:
@@ -86,10 +87,10 @@ func damage(health: int) -> void:
 		super.damage(health)
 	else:
 		# reflect 1/2 damage back to player
-		player.damage(health/2)
+		player.damage(health/2.0)
 		disableShield()
 
-# when this times out and the sheild has not already been broken by the player, break the shield
+# when thishows times out and the sheild has not already been broken by the player, break the shield
 func _on_shield_timer_timeout() -> void:
 	disableShield()
 

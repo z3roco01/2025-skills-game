@@ -1,16 +1,17 @@
 extends Control
 
-@onready var nameInput = $nameInput
-@onready var descriptorsSelect = $descriptersSelect
-@onready var subjectiveInput = $subjectiveInput
-@onready var objectiveInput = $objectiveInput
-@onready var determinerInput = $determinerInput
-@onready var possessiveInput = $possessiveInput
-@onready var reflexiveInput = $reflexiveInput
+@onready var nameInput = $VBoxContainer/nameInput
+@onready var descriptorsSelect = $VBoxContainer/descriptersSelect
+@onready var subjectiveInput = $VBoxContainer/subjectiveInput
+@onready var objectiveInput = $VBoxContainer/objectiveInput
+@onready var determinerInput = $VBoxContainer/determinerInput
+@onready var possessiveInput = $VBoxContainer/possessiveInput
+@onready var reflexiveInput = $VBoxContainer/reflexiveInput
 
 func _on_save_button_pressed() -> void:
 	# TODO: add proper whitespace detection for every string
 	# DOUBLE TODO: MAKE UN GARBAGE
+	# TODO: DONT REASSIGN WHEN EMPTY
 	if(!(nameInput.text == "") and !(nameInput.text == " ")):
 		Identity.playerName = nameInput.text
 	Identity.descriptors = descriptorsSelect.selected
@@ -21,3 +22,4 @@ func _on_save_button_pressed() -> void:
 	Identity.pronounReflexive = reflexiveInput.text
 	Identity.saveToConfig(Prefs._prefs, Prefs._PREFS_PATH)
 	print(Identity)
+	queue_free()

@@ -12,7 +12,7 @@ extends Control
 @onready var characterTexture = $characterTexture
 
 # the script containing the script with the markup
-var dialogueScript = "i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] but i hate [$object] [expr anger]"
+@export var dialogueScript = "i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] but i hate [$object] [expr anger]"
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -85,7 +85,8 @@ func _on_gui_input(event: InputEvent) -> void:
 		if(curDialogueBox < dialogueBoxCount):
 			dialogueBoxes[curDialogueBox].show()
 			curDialogueBox += 1
-		
+		else:
+			queue_free()
 
 # this class holds all the information about a dialogue box
 # such as the text to display and the expression to set
