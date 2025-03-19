@@ -47,6 +47,7 @@ func attack() -> void:
 				# set attack cooldown
 				attackCooldown = 100
 			else:
+				
 				earthquake()
 				# block attacks while earthquaking
 				attackBlocking = true
@@ -88,7 +89,7 @@ func damage(health: int) -> void:
 	else:
 		# reflect 1/2 damage back to player
 		player.damage(health/2.0)
-		disableShield()
+		#disableShield()
 
 # when thishows times out and the sheild has not already been broken by the player, break the shield
 func _on_shield_timer_timeout() -> void:
