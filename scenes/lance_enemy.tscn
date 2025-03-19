@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://b53u1qvna51bu"]
+
+[ext_resource type="Script" path="res://scripts/lance_enemy.gd" id="1_cvgbt"]
+[ext_resource type="Texture2D" uid="uid://dwqblit8de7w7" path="res://textures/Lance Neutral.png" id="2_hlwu3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
+size = Vector2(60, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xs6hg"]
+size = Vector2(150, 200)
+
+[node name="lanceEnemy" type="RigidBody2D"]
+gravity_scale = 0.0
+freeze_mode = 1
+script = ExtResource("1_cvgbt")
+
+[node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, -2.14577e-06)
+scale = Vector2(0.0497592, 0.0375587)
+texture = ExtResource("2_hlwu3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_7rqhy")
+
+[node name="rotators" type="Node2D" parent="."]
+position = Vector2(2, 0)
+
+[node name="dashArrow" type="ColorRect" parent="rotators"]
+offset_left = -268.0
+offset_top = -103.0
+offset_right = 2732.0
+offset_bottom = 97.0
+color = Color(1, 0.266667, 0.541176, 0.192157)
+
+[node name="dashWaitTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="dashCDTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="dashAttackHitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dashAttackHitBox"]
+shape = SubResource("RectangleShape2D_xs6hg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="dashAttackHitBox" to="." method="_on_dash_attack_hit_box_body_entered"]

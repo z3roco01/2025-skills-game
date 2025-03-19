@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var carmile = $carmileEnemy
+@onready var carmile = $lanceEnemy
 @onready var waittimer = $waittimer
 
 func _ready() -> void:

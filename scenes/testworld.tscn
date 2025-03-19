@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
-[ext_resource type="PackedScene" uid="uid://b2i7pjju13kv1" path="res://scenes/carmile_enemy.tscn" id="5_ok8dc"]
+[ext_resource type="PackedScene" uid="uid://b53u1qvna51bu" path="res://scenes/lance_enemy.tscn" id="3_qi556"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
 normal = Vector2(0, 1)
@@ -52,12 +52,9 @@ position = Vector2(960, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall3"]
 shape = SubResource("WorldBoundaryShape2D_tli6n")
 
-[node name="carmileEnemy" parent="." instance=ExtResource("5_ok8dc")]
-position = Vector2(-575, -31)
-
 [node name="player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("1_52pld")]
 position = Vector2(170, -15)
-enemy = NodePath("../carmileEnemy")
+enemy = NodePath("../lanceEnemy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -960.0
@@ -90,3 +87,6 @@ text = "100
 
 [node name="waittimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="lanceEnemy" parent="." instance=ExtResource("3_qi556")]
+position = Vector2(-267, -18)
