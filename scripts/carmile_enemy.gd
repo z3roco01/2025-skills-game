@@ -40,12 +40,12 @@ func attack() -> void:
 	else:
 		if(distanceToPlayer() >= 400):
 			backstab()
-			attackCooldown = 100
+			setAttackCooldown(100)
 		elif(distanceToPlayer() <= 400):
 			if(!shielding):
 				shield()
 				# set attack cooldown
-				attackCooldown = 100
+				setAttackCooldown(100)
 			else:
 				
 				earthquake()
@@ -128,7 +128,7 @@ func _on_earthquake_timer_timeout() -> void:
 		attackBlocking = false
 		setEarthquakes(false)
 		earthquakePhase = 0
-		attackCooldown = 200
+		setAttackCooldown(200)
 
 # helper function that checks if the player is in the current earthquake range
 # and then does the damage if applicable

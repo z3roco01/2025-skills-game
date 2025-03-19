@@ -6,6 +6,7 @@ class_name Enemy
 const startHealth = 100
 var currentHealth = startHealth
 var attackCooldown = 0
+@export var cooldownMult = 1
 
 @export var SPEED = 4
 var vel = Vector2.ZERO
@@ -58,3 +59,6 @@ func onDie() -> void:
 # a helper function, used by enemies that inherit this
 func distanceToPlayer() -> float:
 	return position.distance_to(player.position)
+
+func setAttackCooldown(cooldown: int) -> void:
+	attackCooldown = cooldown * cooldownMult
