@@ -5,7 +5,6 @@ extends Control
 @export var expressions = {}
 # the expression that the character will start on 
 @export var defaultExpression: String
-
 # the node that holds the dialogue text 
 @onready var dialogueTextNode = $dialoguePanel/text
 # gets the node that holds the characters image
