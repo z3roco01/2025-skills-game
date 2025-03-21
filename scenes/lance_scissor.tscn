@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://bybg82vfxqmeq"]
+
+[ext_resource type="Script" path="res://scripts/lance_scissor.gd" id="1_yu0of"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxcx"]
+size = Vector2(40, 40)
+
+[node name="lance_scissor" type="Node2D"]
+script = ExtResource("1_yu0of")
+
+[node name="dagger" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="indicator" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -20.0
+offset_right = 2981.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.635294, 1, 0.313726)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_ptxcx")
+
+[node name="startTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="deathTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="startTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="deathTimer" to="." method="_on_death_timer_timeout"]

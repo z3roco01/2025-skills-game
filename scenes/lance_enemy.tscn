@@ -26,6 +26,8 @@ shape = SubResource("RectangleShape2D_7rqhy")
 [node name="rotators" type="Node2D" parent="."]
 position = Vector2(2, 0)
 
+[node name="daggers" type="Node" parent="rotators"]
+
 [node name="dashArrow" type="ColorRect" parent="rotators"]
 offset_left = -268.0
 offset_top = -103.0

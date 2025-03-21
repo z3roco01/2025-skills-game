@@ -27,11 +27,17 @@ const SPRITE_HEIGHT = 120.0
 @onready var dashCDTimer = $dashCDTimer
 @onready var dashArrow = $rotators/dashArrow
 
+var scissor_throwable = preload("res://scenes/lance_scissor.tscn")
+
 func idleAction() -> void:
 	pass 
 
 func attack() -> void:
-	p1DashAttack()
+	if(attackPhase == 0):
+		p1DashAttack()
+	elif(attackPhase == 1):
+		#p2ThrowAttack()
+		pass #TODO: IMPLEMENT THE ATTACK
 
 # lance dashes across the screen, if player is hit damage is done!
 func p1DashAttack() -> void:
@@ -59,7 +65,22 @@ func p1DashAttack() -> void:
 		# wait a little more before starting next dash
 		dashCDTimer.start()
 		await dashCDTimer.timeout
+	attackCooldown = 0
+	attackPhase = 1 # next attack phase
 
+func p2ThrowAttack() -> void:
+	attackCooldown = 5
+	var rot = random.randf_range(0,360)
+	createScissor(2500.0, 1.0, 2.0, rot)
+
+func createScissor(speed:float, timeUntilStart:float, size:float, rotation:float):
+	var scissor = scissor_throwable.instantiate()
+	scissor.speed = speed
+	scissor.timeUntilStart = timeUntilStart
+	scissor.size = size
+	scissor.rotation = rotation
+	add_child(scissor)
+	scissor.instantiated() # tell scissor its been instantiated
 
 # helper method that gives a random Vector2 on one of the side walls of arena
 func randomiseWallPosition(wall: int) -> Vector2:
