@@ -22,4 +22,4 @@ texture = ExtResource("2_y4o4f")
 
 [node name="rotators" type="Node2D" parent="."]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="pushRotator" type="Node2D" parent="."]
