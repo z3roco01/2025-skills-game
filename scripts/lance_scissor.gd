@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var player # player
+static var player
 @onready var indicator = $indicator # indicator of path
 @onready var startTimer = $startTimer # keeps track until when it moves
 @onready var deathTimer = $deathTimer # keeps track of how long to live
@@ -14,7 +14,8 @@ var currentLifetime = 0.0
 
 # Called when the dagger is instantiated
 func instantiated() -> void:
-	player = get_parent().player
+	if(player == null):
+		player = get_parent().get_node("./player")
 	scale = Vector2(size, size) # set size
 	startTimer.wait_time = timeUntilStart
 	# start timer

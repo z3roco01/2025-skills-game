@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0j5lyhcetvup"]
+
+[ext_resource type="Script" path="res://scripts/lance_poison_cloud.gd" id="1_gy3d0"]
+[ext_resource type="Shader" path="res://tmp.gdshader" id="2_f5ppc"]
+[ext_resource type="Texture2D" uid="uid://grdaroaq76a1" path="res://textures/circle.png" id="3_kkn26"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jy1l0"]
+shader = ExtResource("2_f5ppc")
+shader_parameter/colour = Color(0.298039, 0.678431, 0.294118, 0.364706)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q3q8f"]
+
+[sub_resource type="Gradient" id="Gradient_vmivn"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_eimiv"]
+gradient = SubResource("Gradient_vmivn")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_12o4f"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(1, 1, 0)
+emission_shape = 1
+emission_sphere_radius = 10.0
+direction = Vector3(0, 0, 0)
+spread = 44.478
+initial_velocity_min = -10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_max = 3.5
+color = Color(0.545098, 0.996078, 0.647059, 0.4)
+color_ramp = SubResource("GradientTexture1D_eimiv")
+
+[sub_resource type="ImageTexture" id="ImageTexture_k2yhk"]
+
+[node name="poison cloud" type="Node2D"]
+script = ExtResource("1_gy3d0")
+
+[node name="earthquakeOuter" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_jy1l0")
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("3_kkn26")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+visible = false
+shape = SubResource("CircleShape2D_q3q8f")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_12o4f")
+speed_scale = 1.33
+randomness = 1.0
+
+[node name="earthquakeOuter2" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_jy1l0")
+scale = Vector2(0.0016, 0.0016)
+texture = SubResource("ImageTexture_k2yhk")

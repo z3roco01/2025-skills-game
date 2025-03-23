@@ -48,5 +48,8 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dashAttackHitBox"]
 shape = SubResource("RectangleShape2D_xs6hg")
 
+[node name="throwWaitTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="dashAttackHitBox" to="." method="_on_dash_attack_hit_box_body_entered"]

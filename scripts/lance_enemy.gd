@@ -12,6 +12,11 @@ var dashAttacking = false
 const P1_DASH_DAMAGE = 10
 const P1_DASH_AMOUNT = 10 #amount of dashes in first phase
 
+const P2_SCISSOR_SIZE = 150 # scale of daggers
+const P2_SCISSOR_SPEED = 4000 # speed of daggers
+const P2_SCISSOR_DELAY = 0.5 # time before daggers start going
+const P2_SCISSOR_WAVES = 10 # AMT OF SCISSOR WAVES
+
 const TOP_WALL = 0
 const BOTTOM_WALL = 1
 const LEFT_WALL = 2
@@ -25,6 +30,7 @@ const SPRITE_HEIGHT = 120.0
 
 @onready var dashWaitTimer = $dashWaitTimer
 @onready var dashCDTimer = $dashCDTimer
+@onready var throwWaitTimer = $throwWaitTimer
 @onready var dashArrow = $rotators/dashArrow
 
 var scissor_throwable = preload("res://scenes/lance_scissor.tscn")
@@ -36,7 +42,7 @@ func attack() -> void:
 	if(attackPhase == 0):
 		p1DashAttack()
 	elif(attackPhase == 1):
-		#p2ThrowAttack()
+		p2ScissorAttack()
 		pass #TODO: IMPLEMENT THE ATTACK
 
 # lance dashes across the screen, if player is hit damage is done!
@@ -65,21 +71,51 @@ func p1DashAttack() -> void:
 		# wait a little more before starting next dash
 		dashCDTimer.start()
 		await dashCDTimer.timeout
-	attackCooldown = 0
+	attackCooldown = 200
 	attackPhase = 1 # next attack phase
 
-func p2ThrowAttack() -> void:
-	attackCooldown = 5
-	var rot = random.randf_range(0,360)
-	createScissor(2500.0, 1.0, 2.0, rot)
+func p2ScissorAttack() -> void:
+	attackCooldown = 10000
+	for n in range(P2_SCISSOR_WAVES):
+		if(n % 2 == 0):
+			var currentPosition = 0 # track current position of dagger spawn
+			var daggerStart = random.randi_range(0, 1)
+			if(daggerStart == 1):
+				currentPosition += P2_SCISSOR_SIZE # start on every other
+			# check if able to spawn scissor
+			while(currentPosition <= ARENA_WIDTH):
+				# find where to put scissor
+				var scissorPos = Vector2(currentPosition -ARENA_WIDTH/2, -ARENA_HEIGHT/2 - P2_SCISSOR_SIZE)
+				# spawn scissor
+				createScissor(scissorPos, P2_SCISSOR_SPEED, P2_SCISSOR_DELAY, P2_SCISSOR_SIZE, 0.5*PI)
+				currentPosition += P2_SCISSOR_SIZE * 2  # move to next spot\
+		else:
+			var currentPosition = 0 # track current position of dagger spawn
+			var daggerStart = random.randi_range(0, 1)
+			if(daggerStart == 1):
+				currentPosition += P2_SCISSOR_SIZE # start on every other
+			# check if able to spawn scissor
+			while(currentPosition <= ARENA_HEIGHT):
+				# find where to put scissor
+				var scissorPos = Vector2(-ARENA_WIDTH/2 - P2_SCISSOR_SIZE, -ARENA_HEIGHT/2 + currentPosition)
+				# spawn scissor
+				createScissor(scissorPos, P2_SCISSOR_SPEED, P2_SCISSOR_DELAY, P2_SCISSOR_SIZE, 0)
+				currentPosition += P2_SCISSOR_SIZE * 2  # move to next spot\
+				
+		
+		throwWaitTimer.start()
+		await throwWaitTimer.timeout
+	
+	attackCooldown = 200
 
-func createScissor(speed:float, timeUntilStart:float, size:float, rotation:float):
+func createScissor(position:Vector2, speed:float, timeUntilStart:float, size:float, rotation:float):
 	var scissor = scissor_throwable.instantiate()
+	scissor.position = position
 	scissor.speed = speed
 	scissor.timeUntilStart = timeUntilStart
 	scissor.size = size
 	scissor.rotation = rotation
-	add_child(scissor)
+	get_parent().add_child(scissor)
 	scissor.instantiated() # tell scissor its been instantiated
 
 # helper method that gives a random Vector2 on one of the side walls of arena
