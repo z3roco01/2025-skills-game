@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8tloyufqb2sc"]
+
+[ext_resource type="Shader" path="res://tmp.gdshader" id="1_5lvno"]
+[ext_resource type="Script" path="res://scripts/clementine/clementine_explosion.gd" id="1_tcax0"]
+[ext_resource type="Texture2D" uid="uid://grdaroaq76a1" path="res://textures/circle.png" id="2_alije"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6di2"]
+radius = 240.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s5pdu"]
+shader = ExtResource("1_5lvno")
+shader_parameter/colour = Color(0.945098, 0.439216, 0.207843, 0.329412)
+
+[node name="ClementineExplosion" type="Area2D"]
+script = ExtResource("1_tcax0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b6di2")
+
+[node name="Circle" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_s5pdu")
+scale = Vector2(0.977, 0.977)
+texture = ExtResource("2_alije")
+
+[node name="fuseTime" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="fuseTime" to="." method="_on_fuse_time_timeout"]

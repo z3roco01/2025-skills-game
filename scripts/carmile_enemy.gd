@@ -87,6 +87,7 @@ func shield() -> void:
 func damage(health: int) -> void:
 	if(!shielding):
 		super.damage(health)
+		print("pooop")
 	else:
 		# reflect 1/2 damage back to player
 		player.damage(health/2.0)
@@ -98,6 +99,7 @@ func _on_shield_timer_timeout() -> void:
 
 # helper func, runs the logic that runs when the shield is disabled
 func disableShield() -> void:
+	print("fart")
 	shielding = false
 	shieldColour.visible = false
 

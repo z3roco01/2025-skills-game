@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
-[ext_resource type="PackedScene" uid="uid://b3fri2537ajl2" path="res://scenes/clementine_enemy.tscn" id="3_w2mhi"]
+[ext_resource type="PackedScene" uid="uid://b3fri2537ajl2" path="res://scenes/clementine/clementine_enemy.tscn" id="3_w2mhi"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
 normal = Vector2(0, 1)
@@ -46,11 +46,12 @@ position = Vector2(-960, 0)
 shape = SubResource("WorldBoundaryShape2D_lhy7v")
 
 [node name="wall3" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2(960, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall3"]
 shape = SubResource("WorldBoundaryShape2D_tli6n")
+
+[node name="clementineEnemy" parent="." instance=ExtResource("3_w2mhi")]
 
 [node name="player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("1_52pld")]
 position = Vector2(-194, 27)
@@ -87,5 +88,3 @@ text = "100
 
 [node name="waittimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="clementineEnemy" parent="." instance=ExtResource("3_w2mhi")]

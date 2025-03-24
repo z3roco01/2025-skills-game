@@ -31,6 +31,8 @@ window/stretch/mode="viewport"
 [file_customization]
 
 folder_colors={
+"res://scenes/clementine/": "orange",
+"res://scripts/clementine/": "orange",
 "res://textures/carmille/": "blue",
 "res://textures/clementine/": "orange",
 "res://textures/emil/": "gray",
