@@ -9,6 +9,7 @@ extends Enemy
 @onready var earthquakeInner = $earthquakeInner
 @onready var earthqakeMiddle = $earthquakeMiddle
 @onready var earthquakeOuter = $earthquakeOuter
+@onready var rotators = $rotators
 # BETTER NAMES
 const INNER_RADIUS = 300
 const MIDDLE_RADIUS = 600

@@ -19,7 +19,3 @@ metadata/_edit_group_ = true
 position = Vector2(2.38419e-06, -2.86102e-06)
 scale = Vector2(0.0625652, 0.0448263)
 texture = ExtResource("2_y4o4f")
-
-[node name="rotators" type="Node2D" parent="."]
-
-[node name="pushRotator" type="Node2D" parent="."]

@@ -3,8 +3,9 @@ extends Enemy
 # the amount we will push the player by when too close
 @export var push = 500
 
-# used to get the rotation for pushing
-@onready var pushRotator = $pushRotator
+@onready var homingScene = preload("res://scenes/clementine_homing.tscn")
+# set when a homing has been created
+var homingOut = false
 
 func idleAction() -> void:
 	pass
@@ -13,7 +14,20 @@ func idleAction() -> void:
 func attack() -> void:
 	# player is close
 	if(distanceToPlayer() <= 400):
-		pushRotator.look_at(player.position)
-		var pushVec = Vector2.RIGHT.rotated(pushRotator.rotation) * push
+		var pushVec = inPlayerDir(push)
 		get_tree().create_tween().tween_property(player, "position", player.position + pushVec, 0.4).set_trans(Tween.TRANS_BACK)
 		attackCooldown = 100
+	elif(!homingOut):
+			homingOut = true
+			# create instance of homing
+			var scene = homingScene.instantiate()
+			scene.player = player
+			scene.position = position + inPlayerDir(90)
+			scene.look_at(player.position)
+			# connect the tree_exit which happens when queue_free is called
+			scene.connect("tree_exited", onHomingDestroyed)
+			add_child(scene)
+
+func onHomingDestroyed() -> void:
+	homingOut = false
+	attackCooldown = 50

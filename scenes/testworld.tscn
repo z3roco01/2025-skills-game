@@ -53,7 +53,7 @@ position = Vector2(960, 0)
 shape = SubResource("WorldBoundaryShape2D_tli6n")
 
 [node name="player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("1_52pld")]
-position = Vector2(170, -15)
+position = Vector2(-194, 27)
 enemy = NodePath("../clementineEnemy")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -89,4 +89,3 @@ text = "100
 one_shot = true
 
 [node name="clementineEnemy" parent="." instance=ExtResource("3_w2mhi")]
-position = Vector2(-511, -1)
