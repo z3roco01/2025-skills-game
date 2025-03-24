@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 		# on collision always destroy, and damage player if needed
 		if(collision != null):
 			if(collision.get_collider() == player):
-				player.damage(5)
+				player.damage(8)
 			self.free()
 			
 
