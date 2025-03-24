@@ -17,11 +17,3 @@ func attack() -> void:
 		var pushVec = Vector2.RIGHT.rotated(pushRotator.rotation) * push
 		get_tree().create_tween().tween_property(player, "position", player.position + pushVec, 0.4).set_trans(Tween.TRANS_BACK)
 		attackCooldown = 100
-		#var angle = push.angle_to(player.position)
-		#print(rad_to_deg(angle))
-		#var rotatedPush = push.rotated(push.angle_to(player.position))
-		
-		
-		#print(rotatedPush)
-		#get_tree().create_tween().tween_property(player, "position", player.position + rotatedPush, 0.2)
-		#attackCooldown = 200  
