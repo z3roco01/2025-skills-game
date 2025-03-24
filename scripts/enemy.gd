@@ -13,8 +13,6 @@ var vel = Vector2.ZERO
 # get the player from the parent
 @onready var player = get_parent().get_node("./player")
 @onready var healthText = get_parent().get_node("./enemyHealth")
-# node that holds everything that will rotates around the enemy when they rotate
-@onready var rotators = $rotators
 
 signal death()
 
@@ -62,3 +60,8 @@ func distanceToPlayer() -> float:
 
 func setAttackCooldown(cooldown: int) -> void:
 	attackCooldown = cooldown * cooldownMult
+
+# creates a Vector2 pointing to the player from the enemy with a supplide length
+func inPlayerDir(length: float) -> Vector2:
+	var rot = get_angle_to(player.position)
+	return Vector2.RIGHT.rotated(rot) * length
