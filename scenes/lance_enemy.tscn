@@ -1,10 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://b53u1qvna51bu"]
+[gd_scene load_steps=6 format=3 uid="uid://b53u1qvna51bu"]
 
 [ext_resource type="Script" path="res://scripts/lance_enemy.gd" id="1_cvgbt"]
 [ext_resource type="Texture2D" uid="uid://dwqblit8de7w7" path="res://textures/Lance Neutral.png" id="2_hlwu3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
 size = Vector2(60, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f56f"]
+size = Vector2(80, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs6hg"]
 size = Vector2(150, 200)
@@ -13,6 +16,8 @@ size = Vector2(150, 200)
 gravity_scale = 0.0
 freeze_mode = 1
 script = ExtResource("1_cvgbt")
+cooldownMult = null
+SPEED = null
 
 [node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]
 position = Vector2(-9.53674e-07, -2.14577e-06)
@@ -26,14 +31,35 @@ shape = SubResource("RectangleShape2D_7rqhy")
 [node name="rotators" type="Node2D" parent="."]
 position = Vector2(2, 0)
 
-[node name="daggers" type="Node" parent="rotators"]
+[node name="stabAttackHitbox" type="Area2D" parent="rotators"]
+position = Vector2(-2, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rotators/stabAttackHitbox"]
+position = Vector2(112, -1.5)
+shape = SubResource("RectangleShape2D_6f56f")
 
 [node name="dashArrow" type="ColorRect" parent="rotators"]
+visible = false
 offset_left = -268.0
 offset_top = -103.0
 offset_right = 2732.0
 offset_bottom = 97.0
 color = Color(1, 0.266667, 0.541176, 0.192157)
+
+[node name="stabHitbox" type="ColorRect" parent="rotators"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.65098, 1, 0.611765)
 
 [node name="dashWaitTimer" type="Timer" parent="."]
 wait_time = 0.4
@@ -43,13 +69,20 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
-[node name="dashAttackHitBox" type="Area2D" parent="."]
+[node name="stabTimer" type="Timer" parent="."]
+wait_time = 0.2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="dashAttackHitBox"]
+[node name="dashAttackHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dashAttackHitbox"]
 shape = SubResource("RectangleShape2D_xs6hg")
 
 [node name="throwWaitTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="cloudWaitTimer" type="Timer" parent="."]
+wait_time = 0.7
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="body_entered" from="dashAttackHitBox" to="." method="_on_dash_attack_hit_box_body_entered"]
+[connection signal="body_entered" from="dashAttackHitbox" to="." method="_on_dash_attack_hit_box_body_entered"]

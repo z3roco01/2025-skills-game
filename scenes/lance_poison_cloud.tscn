@@ -58,3 +58,6 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_jy1l0")
 scale = Vector2(0.0016, 0.0016)
 texture = SubResource("ImageTexture_k2yhk")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]

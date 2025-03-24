@@ -8,14 +8,20 @@ var random = RandomNumberGenerator.new()
 # 2 - poison clouds
 
 var dashAttacking = false
+var dazed = false # tracks if dazed (able to be attacked)
 
 const P1_DASH_DAMAGE = 10
 const P1_DASH_AMOUNT = 10 #amount of dashes in first phase
 
-const P2_SCISSOR_SIZE = 150 # scale of daggers
+const P2_SCISSOR_SIZE = 200 # scale of daggers
 const P2_SCISSOR_SPEED = 4000 # speed of daggers
 const P2_SCISSOR_DELAY = 0.5 # time before daggers start going
 const P2_SCISSOR_WAVES = 10 # AMT OF SCISSOR WAVES
+
+const P3_CLOUD_DURATION = 10.0 # how long clouds last
+const P3_CLOUD_SIZE = 30.0 # size of clouds
+const P3_CLOUD_AMT = 20.0 # amount of clouds
+const P3_TIME_BETWEEN_CLOUD = 3.0 # time until lance relocates and spawns cloud
 
 const TOP_WALL = 0
 const BOTTOM_WALL = 1
@@ -31,22 +37,29 @@ const SPRITE_HEIGHT = 120.0
 @onready var dashWaitTimer = $dashWaitTimer
 @onready var dashCDTimer = $dashCDTimer
 @onready var throwWaitTimer = $throwWaitTimer
+@onready var stabTimer = $stabTimer
+@onready var cloudWaitTimer = $cloudWaitTimer
 @onready var dashArrow = $rotators/dashArrow
+@onready var stabHitboxInd = $rotators/stabHitbox
+@onready var stabHitbox = $rotators/stabAttackHitbox
 
 var scissor_throwable = preload("res://scenes/lance_scissor.tscn")
+var poison_cloud = preload("res://scenes/lance_poison_cloud.tscn")
 
 func idleAction() -> void:
 	pass 
 
 func attack() -> void:
 	if(attackPhase == 0):
-		p1DashAttack()
+		p1DashAttack()d
 	elif(attackPhase == 1):
 		p2ScissorAttack()
-		pass #TODO: IMPLEMENT THE ATTACK
+	elif(attackPhase == 2):
+		p3PoisonAttack()
 
 # lance dashes across the screen, if player is hit damage is done!
 func p1DashAttack() -> void:
+	dazed = false
 	attackCooldown = 1000000
 	for n in range(P1_DASH_AMOUNT):
 		# pick a wall to start at
@@ -71,52 +84,162 @@ func p1DashAttack() -> void:
 		# wait a little more before starting next dash
 		dashCDTimer.start()
 		await dashCDTimer.timeout
-	attackCooldown = 200
-	attackPhase = 1 # next attack phase
+	attackFinished()
 
 func p2ScissorAttack() -> void:
+	dazed = false
 	attackCooldown = 10000
+	var currentPosition
 	for n in range(P2_SCISSOR_WAVES):
-		if(n % 2 == 0):
-			var currentPosition = 0 # track current position of dagger spawn
-			var daggerStart = random.randi_range(0, 1)
-			if(daggerStart == 1):
+			currentPosition = 0 # track current position of dagger spawn
+			var scissorStart = random.randi_range(0, 1)
+			var scissorWall  # wall to start at
+			if(scissorStart == 1):
 				currentPosition += P2_SCISSOR_SIZE # start on every other
+			# randomise daggerWall
+			if(n % 2 == 0):
+				# even num = top or bott
+				scissorWall = random.randi_range(0,1)
+			else:
+				# odd num = left or right
+				scissorWall = random.randi_range(2,3)
+			
+			var scissorMax # tracks how far scissors can spawn
+			var scissorRot # the rotation of the scissors
+			# determin scissorMax and scissorRot based on wall start
+			if(scissorWall == TOP_WALL):
+				scissorMax = ARENA_WIDTH
+				scissorRot = 0.5 * PI
+			elif(scissorWall == BOTTOM_WALL):
+				scissorMax = ARENA_WIDTH
+				scissorRot = 1.5 * PI
+			elif(scissorWall == LEFT_WALL):
+				scissorMax = ARENA_HEIGHT
+				scissorRot = 0
+			elif(scissorWall == RIGHT_WALL):
+				scissorMax = ARENA_HEIGHT
+				scissorRot = PI
+			
 			# check if able to spawn scissor
-			while(currentPosition <= ARENA_WIDTH):
-				# find where to put scissor
-				var scissorPos = Vector2(currentPosition -ARENA_WIDTH/2, -ARENA_HEIGHT/2 - P2_SCISSOR_SIZE)
-				# spawn scissor
-				createScissor(scissorPos, P2_SCISSOR_SPEED, P2_SCISSOR_DELAY, P2_SCISSOR_SIZE, 0.5*PI)
-				currentPosition += P2_SCISSOR_SIZE * 2  # move to next spot\
-		else:
-			var currentPosition = 0 # track current position of dagger spawn
-			var daggerStart = random.randi_range(0, 1)
-			if(daggerStart == 1):
-				currentPosition += P2_SCISSOR_SIZE # start on every other
-			# check if able to spawn scissor
-			while(currentPosition <= ARENA_HEIGHT):
-				# find where to put scissor
-				var scissorPos = Vector2(-ARENA_WIDTH/2 - P2_SCISSOR_SIZE, -ARENA_HEIGHT/2 + currentPosition)
-				# spawn scissor
-				createScissor(scissorPos, P2_SCISSOR_SPEED, P2_SCISSOR_DELAY, P2_SCISSOR_SIZE, 0)
-				currentPosition += P2_SCISSOR_SIZE * 2  # move to next spot\
+			while(currentPosition <= scissorMax):
+				# find where to put scissor based on start wall
+				var scissorPos
+				if(scissorWall == TOP_WALL):
+					# top left
+					scissorPos = Vector2(
+						currentPosition -ARENA_WIDTH/2, 
+						-ARENA_HEIGHT/2 - P2_SCISSOR_SIZE
+						)
+				elif(scissorWall == LEFT_WALL):
+					# top left
+					scissorPos = Vector2(
+						-ARENA_WIDTH/2 - P2_SCISSOR_SIZE, 
+						-ARENA_HEIGHT/2 + currentPosition
+						)
+				elif(scissorWall == BOTTOM_WALL):
+					# bottom left
+					scissorPos = Vector2(
+						-ARENA_WIDTH/2 + currentPosition, 
+						ARENA_HEIGHT/2 + P2_SCISSOR_SIZE
+						)
+				elif(scissorWall == RIGHT_WALL):
+					# top right
+					scissorPos = Vector2(
+						ARENA_WIDTH/2 + P2_SCISSOR_SIZE, 
+						-ARENA_HEIGHT/2 + currentPosition
+						)
 				
-		
-		throwWaitTimer.start()
-		await throwWaitTimer.timeout
+				# spawn scissor
+				createScissor(
+				scissorPos, 
+				P2_SCISSOR_SPEED, 
+				P2_SCISSOR_DELAY, 
+				P2_SCISSOR_SIZE, 
+				scissorRot
+				)
+				currentPosition += P2_SCISSOR_SIZE * 2  # move to next spot
+			
+			throwWaitTimer.start()
+			await throwWaitTimer.timeout
+	attackFinished()
+
+func p3PoisonAttack() -> void:
+	attackCooldown = 10000
+	dazed = false
+	for n in range(P3_CLOUD_AMT):
+		# delay before spawning
+		cloudWaitTimer.start()
+		await cloudWaitTimer.timeout
+		# randomise a spot in the arena
+		var targetPos = Vector2(
+			random.randf_range(
+				-ARENA_WIDTH/2 + SPRITE_WIDTH, 
+				ARENA_WIDTH/2 - SPRITE_WIDTH
+				),
+			random.randf_range(
+				-ARENA_HEIGHT/2 + SPRITE_HEIGHT, 
+				ARENA_HEIGHT/2 - SPRITE_HEIGHT
+			)
+			)
+		# move lance to spot with a tween
+		var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
+		tween.tween_property(self, "position", targetPos, 0.2)
+		await tween.finished # wait for lance to finish moving
+		# make cloud
+		createPoisonCloud(
+		targetPos,
+		P3_CLOUD_DURATION,
+		P3_CLOUD_SIZE
+		)
+	attackFinished()
 	
-	attackCooldown = 200
 
 func createScissor(position:Vector2, speed:float, timeUntilStart:float, size:float, rotation:float):
 	var scissor = scissor_throwable.instantiate()
+	# set pos, speed, delay, size, rot, of daggers
 	scissor.position = position
 	scissor.speed = speed
 	scissor.timeUntilStart = timeUntilStart
 	scissor.size = size
 	scissor.rotation = rotation
+	scissor.player = player
+	scissor.lanceEnemy = self
 	get_parent().add_child(scissor)
-	scissor.instantiated() # tell scissor its been instantiated
+	scissor.instantiated() # tell scissor its been instantiated]
+
+# creates a poison cloud
+func createPoisonCloud(position:Vector2, duration:float, size:float):
+	var cloud = poison_cloud.instantiate() # make cloud
+	cloud.size = size
+	cloud.position = position # set position
+	cloud.duration = duration # set duration
+	cloud.player = player # set player track var
+	get_parent().add_child(cloud) # add to main scene
+	cloud.instantiated() # tell cloud its been instantiated]
+
+# triggered by scissor when it hits players
+func scissorHit():
+	# get rotation the player is attacking in
+	var playerAttackRotation = player.rotators.transform.get_rotation()
+	# get a vector for the direction the player is attacking in
+	var playerFacingVec = Vector2.RIGHT.rotated(playerAttackRotation)
+	# calculate a position to be going to
+	var positionTarget = player.position + (playerFacingVec * 140)
+	# start tween of going towards player
+	var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
+	tween.tween_property(self, "position", positionTarget, 0.2)
+	await tween.finished # wait for tween to be done
+	rotators.look_at(player.position) # point stab towards player
+	# show stab 
+	stabHitboxInd.visible = true
+	# start timer to count towards attack
+	stabTimer.start()
+	await stabTimer.timeout
+	# actually do attack
+	if(stabHitbox.overlaps_body(player)):
+		player.damage(10)
+	# hide hitbox
+	stabHitboxInd.visible = false
 
 # helper method that gives a random Vector2 on one of the side walls of arena
 func randomiseWallPosition(wall: int) -> Vector2:
@@ -151,7 +274,22 @@ func findOppositeWall(wall: int) -> int:
 		return 0
 	
 
+func damage(health: int) -> void:
+	# only do damage if dazed (not attacking)
+	if(dazed):
+		super.damage(health)
 
 func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 	if(dashAttacking && body == player): #check for dash hit
 		player.damage(P1_DASH_DAMAGE) # do damage
+
+# things to do when an attack is done
+func attackFinished() -> void:
+	attackCooldown = 200 # wait until next attack
+	dazed = true # become dazed
+	# next phase, go next phase or loop around
+	if(attackPhase == 2):
+		attackPhase = 0
+	else:
+		attackPhase += 1
+	
