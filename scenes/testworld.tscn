@@ -90,5 +90,3 @@ one_shot = true
 
 [node name="lanceEnemy" parent="." instance=ExtResource("3_qi556")]
 position = Vector2(-267, -18)
-cooldownMult = null
-SPEED = null

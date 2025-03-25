@@ -22,6 +22,7 @@ const P3_CLOUD_DURATION = 10.0 # how long clouds last
 const P3_CLOUD_SIZE = 30.0 # size of clouds
 const P3_CLOUD_AMT = 20.0 # amount of clouds
 const P3_TIME_BETWEEN_CLOUD = 3.0 # time until lance relocates and spawns cloud
+const P3_TARGET_PLAYER_CHANCE = 0.5 # chance to teleport to player instead (out of 1)
 
 const TOP_WALL = 0
 const BOTTOM_WALL = 1
@@ -51,7 +52,7 @@ func idleAction() -> void:
 
 func attack() -> void:
 	if(attackPhase == 0):
-		p1DashAttack()d
+		p1DashAttack()
 	elif(attackPhase == 1):
 		p2ScissorAttack()
 	elif(attackPhase == 2):
@@ -59,8 +60,7 @@ func attack() -> void:
 
 # lance dashes across the screen, if player is hit damage is done!
 func p1DashAttack() -> void:
-	dazed = false
-	attackCooldown = 1000000
+	attackStarted()
 	for n in range(P1_DASH_AMOUNT):
 		# pick a wall to start at
 		var startWall = random.randi_range(0, 3)
@@ -87,8 +87,7 @@ func p1DashAttack() -> void:
 	attackFinished()
 
 func p2ScissorAttack() -> void:
-	dazed = false
-	attackCooldown = 10000
+	attackStarted()
 	var currentPosition
 	for n in range(P2_SCISSOR_WAVES):
 			currentPosition = 0 # track current position of dagger spawn
@@ -164,14 +163,18 @@ func p2ScissorAttack() -> void:
 	attackFinished()
 
 func p3PoisonAttack() -> void:
-	attackCooldown = 10000
-	dazed = false
+	attackStarted()
 	for n in range(P3_CLOUD_AMT):
 		# delay before spawning
 		cloudWaitTimer.start()
 		await cloudWaitTimer.timeout
-		# randomise a spot in the arena
-		var targetPos = Vector2(
+		var targetPos # where lance will go
+		# roll if lance will target player
+		if(randi_range(0, 1) > P3_TARGET_PLAYER_CHANCE):
+			targetPos = player.position #target player
+		else:
+			# randomise a spot in the arena if not
+			targetPos = Vector2(
 			random.randf_range(
 				-ARENA_WIDTH/2 + SPRITE_WIDTH, 
 				ARENA_WIDTH/2 - SPRITE_WIDTH
@@ -283,6 +286,13 @@ func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 	if(dashAttacking && body == player): #check for dash hit
 		player.damage(P1_DASH_DAMAGE) # do damage
 
+# things to do when an attack is starting
+func attackStarted() -> void:
+	attackCooldown = 100000 # cannot attack
+	dazed = false # become dazed
+	# un collidable
+	add_collision_exception_with(player)
+
 # things to do when an attack is done
 func attackFinished() -> void:
 	attackCooldown = 200 # wait until next attack
@@ -292,4 +302,6 @@ func attackFinished() -> void:
 		attackPhase = 0
 	else:
 		attackPhase += 1
+	# collidable
+	remove_collision_exception_with(player)
 	
