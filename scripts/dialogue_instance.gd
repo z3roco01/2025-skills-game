@@ -8,12 +8,14 @@ extends Control
 
 # the node that holds the dialogue text 
 @onready var dialogueTextNode = $dialoguePanel/text
+# the node holding the name of the speaking character
+@onready var nameTextNode = $dialoguePanel/namePanel/nameText
 # gets the node that holds the characters image
 @onready var characterTexture = $characterTexture
 @onready var nextCharTimer = $nextCharTimer
 
 # the script containing the script with the markup
-@export var dialogueScript = "i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] but i hate [$object] [expr anger]"
+@export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][name BALLS] but i hate [$object] [expr anger]"
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -77,9 +79,10 @@ func changeExpression(expressionId: String) -> void:
 	characterTexture.texture = expressions[expressionId]
 
 # called by a dialogue box, will show its text and expression
-func showBox(text: String, expressionId: String) -> void:
+func showBox(text: String, expressionId: String, nameText: String) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
+	nameTextNode.text = nameText
 	curTextIdx = 0
 	changeExpression(expressionId)
 	nextCharTimer.start()
@@ -100,7 +103,7 @@ func _on_gui_input(event: InputEvent) -> void:
 # such as the text to display and the expression to set
 class DialogueBox:
 	# singal that will be connected in the main dialogue instance, will show our text
-	signal showBox(text: String, expressionId: String)
+	signal showBox(text: String, expressionId: String, nameText: String)
 	# signal that will lookup a variable then put its value in the first element of the passed array
 	signal lookupVar(varName: String, returnArray: Array)
 	
@@ -112,6 +115,8 @@ class DialogueBox:
 	var tagRegex = RegEx.new()
 	# the default expression that it will default to
 	var defaultExpression: String
+	# the name being shown
+	var nameText: String
 	
 	# create the regex and format the text
 	func _init() -> void:
@@ -130,6 +135,7 @@ class DialogueBox:
 			var matched = result.get_string()
 			# strip the brackets from the matched string
 			matched = matched.lstrip("[").rstrip("]")
+			print(matched)
 			
 			# now find which type of tag it is
 			# if it starts with a $ then its a varaible tag
@@ -148,7 +154,12 @@ class DialogueBox:
 				var choice = choices[Identity.descriptors]
 				# then replace the instance of this tag with the decided string
 				dialogueText = dialogueText.replace("[" + matched + "]", choice)
-			
+			elif(matched.begins_with("name ")): # when this tag appears, set the name for this box
+				print("Peeeee")
+				# strip off the formatting and set the name
+				nameText = matched.lstrip("name ")
+				# remove the tag from the dialogue
+				dialogueText = dialogueText.replace("[" + matched + "]", "")
 	
 	# replaces the passed variable with the value from the dictionary, replaces in the dialogue texture
 	func varReplace(varName: String) -> void:
@@ -161,7 +172,7 @@ class DialogueBox:
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
-		showBox.emit(dialogueText, expressionId)
+		showBox.emit(dialogueText, expressionId, nameText)
 
 # means we are ready to show the next character
 func _on_next_char_timer_timeout() -> void:
