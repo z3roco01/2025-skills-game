@@ -15,7 +15,7 @@ extends Control
 @onready var nextCharTimer = $nextCharTimer
 
 # the script containing the script with the markup
-@export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][name BALLS] but i hate [$object] [expr anger]"
+@export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -82,7 +82,8 @@ func changeExpression(expressionId: String) -> void:
 func showBox(text: String, expressionId: String, nameText: String) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
-	nameTextNode.text = nameText
+	if(!nameText.is_empty()): # only set name when it is being changed
+		nameTextNode.text = nameText
 	curTextIdx = 0
 	changeExpression(expressionId)
 	nextCharTimer.start()
@@ -92,12 +93,16 @@ func lookupVar(varName: String, returnArray: Array) -> void:
 	returnArray[0] = dialogueVariables[varName]
 
 func _on_gui_input(event: InputEvent) -> void:
-	if(event is InputEventMouseButton):
-		if(curDialogueBox < dialogueBoxCount):
-			dialogueBoxes[curDialogueBox].show()
-			curDialogueBox += 1
-		else:
-			queue_free()
+	if(event is InputEventMouseButton and !event.is_pressed()): # on mouse button release
+		print("Fart")
+		if(textToShow == dialogueTextNode.text): # if the text box is completely shown
+			if(curDialogueBox < dialogueBoxCount):
+				dialogueBoxes[curDialogueBox].show()
+				curDialogueBox += 1
+			else:
+				queue_free()
+		else: # comptely show all text
+			dialogueTextNode.text = textToShow
 
 # this class holds all the information about a dialogue box
 # such as the text to display and the expression to set
@@ -116,7 +121,7 @@ class DialogueBox:
 	# the default expression that it will default to
 	var defaultExpression: String
 	# the name being shown
-	var nameText: String
+	var nameText = ""
 	
 	# create the regex and format the text
 	func _init() -> void:
@@ -135,7 +140,6 @@ class DialogueBox:
 			var matched = result.get_string()
 			# strip the brackets from the matched string
 			matched = matched.lstrip("[").rstrip("]")
-			print(matched)
 			
 			# now find which type of tag it is
 			# if it starts with a $ then its a varaible tag
