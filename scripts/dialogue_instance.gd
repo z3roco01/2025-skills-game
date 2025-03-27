@@ -15,7 +15,8 @@ extends Control
 @onready var nextCharTimer = $nextCharTimer
 
 # the script containing the script with the markup
-@export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
+#@export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
+@export var dialogueScript = "[question fartface[$name]|poopy{deez|nuts}]"
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -159,11 +160,27 @@ class DialogueBox:
 				# then replace the instance of this tag with the decided string
 				dialogueText = dialogueText.replace("[" + matched + "]", choice)
 			elif(matched.begins_with("name ")): # when this tag appears, set the name for this box
-				print("Peeeee")
 				# strip off the formatting and set the name
 				nameText = matched.lstrip("name ")
 				# remove the tag from the dialogue
 				dialogueText = dialogueText.replace("[" + matched + "]", "")
+			elif(matched.begins_with("question ")): # WE ARE DOING A QUESTION, BIG THINGS COMING
+				#q1|q2|q3[a1|a2|a3]
+				# strip off the question  first so that the lenght and index is right
+				var striped = matched.lstrip("question ")
+				# strip off the answers and split the questions into an array of 3
+				var quests = striped.substr(0, striped.length()-striped.find("{")).split("|", true, 3)
+				# strip off questions and split anwsers into an array
+				var ans = striped.substr(striped.find("{")+1).rstrip("}").split("|", true, 3)
+				var questBoxes = []
+				
+				for quest in quests:
+					var box = DialogueBox.new()
+					box.dialogueText = quest
+					box.formatText()
+					questBoxes.append(box)
+				for fart in questBoxes:
+					print(fart.dialogueText)
 	
 	# replaces the passed variable with the value from the dictionary, replaces in the dialogue texture
 	func varReplace(varName: String) -> void:
