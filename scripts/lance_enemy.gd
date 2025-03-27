@@ -288,13 +288,14 @@ func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 
 # things to do when an attack is starting
 func attackStarted() -> void:
-	attackCooldown = 100000 # cannot attack
+	attackBlocking = true
 	dazed = false # become dazed
 	# un collidable
 	add_collision_exception_with(player)
 
 # things to do when an attack is done
 func attackFinished() -> void:
+	attackBlocking = false
 	attackCooldown = 200 # wait until next attack
 	dazed = true # become dazed
 	# next phase, go next phase or loop around

@@ -16,7 +16,7 @@ var vel = Vector2.ZERO
 # node that holds everything that will rotates around the enemy when they rotate
 @onready var rotators = $rotators
 # tracks if attacks can happen
-var attackBlocked = false
+var attackBlocking = false
 
 signal death()
 
@@ -24,7 +24,7 @@ signal death()
 func _physics_process(_delta: float) -> void:
 	if(alive()):
 		# if we can attack then run attack selection logic
-		if(attackCooldown <= 0 and !attackBlocked):
+		if(attackCooldown <= 0 and !attackBlocking):
 			attack()
 		else: # if it is not attacking, run any idle actions
 			idleAction()
