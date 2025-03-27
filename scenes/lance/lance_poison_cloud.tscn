@@ -1,8 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://c0j5lyhcetvup"]
 
-[ext_resource type="Script" path="res://scripts/lance_poison_cloud.gd" id="1_gy3d0"]
-[ext_resource type="Shader" path="res://tmp.gdshader" id="2_f5ppc"]
+[ext_resource type="Script" path="res://scripts/lance/lance_poison_cloud.gd" id="1_gy3d0"]
+[ext_resource type="Shader" path="res://shaders/tmp.gdshader" id="2_f5ppc"]
 [ext_resource type="Texture2D" uid="uid://grdaroaq76a1" path="res://textures/circle.png" id="3_kkn26"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jy1l0"]
 shader = ExtResource("2_f5ppc")

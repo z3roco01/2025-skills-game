@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
-[ext_resource type="PackedScene" uid="uid://b53u1qvna51bu" path="res://scenes/lance_enemy.tscn" id="3_qi556"]
+[ext_resource type="PackedScene" uid="uid://b53u1qvna51bu" path="res://scenes/lance/lance_enemy.tscn" id="3_qi556"]
+
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
 normal = Vector2(0, 1)

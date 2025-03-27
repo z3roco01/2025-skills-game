@@ -1,6 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bybg82vfxqmeq"]
 
-[ext_resource type="Script" path="res://scripts/lance_scissor.gd" id="1_yu0of"]
+[ext_resource type="Script" path="res://scripts/lance/lance_scissor.gd" id="1_yu0of"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxcx"]
 size = Vector2(1, 1)

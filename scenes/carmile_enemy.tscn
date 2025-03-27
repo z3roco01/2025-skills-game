@@ -1,9 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://b2i7pjju13kv1"]
 
 [ext_resource type="Script" path="res://scripts/carmile_enemy.gd" id="1_iinlb"]
-[ext_resource type="Shader" path="res://tmp.gdshader" id="2_vycuw"]
+[ext_resource type="Shader" path="res://shaders/tmp.gdshader" id="2_vycuw"]
 [ext_resource type="Texture2D" uid="uid://grdaroaq76a1" path="res://textures/circle.png" id="3_vsimn"]
 [ext_resource type="Texture2D" uid="uid://c4cyfofvw5xop" path="res://textures/emil/Émil_Angry_1.png" id="4_5a0jk"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_shkmk"]
 shader = ExtResource("2_vycuw")
