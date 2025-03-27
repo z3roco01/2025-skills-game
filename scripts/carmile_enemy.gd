@@ -26,12 +26,14 @@ var earthquakePhase = 0
 var earthquakeWait = false
 # if the earthquake dealt damage this phase
 var earthquakeDamaged = false
+# if we are going to earthquake
+var earthQuaking = false
 
 func idleAction() -> void:
 	pass 
 
 func attack() -> void:
-	if(attackBlocking):
+	if(earthQuaking):
 		# if we are earthquaking, then do the damage
 		if(earthquakePhase > 0 and earthquakePhase < 4):
 			earthquakeDamage()
@@ -48,7 +50,7 @@ func attack() -> void:
 				
 				earthquake()
 				# block attacks while earthquaking
-				attackBlocking = true
+				earthQuaking = true
 
 # an attack that will trigger once chosen
 # will teleport behind player then stab them
@@ -123,7 +125,7 @@ func _on_earthquake_timer_timeout() -> void:
 		# start timer again 
 		earthquakeTimer.start()
 	elif(earthquakePhase == 4):
-		attackBlocking = false
+		earthQuaking = false
 		setEarthquakes(false)
 		earthquakePhase = 0
 		setAttackCooldown(200)
