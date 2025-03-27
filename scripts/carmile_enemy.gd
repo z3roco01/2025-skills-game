@@ -24,8 +24,6 @@ var tookSheildDamage = false
 var earthquakePhase = 0
 # if this earthquake phase should be a wait or not
 var earthquakeWait = false
-# when set, no attacks will happen
-var attackBlocking = false
 # if the earthquake dealt damage this phase
 var earthquakeDamaged = false
 
