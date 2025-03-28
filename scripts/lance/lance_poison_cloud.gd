@@ -1,7 +1,7 @@
 extends Node2D
 
-const TIME_BETWEEN_DAMAGE = 1 # time between each damage tick
-const CLOUD_DAMAGE = 2 # damage to do each time
+const TIME_BETWEEN_DAMAGE = 0.3 # time between each damage tick
+const CLOUD_DAMAGE = 1 # damage to do each time
 
 # set by lance when created
 var duration = 0 
@@ -11,12 +11,18 @@ static var player
 var playerInCloud = false # tracks if player is in cloud
 var lifetime = 0 # tracks how long cloud been alive
 var playerTimeInCloud = 0 # tracks how long player been in cloud
+
+@onready var particles = $GPUParticles2D
+
 # Called when lance creates the cloud
 func instantiated():
 	if(player == null):
 		get_parent().get_node("./player")
 	# set size
 	self.scale = Vector2(size, size)
+	# set particle size
+	particles.process_material.scale_min = size
+	particles.process_material.scale_max = size * 3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
