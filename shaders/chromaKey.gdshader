@@ -1,3 +1,4 @@
+// MAKE BETTER LOOK AT https://github.com/Ymanawat/Chroma-Key-Shader-Godot-4/blob/master/control.gdshader
 shader_type canvas_item;
 
 uniform vec4 chroma : source_color = vec4(1);

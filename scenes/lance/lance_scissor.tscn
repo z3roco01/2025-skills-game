@@ -21,7 +21,6 @@ shader_parameter/chroma = Color(0, 1, 0, 1)
 shader_parameter/tolerance = 0.481
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5wvpo"]
-load_path = "res://.godot/imported/ezgif-frame-010.png-fa1957907e2b484f904a2c5216cb0e1e.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xsr4d"]
 animations = [{
