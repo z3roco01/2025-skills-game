@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bybg82vfxqmeq"]
+[gd_scene load_steps=6 format=3 uid="uid://bybg82vfxqmeq"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_scissor.gd" id="1_yu0of"]
 [ext_resource type="VideoStream" path="res://animations/lance/SCISSOR ANIMATION.ogv" id="2_27aff"]
+[ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_wq6uo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxcx"]
 size = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4bjcq"]
+shader = ExtResource("2_wq6uo")
+shader_parameter/chroma = Color(0, 1, 0.0784314, 1)
+shader_parameter/tolerance = 0.68
 
 [node name="lance_scissor" type="Node2D"]
 script = ExtResource("1_yu0of")
@@ -32,22 +38,10 @@ shape = SubResource("RectangleShape2D_ptxcx")
 [node name="startTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2i(2, 2)
-
 [node name="deathTimer" type="Timer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1.0
-offset_bottom = 1.0
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-offset_right = 1.0
-offset_bottom = 1.0
-stretch_mode = 2
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="TextureRect2"]
-layout_mode = 0
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+material = SubResource("ShaderMaterial_4bjcq")
 offset_left = 0.5
 offset_top = -0.25
 offset_right = 1.5
