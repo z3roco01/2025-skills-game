@@ -38,6 +38,7 @@ folder_colors={
 "res://scenes/lance/": "pink",
 "res://scripts/clementine/": "orange",
 "res://scripts/lance/": "pink",
+"res://textures/UI/": "purple",
 "res://textures/carmille/": "blue",
 "res://textures/clementine/": "orange",
 "res://textures/emil/": "gray",

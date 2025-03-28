@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=9 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
+[ext_resource type="Texture2D" uid="uid://bb4jjm2rm142y" path="res://textures/backgrounds/arena.png" id="2_waway"]
 [ext_resource type="PackedScene" uid="uid://b53u1qvna51bu" path="res://scenes/lance/lance_enemy.tscn" id="3_qi556"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
@@ -18,12 +19,21 @@ normal = Vector2(-1, 0)
 [node name="testworld" type="Node2D"]
 script = ExtResource("1_jgkv1")
 
-[node name="ColorRect4" type="ColorRect" parent="."]
+[node name="background" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -960.0
 offset_top = -540.0
 offset_right = 960.0
 offset_bottom = 540.0
-color = Color(0.136826, 0.136826, 0.136826, 1)
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_waway")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
