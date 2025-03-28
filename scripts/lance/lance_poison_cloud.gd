@@ -12,6 +12,8 @@ var playerInCloud = false # tracks if player is in cloud
 var lifetime = 0 # tracks how long cloud been alive
 var playerTimeInCloud = 0 # tracks how long player been in cloud
 
+var random = RandomNumberGenerator.new()
+
 @onready var particles = $GPUParticles2D
 @onready var indCircle = $circle
 @onready var hairsprayTexture = $texture
@@ -32,6 +34,9 @@ func instantiated():
 	# set opacities to 0
 	indCircle.modulate.a = 0
 	hairsprayTexture.modulate.a = 0
+	
+	# set texture to random rotation
+	hairsprayTexture.rotation = random.randi_range(0, 360)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
