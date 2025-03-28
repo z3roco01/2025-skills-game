@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=11 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
 [ext_resource type="Texture2D" uid="uid://bb4jjm2rm142y" path="res://textures/backgrounds/arena.png" id="2_waway"]
+[ext_resource type="Texture2D" uid="uid://e6lrlw3fvxnt" path="res://textures/UI/MC health bar.png" id="3_gnibq"]
 [ext_resource type="PackedScene" uid="uid://b53u1qvna51bu" path="res://scenes/lance/lance_enemy.tscn" id="3_qi556"]
+[ext_resource type="Texture2D" uid="uid://bh27tgqisjnse" path="res://textures/UI/Lance health bar.png" id="4_65vbi"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
 normal = Vector2(0, 1)
@@ -34,6 +36,12 @@ grow_vertical = 2
 texture = ExtResource("2_waway")
 expand_mode = 3
 stretch_mode = 6
+
+[node name="McHealthBar" type="Sprite2D" parent="."]
+texture = ExtResource("3_gnibq")
+
+[node name="LanceHealthBar" type="Sprite2D" parent="."]
+texture = ExtResource("4_65vbi")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -66,28 +74,21 @@ shape = SubResource("WorldBoundaryShape2D_tli6n")
 position = Vector2(170, -15)
 enemy = NodePath("../lanceEnemy")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -589.0
-offset_bottom = -445.0
-color = Color(0.25, 0.25, 0.25, 1)
-
 [node name="health" type="Label" parent="."]
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -832.0
-offset_bottom = -437.0
+offset_left = -770.0
+offset_top = -503.0
+offset_right = -642.0
+offset_bottom = -400.0
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 75
 text = "100
 "
 
 [node name="enemyHealth" type="Label" parent="."]
-offset_left = -723.0
-offset_top = -540.0
-offset_right = -589.0
-offset_bottom = -437.0
+offset_left = 633.0
+offset_top = -503.0
+offset_right = 767.0
+offset_bottom = -400.0
 theme_override_colors/font_color = Color(1, 0.32, 0.32, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5

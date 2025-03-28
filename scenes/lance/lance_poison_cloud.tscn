@@ -1,21 +1,24 @@
 [gd_scene load_steps=12 format=3 uid="uid://c0j5lyhcetvup"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_poison_cloud.gd" id="1_gy3d0"]
-[ext_resource type="Shader" path="res://shaders/tmp.gdshader" id="2_f5ppc"]
 [ext_resource type="Texture2D" uid="uid://grdaroaq76a1" path="res://textures/circle.png" id="3_kkn26"]
+[ext_resource type="Texture2D" uid="uid://vvpbw7ws5rly" path="res://textures/lance/spritesheetSwirls.png" id="3_qnm17"]
 [ext_resource type="Texture2D" uid="uid://b2dppk8hq4uih" path="res://textures/lance/Hairspray cloud.png" id="4_l0mk8"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jy1l0"]
-shader = ExtResource("2_f5ppc")
-shader_parameter/colour = Color(0.721569, 0.776471, 0.760784, 0.2)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q3q8f"]
 
-[sub_resource type="Gradient" id="Gradient_vmivn"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pvc4t"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_eimiv"]
-gradient = SubResource("Gradient_vmivn")
+[sub_resource type="Curve" id="Curve_y1ew8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.772021, 0.0659339), 0.0, 0.0, 0, 0, Vector2(1, 0.505494), 1.28916, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5pr47"]
+curve = SubResource("Curve_y1ew8")
 
 [sub_resource type="Curve" id="Curve_0xndh"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -29,22 +32,26 @@ particle_flag_disable_z = true
 emission_shape_offset = Vector3(1, 1, 0)
 emission_shape = 1
 emission_sphere_radius = 10.0
+angle_min = -360.0
+angle_max = 360.0
+angle_curve = SubResource("CurveTexture_5pr47")
 direction = Vector3(0, 0, 0)
 spread = 44.478
 initial_velocity_min = -10.0
 initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
-scale_max = 3.5
+scale_min = 0.02
+scale_max = 0.07
 scale_curve = SubResource("CurveTexture_gengf")
-color = Color(1, 0.917647, 1, 0.4)
-color_ramp = SubResource("GradientTexture1D_eimiv")
+color = Color(1, 1, 1, 0.780392)
+anim_offset_max = 1.0
 
 [node name="poison cloud" type="Node2D"]
 script = ExtResource("1_gy3d0")
 
-[node name="earthquakeOuter" type="Sprite2D" parent="."]
+[node name="circle" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.211765)
 texture_filter = 1
-material = SubResource("ShaderMaterial_jy1l0")
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("3_kkn26")
 
@@ -55,22 +62,24 @@ visible = false
 shape = SubResource("CircleShape2D_q3q8f")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 20
+material = SubResource("CanvasItemMaterial_pvc4t")
+amount = 12
 process_material = SubResource("ParticleProcessMaterial_12o4f")
+texture = ExtResource("3_qnm17")
 speed_scale = 1.33
 randomness = 1.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.588235)
+[node name="texture" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.643137)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -10.5
+offset_left = -10.0
 offset_top = -11.0
-offset_right = 11.5
-offset_bottom = 11.0
+offset_right = 11.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_l0mk8")

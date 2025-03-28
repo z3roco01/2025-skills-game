@@ -13,7 +13,12 @@ var lifetime = 0 # tracks how long cloud been alive
 var playerTimeInCloud = 0 # tracks how long player been in cloud
 
 @onready var particles = $GPUParticles2D
+@onready var indCircle = $circle
+@onready var hairsprayTexture = $texture
 
+const CIRCLE_OPACITY_BASE = 0.15 # opacity to be spawned at
+const TEXTURE_OPACITY_BASE = 0.5
+const APPEAR_TIME = 0.5
 # Called when lance creates the cloud
 func instantiated():
 	if(player == null):
@@ -21,8 +26,12 @@ func instantiated():
 	# set size
 	self.scale = Vector2(size, size)
 	# set particle size
-	particles.process_material.scale_min = size
-	particles.process_material.scale_max = size * 3
+	particles.process_material.scale_min = 0.02 * size
+	particles.process_material.scale_max = 0.04 * size
+	
+	# set opacities to 0
+	indCircle.modulate.a = 0
+	hairsprayTexture.modulate.a = 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,6 +49,16 @@ func _process(delta: float) -> void:
 	if(playerTimeInCloud >= TIME_BETWEEN_DAMAGE):
 		player.damage(CLOUD_DAMAGE) # do damage
 		playerTimeInCloud = 0 # reset counter
+	
+	# set opacities
+	indCircle.modulate.a = findOpacity(CIRCLE_OPACITY_BASE)
+	hairsprayTexture.modulate.a = findOpacity(TEXTURE_OPACITY_BASE)
+	
+func findOpacity(base:float):
+	if(lifetime > APPEAR_TIME):
+		return base - pow(lifetime/duration, 3) * base
+	else:
+		return 0 + lifetime/APPEAR_TIME * base
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	# check if body is player
