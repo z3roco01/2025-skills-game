@@ -1,8 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b53u1qvna51bu"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_enemy.gd" id="1_cvgbt"]
-[ext_resource type="Texture2D" uid="uid://dwqblit8de7w7" path="res://textures/Lance Neutral.png" id="2_hlwu3"]
-
+[ext_resource type="Texture2D" uid="uid://dwqblit8de7w7" path="res://textures/lance/Lance Neutral.png" id="2_hlwu3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
 size = Vector2(60, 120)

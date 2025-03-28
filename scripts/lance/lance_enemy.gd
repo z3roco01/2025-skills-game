@@ -44,8 +44,8 @@ const SPRITE_HEIGHT = 120.0
 @onready var stabHitboxInd = $rotators/stabHitbox
 @onready var stabHitbox = $rotators/stabAttackHitbox
 
-var scissor_throwable = preload("res://scenes/lance_scissor.tscn")
-var poison_cloud = preload("res://scenes/lance_poison_cloud.tscn")
+var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
+var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
 
 func idleAction() -> void:
 	pass 
