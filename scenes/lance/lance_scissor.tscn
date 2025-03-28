@@ -1,16 +1,65 @@
-[gd_scene load_steps=6 format=3 uid="uid://bybg82vfxqmeq"]
+[gd_scene load_steps=16 format=3 uid="uid://bybg82vfxqmeq"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_scissor.gd" id="1_yu0of"]
-[ext_resource type="VideoStream" path="res://animations/lance/SCISSOR ANIMATION.ogv" id="2_27aff"]
 [ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_wq6uo"]
+[ext_resource type="Texture2D" uid="uid://nwsun1cwgjtx" path="res://animations/lance/scissoring/ezgif-frame-001.png" id="4_qainh"]
+[ext_resource type="Texture2D" uid="uid://q5b41ix21gpq" path="res://animations/lance/scissoring/ezgif-frame-002.png" id="5_om34c"]
+[ext_resource type="Texture2D" uid="uid://3jbpcntq6sud" path="res://animations/lance/scissoring/ezgif-frame-003.png" id="6_d2unw"]
+[ext_resource type="Texture2D" uid="uid://yd7lrelad34k" path="res://animations/lance/scissoring/ezgif-frame-004.png" id="7_72riy"]
+[ext_resource type="Texture2D" uid="uid://dohgbs45t85pl" path="res://animations/lance/scissoring/ezgif-frame-005.png" id="8_kbkfc"]
+[ext_resource type="Texture2D" uid="uid://ck7pchu8xd62b" path="res://animations/lance/scissoring/ezgif-frame-006.png" id="9_vpmcq"]
+[ext_resource type="Texture2D" uid="uid://gei8x222itse" path="res://animations/lance/scissoring/ezgif-frame-007.png" id="10_lgnop"]
+[ext_resource type="Texture2D" uid="uid://cb4jrp5iiphnu" path="res://animations/lance/scissoring/ezgif-frame-008.png" id="11_2ywxu"]
+[ext_resource type="Texture2D" uid="uid://d151n7kq20dr4" path="res://animations/lance/scissoring/ezgif-frame-009.png" id="12_ffyor"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ptxcx"]
 size = Vector2(1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4bjcq"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wp7j"]
 shader = ExtResource("2_wq6uo")
-shader_parameter/chroma = Color(0, 1, 0.0784314, 1)
-shader_parameter/tolerance = 0.68
+shader_parameter/chroma = Color(0, 1, 0, 1)
+shader_parameter/tolerance = 0.481
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5wvpo"]
+load_path = "res://.godot/imported/ezgif-frame-010.png-fa1957907e2b484f904a2c5216cb0e1e.ctex"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xsr4d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qainh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_om34c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d2unw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_72riy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kbkfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vpmcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lgnop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2ywxu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ffyor")
+}, {
+"duration": 1.0,
+"texture": SubResource("CompressedTexture2D_5wvpo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
 
 [node name="lance_scissor" type="Node2D"]
 script = ExtResource("1_yu0of")
@@ -40,16 +89,13 @@ one_shot = true
 
 [node name="deathTimer" type="Timer" parent="."]
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-material = SubResource("ShaderMaterial_4bjcq")
-offset_left = 0.5
-offset_top = -0.25
-offset_right = 1.5
-offset_bottom = 0.75
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_0wp7j")
+position = Vector2(0.5, 0.475)
 rotation = 0.785398
-stream = ExtResource("2_27aff")
-autoplay = true
-expand = true
+scale = Vector2(0.001, 0.001)
+sprite_frames = SubResource("SpriteFrames_xsr4d")
+autoplay = "default"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="startTimer" to="." method="_on_start_timer_timeout"]
