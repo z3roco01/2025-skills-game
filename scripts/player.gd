@@ -20,8 +20,10 @@ var speed = DEFAULT_SPEED
 @onready var stabAreaColour = $rotators/stabArea/CollisionShape2D/ColorRect
 @onready var slashTimer = $slashTimer
 @onready var slashArea = $rotators/slashArea
+@onready var sprite = $playerSprite
 # create a tween
 @onready var tween = get_tree().create_tween()
+
 
 # damage that should be delt to the enemey each physics tick
 var enemyDamage = 0
@@ -35,6 +37,11 @@ var slashing = false
 func _physics_process(_delta: float) -> void:
 	rotators.look_at(get_global_mouse_position())
 	var direction := Input.get_vector("left", "right", "up", "back")
+	
+	if(Input.is_action_pressed("left")):
+		sprite.flip_h = false
+	elif(Input.is_action_pressed("right")):
+		sprite.flip_h = true
 	
 	# only dash when the dash key has been pressed, the cooldown is done and the player is moving in a direction
 	if(Input.is_action_just_pressed("dash") and dashCooldown.is_stopped() and direction != Vector2.ZERO):

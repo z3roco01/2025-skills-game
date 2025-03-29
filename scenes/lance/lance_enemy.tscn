@@ -1,7 +1,98 @@
-[gd_scene load_steps=6 format=3 uid="uid://b53u1qvna51bu"]
+[gd_scene load_steps=25 format=3 uid="uid://b53u1qvna51bu"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_enemy.gd" id="1_cvgbt"]
-[ext_resource type="Texture2D" uid="uid://dwqblit8de7w7" path="res://textures/lance/Lance Neutral.png" id="2_hlwu3"]
+[ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_h73si"]
+[ext_resource type="Texture2D" uid="uid://7w7a37p62rol" path="res://textures/lance/LANCE CHIBI neutral.png" id="2_y38dd"]
+[ext_resource type="Texture2D" uid="uid://cmrm4qt2601yk" path="res://animations/lance/dashing/ezgif-frame-001.png" id="4_n66d6"]
+[ext_resource type="Texture2D" uid="uid://c4qsifn7rk6ml" path="res://animations/lance/dashing/ezgif-frame-002.png" id="5_0p4dv"]
+[ext_resource type="Texture2D" uid="uid://14mu2rb3md8h" path="res://animations/lance/dashing/ezgif-frame-003.png" id="6_ttjdt"]
+[ext_resource type="Texture2D" uid="uid://ksjjo1j6uibx" path="res://animations/lance/dashing/ezgif-frame-004.png" id="7_ukmvl"]
+[ext_resource type="Texture2D" uid="uid://d18h4bf7kkah3" path="res://animations/lance/dashing/ezgif-frame-005.png" id="8_6owsn"]
+[ext_resource type="Texture2D" uid="uid://ll3p3vu3p6ef" path="res://animations/lance/dashing/ezgif-frame-006.png" id="9_dbkbq"]
+[ext_resource type="Texture2D" uid="uid://dcvl7ptqyx6k7" path="res://animations/lance/dashing/ezgif-frame-007.png" id="10_0ot8y"]
+[ext_resource type="Texture2D" uid="uid://dkx8dstny65wk" path="res://animations/lance/dashing/ezgif-frame-008.png" id="11_clog6"]
+[ext_resource type="Texture2D" uid="uid://p7cnf4g7rktg" path="res://animations/lance/dashing/ezgif-frame-009.png" id="12_h2tl3"]
+[ext_resource type="Texture2D" uid="uid://dp8ipb13smmls" path="res://animations/lance/dashing/ezgif-frame-010.png" id="13_ktihs"]
+[ext_resource type="Texture2D" uid="uid://8ge6edg5mno3" path="res://animations/lance/dashing/ezgif-frame-011.png" id="14_q1oj7"]
+[ext_resource type="Texture2D" uid="uid://c82o6xdo26a8" path="res://animations/lance/dashing/ezgif-frame-012.png" id="15_8ve8g"]
+[ext_resource type="Texture2D" uid="uid://dl1uo0v3r64bc" path="res://animations/lance/dashing/ezgif-frame-013.png" id="16_36uc8"]
+[ext_resource type="Texture2D" uid="uid://d1kpmxlcb1rs2" path="res://animations/lance/dashing/ezgif-frame-014.png" id="17_jfl6j"]
+[ext_resource type="Texture2D" uid="uid://bjxysqdd0jy7x" path="res://animations/lance/dashing/ezgif-frame-015.png" id="18_smqyl"]
+[ext_resource type="Texture2D" uid="uid://df65575lvhgbv" path="res://animations/lance/dashing/ezgif-frame-016.png" id="19_xgle3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jlk8e"]
+shader = ExtResource("2_h73si")
+shader_parameter/chroma = Color(0.0627451, 1, 0.313726, 1)
+shader_parameter/tolerance = 0.427
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ig4jo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_y38dd")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_dbkbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_0ot8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_clog6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_h2tl3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ktihs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_q1oj7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8ve8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_36uc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_jfl6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_smqyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xgle3")
+}],
+"loop": true,
+"name": &"p1DashLoop",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_n66d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0p4dv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ttjdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ukmvl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6owsn")
+}],
+"loop": false,
+"name": &"p1DashStartup",
+"speed": 20.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
 size = Vector2(60, 120)
@@ -17,12 +108,14 @@ gravity_scale = 0.0
 freeze_mode = 1
 script = ExtResource("1_cvgbt")
 
-[node name="485b60d7-628c-4763-8717-b0b0f7a0f7f5" type="Sprite2D" parent="."]
-position = Vector2(-9.53674e-07, -2.14577e-06)
-scale = Vector2(0.0497592, 0.0375587)
-texture = ExtResource("2_hlwu3")
+[node name="lanceSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_jlk8e")
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_ig4jo")
+animation = &"neutral"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_7rqhy")
 
@@ -33,6 +126,7 @@ position = Vector2(2, 0)
 position = Vector2(-2, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rotators/stabAttackHitbox"]
+visible = false
 position = Vector2(112, -1.5)
 shape = SubResource("RectangleShape2D_6f56f")
 
@@ -73,6 +167,7 @@ wait_time = 0.2
 [node name="dashAttackHitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dashAttackHitbox"]
+visible = false
 shape = SubResource("RectangleShape2D_xs6hg")
 
 [node name="throwWaitTimer" type="Timer" parent="."]

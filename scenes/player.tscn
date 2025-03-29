@@ -1,7 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://6vtbxytds8cv"]
+[gd_scene load_steps=7 format=3 uid="uid://6vtbxytds8cv"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_noueq"]
-[ext_resource type="Texture2D" uid="uid://px4q2inpvuru" path="res://textures/mc/MC_Sprite.png" id="2_c6mhc"]
+[ext_resource type="Texture2D" uid="uid://cvap1snxvunef" path="res://textures/mc/MC CHIBI neutral.png" id="2_46jye"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b8s3n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_46jye")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2wxn"]
 size = Vector2(96, 96)
@@ -17,9 +28,10 @@ scale = Vector2(0.8, 0.8)
 motion_mode = 1
 script = ExtResource("1_noueq")
 
-[node name="Mscarter" type="Sprite2D" parent="."]
-scale = Vector2(0.0485189, 0.0381373)
-texture = ExtResource("2_c6mhc")
+[node name="playerSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.06, 0.06)
+sprite_frames = SubResource("SpriteFrames_b8s3n")
+animation = &"neutral"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_d2wxn")

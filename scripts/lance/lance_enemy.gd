@@ -43,6 +43,7 @@ const SPRITE_HEIGHT = 120.0
 @onready var dashArrow = $rotators/dashArrow
 @onready var stabHitboxInd = $rotators/stabHitbox
 @onready var stabHitbox = $rotators/stabAttackHitbox
+@onready var sprite = $lanceSprite
 
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
@@ -71,10 +72,21 @@ func p1DashAttack() -> void:
 		var endPoint = randomiseWallPosition(endWall)
 		position = startPoint # move to start point
 		rotators.look_at(endPoint)
+		sprite.rotation = 0
+		sprite.look_at(endPoint)
+		# check if needed to invert based on pos
+		if(position.x < 0):
+			sprite.flip_h = true
+			sprite.flip_v = false
+		else:
+			sprite.flip_h = true
+			sprite.flip_v = true
+		sprite.play("p1DashStartup")
 		dashArrow.visible = true # show arrow
 		dashWaitTimer.start() # wait until attacking
 		await dashWaitTimer.timeout
 		dashArrow.visible = false # hide arrow
+		sprite.play("p1DashLoop")
 		# start dashing
 		dashAttacking = true
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
@@ -186,8 +198,13 @@ func p3PoisonAttack() -> void:
 			)
 		# move lance to spot with a tween
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
+		# dash animation
+		sprite.play("p1DashStartup", 4.0)
 		tween.tween_property(self, "position", targetPos, 0.2)
+		if(targetPos.x > position.x):
+			sprite.flip_h = true
 		await tween.finished # wait for lance to finish moving
+		resetSprite()
 		# make cloud
 		createPoisonCloud(
 		targetPos,
@@ -292,6 +309,7 @@ func attackStarted() -> void:
 	dazed = false # become dazed
 	# un collidable
 	add_collision_exception_with(player)
+	resetSprite()
 
 # things to do when an attack is done
 func attackFinished() -> void:
@@ -305,4 +323,11 @@ func attackFinished() -> void:
 		attackPhase += 1
 	# collidable
 	remove_collision_exception_with(player)
-	
+	resetSprite()
+
+# sprite will go back to default
+func resetSprite() -> void:
+	sprite.play("neutral") # reset sprite
+	sprite.rotation = 0
+	sprite.flip_h = false
+	sprite.flip_v = false
