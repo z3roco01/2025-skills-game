@@ -42,6 +42,7 @@ const SPRITE_HEIGHT = 120.0
 @onready var cloudWaitTimer = $cloudWaitTimer
 @onready var dashArrow = $rotators/dashArrow
 @onready var dashArrowAnim = $rotators/dashArrow/AnimationPlayer
+@onready var dashParticles = $dashParticles
 @onready var stabHitboxInd = $rotators/stabHitbox
 @onready var stabHitbox = $rotators/stabAttackHitbox
 @onready var sprite = $lanceSprite
@@ -82,6 +83,7 @@ func p1DashAttack() -> void:
 		else:
 			sprite.flip_h = true
 			sprite.flip_v = true
+		dashParticles.emitting = true # start particle emission
 		sprite.play("p1DashStartup")
 		dashArrowAnim.play("RESET")
 		dashArrow.visible = true # show arrow
@@ -94,6 +96,7 @@ func p1DashAttack() -> void:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(self, "position", endPoint, 0.3)
 		await tween.finished
+		dashParticles.emitting = false # stop particle emission
 		dashAttacking = false
 		# wait a little more before starting next dash
 		dashCDTimer.start()

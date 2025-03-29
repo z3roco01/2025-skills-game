@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b53u1qvna51bu"]
+[gd_scene load_steps=37 format=3 uid="uid://b53u1qvna51bu"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_enemy.gd" id="1_cvgbt"]
 [ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_h73si"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://d1kpmxlcb1rs2" path="res://animations/lance/dashing/ezgif-frame-014.png" id="17_jfl6j"]
 [ext_resource type="Texture2D" uid="uid://bjxysqdd0jy7x" path="res://animations/lance/dashing/ezgif-frame-015.png" id="18_smqyl"]
 [ext_resource type="Texture2D" uid="uid://df65575lvhgbv" path="res://animations/lance/dashing/ezgif-frame-016.png" id="19_xgle3"]
+[ext_resource type="Texture2D" uid="uid://ccrquf518450m" path="res://textures/lance/spritesheetDash.png" id="20_p7l0a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jlk8e"]
 shader = ExtResource("2_h73si")
@@ -102,33 +103,6 @@ size = Vector2(60, 120)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6f56f"]
 size = Vector2(80, 400)
 
-[sub_resource type="Animation" id="Animation_2n5m6"]
-resource_name = "start"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 0.933033),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.966667),
-"transitions": PackedFloat32Array(1, 0.378929),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_ddjqd"]
 length = 0.001
 tracks/0/type = "value"
@@ -156,6 +130,33 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_2n5m6"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 0.933033),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 0.378929),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3ng6d"]
 _data = {
 "RESET": SubResource("Animation_ddjqd"),
@@ -164,6 +165,54 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xs6hg"]
 size = Vector2(150, 200)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kr2y7"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_07ne0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_abyax"]
+curve = SubResource("Curve_07ne0")
+
+[sub_resource type="Gradient" id="Gradient_5xmlp"]
+offsets = PackedFloat32Array(0, 0.212121, 1)
+colors = PackedColorArray(1, 1, 1, 0.847059, 1, 0.913725, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rk28i"]
+gradient = SubResource("Gradient_5xmlp")
+
+[sub_resource type="Curve" id="Curve_wh1e5"]
+_data = [Vector2(0, 0.813187), 0.0, 1.57102, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7umm2"]
+curve = SubResource("Curve_wh1e5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_acok5"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(100, 100, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.5
+emission_ring_inner_radius = 1.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+angle_curve = SubResource("CurveTexture_abyax")
+initial_velocity_min = -20.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_7umm2")
+scale_over_velocity_max = 1.0
+color_ramp = SubResource("GradientTexture1D_rk28i")
+anim_offset_max = 1.0
 
 [node name="lanceEnemy" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -193,6 +242,7 @@ position = Vector2(112, -1.5)
 shape = SubResource("RectangleShape2D_6f56f")
 
 [node name="dashArrow" type="ColorRect" parent="rotators"]
+visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -202,7 +252,7 @@ offset_right = 3000.0
 offset_bottom = 100.0
 grow_vertical = 2
 pivot_offset = Vector2(0, 100)
-color = Color(1, 0.266667, 0.541176, 0.192157)
+color = Color(1, 0.607843, 1, 0.192157)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="rotators/dashArrow"]
 libraries = {
@@ -247,6 +297,14 @@ one_shot = true
 [node name="cloudWaitTimer" type="Timer" parent="."]
 wait_time = 0.7
 one_shot = true
+
+[node name="dashParticles" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_kr2y7")
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_acok5")
+texture = ExtResource("20_p7l0a")
+lifetime = 0.5
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="dashAttackHitbox" to="." method="_on_dash_attack_hit_box_body_entered"]
