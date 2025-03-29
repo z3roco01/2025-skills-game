@@ -41,6 +41,7 @@ const SPRITE_HEIGHT = 120.0
 @onready var stabTimer = $stabTimer
 @onready var cloudWaitTimer = $cloudWaitTimer
 @onready var dashArrow = $rotators/dashArrow
+@onready var dashArrowAnim = $rotators/dashArrow/AnimationPlayer
 @onready var stabHitboxInd = $rotators/stabHitbox
 @onready var stabHitbox = $rotators/stabAttackHitbox
 @onready var sprite = $lanceSprite
@@ -82,10 +83,11 @@ func p1DashAttack() -> void:
 			sprite.flip_h = true
 			sprite.flip_v = true
 		sprite.play("p1DashStartup")
+		dashArrowAnim.play("RESET")
 		dashArrow.visible = true # show arrow
 		dashWaitTimer.start() # wait until attacking
 		await dashWaitTimer.timeout
-		dashArrow.visible = false # hide arrow
+		dashArrowAnim.play("start",-1,1/0.3 * 2) #play disappear animation
 		sprite.play("p1DashLoop")
 		# start dashing
 		dashAttacking = true
@@ -203,8 +205,10 @@ func p3PoisonAttack() -> void:
 		tween.tween_property(self, "position", targetPos, 0.2)
 		if(targetPos.x > position.x):
 			sprite.flip_h = true
+		else:
+			sprite.flip_h = false
 		await tween.finished # wait for lance to finish moving
-		resetSprite()
+		sprite.play("neutral") # neutral stance
 		# make cloud
 		createPoisonCloud(
 		targetPos,
@@ -248,7 +252,13 @@ func scissorHit():
 	# start tween of going towards player
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "position", positionTarget, 0.2)
-	await tween.finished # wait for tween to be done
+	sprite.play("p1DashStartup")
+	if(positionTarget.x > position.x):
+		sprite.flip_h = true
+	else:
+		sprite.flip_h = false
+	await tween.finished # wait for lance to finish moving
+	sprite.play("neutral") # neutral stance
 	rotators.look_at(player.position) # point stab towards player
 	# show stab 
 	stabHitboxInd.visible = true
