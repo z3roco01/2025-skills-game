@@ -37,12 +37,13 @@ folder_colors={
 "res://scenes/lance/": "pink",
 "res://scripts/clementine/": "orange",
 "res://scripts/lance/": "pink",
-"res://textures/UI/": "purple",
 "res://textures/carmille/": "blue",
 "res://textures/clementine/": "orange",
 "res://textures/emil/": "gray",
 "res://textures/lance/": "pink",
-"res://textures/mc/": "red"
+"res://textures/mc/": "red",
+"res://ui/": "purple",
+"res://ui/textures/": "purple"
 }
 
 [input]

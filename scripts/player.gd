@@ -12,7 +12,7 @@ var speed = DEFAULT_SPEED
 # gets the main node, which contains the players preferences
 @onready var mainNode = get_node("../")
 # gets the health label from the parent, hardcoded bc has to be
-@onready var healthLabel = get_node("../health")
+@onready var healthLabel = get_node("../uis/health")
 @onready var dashCooldown = $dashCooldown
 @onready var rotators = $rotators
 @onready var slashAreaColour = $rotators/slashArea/CollisionShape2D/ColorRect

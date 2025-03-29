@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=13 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
+[ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="2_ujqbu"]
 [ext_resource type="Texture2D" uid="uid://bb4jjm2rm142y" path="res://textures/backgrounds/arena.png" id="2_waway"]
-[ext_resource type="Texture2D" uid="uid://e6lrlw3fvxnt" path="res://textures/UI/MC health bar.png" id="3_gnibq"]
+[ext_resource type="Texture2D" uid="uid://e6lrlw3fvxnt" path="res://ui/textures/MC health bar.png" id="3_gnibq"]
 [ext_resource type="PackedScene" uid="uid://b53u1qvna51bu" path="res://scenes/lance/lance_enemy.tscn" id="3_qi556"]
-[ext_resource type="Texture2D" uid="uid://bh27tgqisjnse" path="res://textures/UI/Lance health bar.png" id="4_65vbi"]
+[ext_resource type="Texture2D" uid="uid://bh27tgqisjnse" path="res://ui/textures/Lance health bar.png" id="4_65vbi"]
+[ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="6_uvmqu"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
 normal = Vector2(0, 1)
@@ -21,27 +23,86 @@ normal = Vector2(-1, 0)
 [node name="testworld" type="Node2D"]
 script = ExtResource("1_jgkv1")
 
-[node name="background" type="TextureRect" parent="."]
+[node name="uis" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_ujqbu")
+
+[node name="background" type="TextureRect" parent="uis"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = 960.0
-offset_bottom = 540.0
+offset_left = -980.0
+offset_top = -560.0
+offset_right = 940.0
+offset_bottom = 520.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_waway")
 expand_mode = 3
 stretch_mode = 6
 
-[node name="McHealthBar" type="Sprite2D" parent="."]
+[node name="mcHealthBg" type="TextureRect" parent="uis"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -980.0
+offset_top = -560.0
+offset_right = 940.0
+offset_bottom = 520.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_gnibq")
 
-[node name="LanceHealthBar" type="Sprite2D" parent="."]
+[node name="laneHealthBg" type="TextureRect" parent="uis"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -980.0
+offset_top = -560.0
+offset_right = 940.0
+offset_bottom = 520.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("4_65vbi")
+
+[node name="health" type="Label" parent="uis"]
+layout_mode = 0
+offset_left = -770.0
+offset_top = -505.0
+offset_right = -614.0
+offset_bottom = -403.0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_uvmqu")
+theme_override_font_sizes/font_size = 75
+text = "100
+"
+vertical_alignment = 2
+
+[node name="enemyHealth" type="Label" parent="uis"]
+layout_mode = 0
+offset_left = 633.0
+offset_top = -505.0
+offset_right = 789.0
+offset_bottom = -403.0
+theme_override_colors/font_color = Color(1, 0.32, 0.32, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("6_uvmqu")
+theme_override_font_sizes/font_size = 75
+text = "100
+"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -73,28 +134,6 @@ shape = SubResource("WorldBoundaryShape2D_tli6n")
 [node name="player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("1_52pld")]
 position = Vector2(170, -15)
 enemy = NodePath("../lanceEnemy")
-
-[node name="health" type="Label" parent="."]
-offset_left = -770.0
-offset_top = -503.0
-offset_right = -642.0
-offset_bottom = -400.0
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 75
-text = "100
-"
-
-[node name="enemyHealth" type="Label" parent="."]
-offset_left = 633.0
-offset_top = -503.0
-offset_right = 767.0
-offset_bottom = -400.0
-theme_override_colors/font_color = Color(1, 0.32, 0.32, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 75
-text = "100
-"
 
 [node name="waittimer" type="Timer" parent="."]
 one_shot = true

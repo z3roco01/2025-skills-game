@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh27tgqisjnse"
-path="res://.godot/imported/Lance health bar.png-7c8e4717e8774ba86cd289464f731990.ctex"
+uid="uid://iscucwpdb2an"
+path="res://.godot/imported/Textbox.png-d762e1b0f23d148b08f7af9a31eecc32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/UI/Lance health bar.png"
-dest_files=["res://.godot/imported/Lance health bar.png-7c8e4717e8774ba86cd289464f731990.ctex"]
+source_file="res://ui/textures/Textbox.png"
+dest_files=["res://.godot/imported/Textbox.png-d762e1b0f23d148b08f7af9a31eecc32.ctex"]
 
 [params]
 

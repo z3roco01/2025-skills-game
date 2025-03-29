@@ -12,7 +12,7 @@ var attackCooldown = 0
 var vel = Vector2.ZERO
 # get the player from the parent
 @onready var player = get_parent().get_node("./player")
-@onready var healthText = get_parent().get_node("./enemyHealth")
+@onready var healthText = get_parent().get_node("./uis/enemyHealth")
 # node that holds everything that will rotates around the enemy when they rotate
 @onready var rotators = $rotators
 # tracks if attacks can happen
