@@ -82,11 +82,13 @@ func p1DashAttack() -> void:
 			sprite.flip_h = true
 			sprite.flip_v = true
 		sprite.play("p1DashStartup")
+		sprite.material.set_shader_parameter("enabled", true)
 		dashArrow.visible = true # show arrow
 		dashWaitTimer.start() # wait until attacking
 		await dashWaitTimer.timeout
 		dashArrow.visible = false # hide arrow
 		sprite.play("p1DashLoop")
+		sprite.material.set_shader_parameter("enabled", true)
 		# start dashing
 		dashAttacking = true
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
@@ -200,6 +202,7 @@ func p3PoisonAttack() -> void:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
 		# dash animation
 		sprite.play("p1DashStartup", 4.0)
+		sprite.material.set_shader_parameter("enabled", true)
 		tween.tween_property(self, "position", targetPos, 0.2)
 		if(targetPos.x > position.x):
 			sprite.flip_h = true
@@ -328,6 +331,7 @@ func attackFinished() -> void:
 # sprite will go back to default
 func resetSprite() -> void:
 	sprite.play("neutral") # reset sprite
+	sprite.material.set_shader_parameter("enabled", false)
 	sprite.rotation = 0
 	sprite.flip_h = false
 	sprite.flip_v = false

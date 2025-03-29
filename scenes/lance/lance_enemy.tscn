@@ -24,6 +24,8 @@
 shader = ExtResource("2_h73si")
 shader_parameter/chroma = Color(0.0627451, 1, 0.313726, 1)
 shader_parameter/tolerance = 0.427
+shader_parameter/fadeAmount = 0.5
+shader_parameter/enabled = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ig4jo"]
 animations = [{
