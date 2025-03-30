@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcne32iho2ohv"]
+[gd_scene load_steps=8 format=3 uid="uid://dcne32iho2ohv"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
 [ext_resource type="Texture2D" uid="uid://iscucwpdb2an" path="res://ui/textures/Textbox.png" id="3_uxotw"]
+[ext_resource type="Texture2D" uid="uid://bwlv35ivqvykb" path="res://textures/backgrounds/parlour.png" id="4_yg5ib"]
+[ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_pn675"]
 [ext_resource type="Texture2D" uid="uid://c4cyfofvw5xop" path="res://textures/emil/Émil_Angry_1.png" id="5_qsmhr"]
+[ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="6_7n0wu"]
 
 [node name="dialogueInstance" type="Control"]
 z_index = -6
@@ -22,21 +25,15 @@ expressions = {
 defaultExpression = "content"
 dialogueScript = "test text wow omg hello[nb]im ohios sigmest rizzler !!"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -960.0
-offset_top = -540.0
-offset_right = 960.0
-offset_bottom = 540.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 1
-color = Color(0.06, 0.06, 0.06, 1)
+[node name="Parlour" type="Sprite2D" parent="."]
+position = Vector2(963.556, 541)
+scale = Vector2(0.338889, 0.338889)
+texture = ExtResource("4_yg5ib")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="characterTexture" type="TextureRect" parent="."]
 layout_mode = 1
@@ -45,14 +42,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -923.0
-offset_top = -539.0
-offset_right = 323.0
-offset_bottom = 2656.0
+offset_left = -1051.0
+offset_top = -672.0
+offset_right = 819.0
+offset_bottom = 2648.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_qsmhr")
+texture = ExtResource("5_pn675")
+stretch_mode = 4
+
+[node name="McSprite" type="Sprite2D" parent="."]
+position = Vector2(1511, 766)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("6_7n0wu")
 
 [node name="textBox" type="TextureRect" parent="."]
 layout_mode = 0
@@ -90,8 +93,7 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-text = "peepee poopoo test text
-omg its some text that he is saying woah"
+text = "welcome to my parlor lil bro"
 
 [node name="nextCharTimer" type="Timer" parent="."]
 wait_time = 0.025
