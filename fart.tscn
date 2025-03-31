@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdejn4ap70hws"]
+
+[ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_gmesb"]
+
+[node name="Button" type="Button"]
+offset_right = 832.0
+offset_bottom = 190.0
+theme = ExtResource("1_gmesb")
