@@ -1,5 +1,6 @@
 extends Control
 
+
 # dictionary of expressions for this character
 # you cant type hint on export, but this will have string keys and CompressedTexture2D values
 @export var expressions = {}
