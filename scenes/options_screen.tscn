@@ -42,6 +42,7 @@ offset_top = 2.0
 offset_right = 264.0
 offset_bottom = 137.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0.135748, 0.0587311, 0.107874, 1)
 theme_override_fonts/font = ExtResource("1_inn8x")
 theme_override_font_sizes/font_size = 100
 text = "OPTIONS"
@@ -63,6 +64,18 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 30
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.185247, 0.0884369, 0.150192, 1)
+theme_override_fonts/font = ExtResource("1_inn8x")
+theme_override_font_sizes/font_size = 50
+text = "SOUND"
+horizontal_alignment = 1
 
 [node name="slider_option2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -117,6 +130,18 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 4
+
+[node name="spacer2" type="Control" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.185247, 0.0884369, 0.150192, 1)
+theme_override_fonts/font = ExtResource("1_inn8x")
+theme_override_font_sizes/font_size = 50
+text = "CONTROLS"
+horizontal_alignment = 1
 
 [node name="control_option" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
