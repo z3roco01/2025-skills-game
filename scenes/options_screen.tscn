@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dk8gqx0goxqwe"]
+[gd_scene load_steps=4 format=3 uid="uid://1jtlva7goem7"]
 
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="1_inn8x"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_qqbbh"]
@@ -33,27 +33,79 @@ horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme_override_constants/separation = 50
-alignment = 1
+theme_override_constants/separation = 30
 
-[node name="option_button" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-layout_direction = 2
+[node name="slider_option2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 5
-size_flags_vertical = 3
-theme_override_constants/separation = 100
+theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/option_button"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/slider_option2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_inn8x")
-theme_override_font_sizes/font_size = 75
-text = "MOVE UP"
+text = "MaIN VOLUME"
 
-[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/option_button"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/slider_option2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option2"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="slider_option" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/slider_option"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_inn8x")
+text = "MUSIC VOLUME"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/slider_option"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="slider_option3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/slider_option3"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_inn8x")
+text = "SFX VOLUME"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/slider_option3"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="sfxVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option3"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="control_option" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_inn8x")
+text = "move up"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="moveUp" type="Button" parent="ScrollContainer/VBoxContainer/control_option"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -61,21 +113,22 @@ size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("3_68d0n")
 theme_override_font_sizes/font_size = 50
-text = "POOP"
+text = "???"
 
-[node name="option_button2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-layout_direction = 2
+[node name="control_option2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 100
+theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/option_button2"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option2"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_inn8x")
-theme_override_font_sizes/font_size = 75
-text = "MOVE left"
+text = "move down"
 
-[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer/option_button2"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="moveDown" type="Button" parent="ScrollContainer/VBoxContainer/control_option2"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -83,32 +136,22 @@ size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("3_68d0n")
 theme_override_font_sizes/font_size = 50
-text = "POOP"
+text = "???"
 
-[node name="HSplitContainer" type="HSplitContainer" parent="ScrollContainer"]
+[node name="control_option3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
+theme_override_constants/separation = 90
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/HSplitContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="ScrollContainer/HSplitContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option3"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_inn8x")
-theme_override_font_sizes/font_size = 75
-text = "MOVE UP"
+text = "move left"
 
-[node name="Label2" type="Label" parent="ScrollContainer/HSplitContainer/VBoxContainer"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option3"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_inn8x")
-theme_override_font_sizes/font_size = 75
-text = "MOVE left"
+size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer/HSplitContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="ScrollContainer/HSplitContainer/VBoxContainer2"]
+[node name="moveLeft" type="Button" parent="ScrollContainer/VBoxContainer/control_option3"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -116,9 +159,22 @@ size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("3_68d0n")
 theme_override_font_sizes/font_size = 50
-text = "POOP"
+text = "???"
 
-[node name="Button2" type="Button" parent="ScrollContainer/HSplitContainer/VBoxContainer2"]
+[node name="control_option4" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option4"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_inn8x")
+text = "move right"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="moveRight" type="Button" parent="ScrollContainer/VBoxContainer/control_option4"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -126,4 +182,4 @@ size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("3_68d0n")
 theme_override_font_sizes/font_size = 50
-text = "POOP"
+text = "???"
