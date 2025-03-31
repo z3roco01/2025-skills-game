@@ -27,6 +27,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 68.0
+offset_bottom = 68.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
@@ -51,7 +53,7 @@ text = "MaIN VOLUME"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option2"]
+[node name="mainVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option2"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -69,7 +71,7 @@ text = "MUSIC VOLUME"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSlider" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option"]
+[node name="musicVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -175,6 +177,75 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="moveRight" type="Button" parent="ScrollContainer/VBoxContainer/control_option4"]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_68d0n")
+theme_override_font_sizes/font_size = 50
+text = "???"
+
+[node name="control_option6" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option6"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_inn8x")
+text = "SLASH ATTACK"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option6"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="slash" type="Button" parent="ScrollContainer/VBoxContainer/control_option6"]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_68d0n")
+theme_override_font_sizes/font_size = 50
+text = "???"
+
+[node name="control_option5" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option5"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_inn8x")
+text = "STAB ATTACK"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option5"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="stab" type="Button" parent="ScrollContainer/VBoxContainer/control_option5"]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("3_68d0n")
+theme_override_font_sizes/font_size = 50
+text = "???"
+
+[node name="control_option7" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option7"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_inn8x")
+text = "DASH"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option7"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="dash" type="Button" parent="ScrollContainer/VBoxContainer/control_option7"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
