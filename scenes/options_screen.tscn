@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=5 format=3 uid="uid://1jtlva7goem7"]
+=======
+[gd_scene load_steps=4 format=3 uid="uid://dk8gqx0goxqwe"]
+>>>>>>> 4d211a9e0f56b39376b94fab8a8ac4ea95145eb6
 
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="1_inn8x"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_qqbbh"]
