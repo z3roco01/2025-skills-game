@@ -37,7 +37,6 @@ shape = SubResource("RectangleShape2D_orbvg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bloackage2"]
 position = Vector2(2160, 1060)
 rotation = -1.12016
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_cpmc3")
 
 [node name="areanCollider" type="StaticBody2D" parent="."]
