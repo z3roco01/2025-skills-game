@@ -35,4 +35,6 @@ theme_override_fonts/font = ExtResource("2_qllch")
 theme_override_font_sizes/font_size = 128
 text = "PLAY"
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bpqfjg4bc33l8"]
+
+[ext_resource type="Script" path="res://scripts/world_player.gd" id="1_4q800"]
+[ext_resource type="Texture2D" uid="uid://cvap1snxvunef" path="res://textures/mc/MC CHIBI neutral.png" id="1_7raiu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ooy0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7raiu")
+}],
+"loop": true,
+"name": &"neutral",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5y7kl"]
+size = Vector2(35, 55)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vqp63"]
+radius = 31.0
+height = 94.0
+
+[node name="worldPlayer" type="CharacterBody2D"]
+script = ExtResource("1_4q800")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.3, 1.3)
+
+[node name="playerSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.07, 0.07)
+sprite_frames = SubResource("SpriteFrames_0ooy0")
+animation = &"neutral"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 18.5)
+shape = SubResource("RectangleShape2D_5y7kl")
+
+[node name="doorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="doorArea"]
+position = Vector2(-2, -10)
+shape = SubResource("CapsuleShape2D_vqp63")
+
+[connection signal="area_entered" from="doorArea" to="." method="_on_door_area_area_entered"]

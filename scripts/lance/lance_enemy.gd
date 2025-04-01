@@ -85,12 +85,14 @@ func p1DashAttack() -> void:
 			sprite.flip_v = true
 		dashParticles.emitting = true # start particle emission
 		sprite.play("p1DashStartup")
+		sprite.material.set_shader_parameter("enabled", true)
 		dashArrowAnim.play("RESET")
 		dashArrow.visible = true # show arrow
 		dashWaitTimer.start() # wait until attacking
 		await dashWaitTimer.timeout
 		dashArrowAnim.play("start",-1,1/0.3 * 2) #play disappear animation
 		sprite.play("p1DashLoop")
+		sprite.material.set_shader_parameter("enabled", true)
 		# start dashing
 		dashAttacking = true
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
@@ -205,6 +207,7 @@ func p3PoisonAttack() -> void:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
 		# dash animation
 		sprite.play("p1DashStartup", 4.0)
+		sprite.material.set_shader_parameter("enabled", true)
 		tween.tween_property(self, "position", targetPos, 0.2)
 		if(targetPos.x > position.x):
 			sprite.flip_h = true
@@ -212,6 +215,7 @@ func p3PoisonAttack() -> void:
 			sprite.flip_h = false
 		await tween.finished # wait for lance to finish moving
 		sprite.play("neutral") # neutral stance
+		sprite.material.set_shader_parameter("enabled", false)
 		# make cloud
 		createPoisonCloud(
 		targetPos,
@@ -256,12 +260,14 @@ func scissorHit():
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
 	tween.tween_property(self, "position", positionTarget, 0.2)
 	sprite.play("p1DashStartup")
+	sprite.material.set_shader_parameter("enabled", true)
 	if(positionTarget.x > position.x):
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
 	await tween.finished # wait for lance to finish moving
 	sprite.play("neutral") # neutral stance
+	sprite.material.set_shader_parameter("enabled", false)
 	rotators.look_at(player.position) # point stab towards player
 	# show stab 
 	stabHitboxInd.visible = true
@@ -341,6 +347,7 @@ func attackFinished() -> void:
 # sprite will go back to default
 func resetSprite() -> void:
 	sprite.play("neutral") # reset sprite
+	sprite.material.set_shader_parameter("enabled", false)
 	sprite.rotation = 0
 	sprite.flip_h = false
 	sprite.flip_v = false

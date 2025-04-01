@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdv8ta3fqmx2x"]
+
+[ext_resource type="Texture2D" uid="uid://qg02kmniv2jw" path="res://textures/backgrounds/fireMap.png" id="1_ir1bw"]
+[ext_resource type="PackedScene" uid="uid://bpqfjg4bc33l8" path="res://scenes/world/world_player.tscn" id="2_hje1m"]
+[ext_resource type="PackedScene" uid="uid://b8kbsq1vlbbow" path="res://scenes/world/door.tscn" id="3_ciumx"]
+[ext_resource type="PackedScene" uid="uid://ic4bic7a2os3" path="res://testBuildStuff/playButton.tscn" id="4_ykcjj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orbvg"]
+size = Vector2(628, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpmc3"]
+size = Vector2(856.715, 210.347)
+
+[node name="world" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.667, 0.667)
+texture = ExtResource("1_ir1bw")
+
+[node name="buildingCollider" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="buildingCollider"]
+position = Vector2(926, 1731)
+polygon = PackedVector2Array(-6, -3, 6, -272, 60, -360, 170, -407, 175, -431, -25, -500, -25, -531, 154, -568, 324, -561, 356, -594, 362, -639, 422, -623, 611, -734, 507, -771, 505, -828, 554, -856, 762, -847, 838, -901, 866, -967, 978, -997, 1048, -960, 1346, -1037, 1555, -1038, 1576, -1182, -132, -703)
+
+[node name="blockage1" type="StaticBody2D" parent="."]
+position = Vector2(924, 1738)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blockage1"]
+position = Vector2(303, 0.5)
+shape = SubResource("RectangleShape2D_orbvg")
+
+[node name="bloackage2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bloackage2"]
+position = Vector2(2160, 1060)
+rotation = -1.12016
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_cpmc3")
+
+[node name="areanCollider" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="areanCollider"]
+position = Vector2(1539, 1728)
+polygon = PackedVector2Array(0, 2, 53, -77, 147, -145, 311, -218, 486, -257, 568, -250)
+
+[node name="worldPlayer" parent="." instance=ExtResource("2_hje1m")]
+position = Vector2(1486, 1168)
+
+[node name="lanceDoor" parent="." instance=ExtResource("3_ciumx")]
+position = Vector2(1446, 1052)
+rotation = -0.547963
+buildingScene = ExtResource("4_ykcjj")
