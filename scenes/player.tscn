@@ -15,7 +15,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2wxn"]
-size = Vector2(96, 96)
+size = Vector2(39.625, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urh5o"]
 size = Vector2(50, 300)
@@ -34,6 +34,7 @@ sprite_frames = SubResource("SpriteFrames_b8s3n")
 animation = &"neutral"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_d2wxn")
 
 [node name="dashCooldown" type="Timer" parent="."]

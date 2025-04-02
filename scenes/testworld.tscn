@@ -132,7 +132,8 @@ position = Vector2(960, 0)
 shape = SubResource("WorldBoundaryShape2D_tli6n")
 
 [node name="player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("1_52pld")]
-position = Vector2(170, -15)
+position = Vector2(52, -15)
+scale = Vector2(1.3, 1.3)
 enemy = NodePath("../lanceEnemy")
 
 [node name="waittimer" type="Timer" parent="."]
