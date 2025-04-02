@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3rj44358t1hs"]
 
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_nujkm"]
-[ext_resource type="Script" path="res://scripts/menus/options_screen.gd" id="2_s3gpl"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="3_5lxlk"]
 [ext_resource type="FontFile" uid="uid://dfyug0ly7cnnn" path="res://ui/fonts/Rosamby.ttf" id="4_v3sct"]
+[ext_resource type="Script" path="res://scripts/menus/back_button.gd" id="5_5rv80"]
 
 [node name="options_screen" type="Control"]
 layout_mode = 3
@@ -13,7 +13,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_nujkm")
-script = ExtResource("2_s3gpl")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -79,56 +78,56 @@ theme_override_font_sizes/font_size = 50
 text = "SOUND"
 horizontal_alignment = 1
 
-[node name="slider_option2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="masterOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/slider_option2"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/masterOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
-text = "MaIN VOLUME"
+text = "MASTER VOLUME"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/slider_option2"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/masterOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="mainVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option2"]
+[node name="masterVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/masterOption"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="slider_option" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="musicOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/slider_option"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/musicOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "MUSIC VOLUME"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/slider_option"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/musicOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="musicVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option"]
+[node name="musicVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/musicOption"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="slider_option3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="sfxOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/slider_option3"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/sfxOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "SFX VOLUME"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/slider_option3"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/sfxOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="sfxVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/slider_option3"]
+[node name="sfxVolume" type="HSlider" parent="ScrollContainer/VBoxContainer/sfxOption"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -145,20 +144,20 @@ theme_override_font_sizes/font_size = 50
 text = "CONTROLS"
 horizontal_alignment = 1
 
-[node name="control_option" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="upOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/upOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "move up"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/upOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="moveUp" type="Button" parent="ScrollContainer/VBoxContainer/control_option"]
+[node name="moveUp" type="Button" parent="ScrollContainer/VBoxContainer/upOption"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -168,20 +167,20 @@ theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
 
-[node name="control_option2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="downOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option2"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/downOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "move down"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option2"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/downOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="moveDown" type="Button" parent="ScrollContainer/VBoxContainer/control_option2"]
+[node name="moveDown" type="Button" parent="ScrollContainer/VBoxContainer/downOption"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -191,20 +190,20 @@ theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
 
-[node name="control_option3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="leftOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option3"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/leftOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "move left"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option3"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/leftOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="moveLeft" type="Button" parent="ScrollContainer/VBoxContainer/control_option3"]
+[node name="moveLeft" type="Button" parent="ScrollContainer/VBoxContainer/leftOption"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -214,20 +213,20 @@ theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
 
-[node name="control_option4" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="rightOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option4"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/rightOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "move right"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option4"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/rightOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="moveRight" type="Button" parent="ScrollContainer/VBoxContainer/control_option4"]
+[node name="moveRight" type="Button" parent="ScrollContainer/VBoxContainer/rightOption"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -237,20 +236,20 @@ theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
 
-[node name="control_option6" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="slashOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option6"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/slashOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "SLASH ATTACK"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option6"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/slashOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="slash" type="Button" parent="ScrollContainer/VBoxContainer/control_option6"]
+[node name="slash" type="Button" parent="ScrollContainer/VBoxContainer/slashOption"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -260,20 +259,20 @@ theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
 
-[node name="control_option5" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="stabOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option5"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/stabOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "STAB ATTACK"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option5"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/stabOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="stab" type="Button" parent="ScrollContainer/VBoxContainer/control_option5"]
+[node name="stab" type="Button" parent="ScrollContainer/VBoxContainer/stabOption"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -283,20 +282,20 @@ theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
 
-[node name="control_option7" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="dashOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 90
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/control_option7"]
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/dashOption"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_5lxlk")
 text = "DASH"
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/control_option7"]
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/dashOption"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="dash" type="Button" parent="ScrollContainer/VBoxContainer/control_option7"]
+[node name="dash" type="Button" parent="ScrollContainer/VBoxContainer/dashOption"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -305,3 +304,15 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+
+[node name="backButton" type="Button" parent="ScrollContainer/VBoxContainer" node_paths=PackedStringArray("root")]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 50
+text = "Back
+"
+script = ExtResource("5_5rv80")
+root = NodePath("../../..")
