@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var doorArea = $doorArea
 @onready var camera = $Camera2D
 @onready var pauseMenu = preload("res://scenes/menus/pause_menu.tscn")
+var paused = false
 
 var insideBuilding = false
 
@@ -28,9 +29,16 @@ func _on_door_area_area_entered(area: Area2D) -> void:
 		area.enter()
 
 func _input(event: InputEvent) -> void:
-	if(event.is_action_pressed("pause")):
+	if(event.is_action_pressed("pause") and !paused):
 		var pauseMenuInstance = pauseMenu.instantiate()
 		pauseMenuInstance.position = self.position - Vector2(960, 540)
 		camera.zoom.x = 1
 		camera.zoom.y = 1
+		pauseMenuInstance.connect("tree_exited", pauseMenuClose)
 		get_parent().add_sibling(pauseMenuInstance)
+		paused = true
+
+func pauseMenuClose() -> void:
+	camera.zoom.x = 1.3
+	camera.zoom.y = 1.3
+	paused = false

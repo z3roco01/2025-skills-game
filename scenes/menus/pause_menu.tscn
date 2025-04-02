@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpby85o5a8q54"]
+[gd_scene load_steps=7 format=3 uid="uid://bpby85o5a8q54"]
 
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_l84ic"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="1_of3sp"]
-[ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="2_p2qhh"]
 [ext_resource type="Script" path="res://scripts/menus/back_button.gd" id="3_jiuyp"]
 [ext_resource type="Script" path="res://scripts/menus/scene_switch_button.gd" id="4_f63e6"]
 [ext_resource type="PackedScene" uid="uid://c3rj44358t1hs" path="res://scenes/menus/options_screen.tscn" id="5_0u3wd"]
@@ -16,7 +15,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_l84ic")
-script = ExtResource("2_p2qhh")
 
 [node name="bg" type="ColorRect" parent="."]
 layout_mode = 1
