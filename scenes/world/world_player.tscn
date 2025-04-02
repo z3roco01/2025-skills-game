@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bpqfjg4bc33l8"]
 
-[ext_resource type="Script" path="res://scripts/world_player.gd" id="1_4q800"]
+[ext_resource type="Script" path="res://scripts/world/world_player.gd" id="1_4q800"]
 [ext_resource type="Texture2D" uid="uid://cvap1snxvunef" path="res://textures/mc/MC CHIBI neutral.png" id="1_7raiu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ooy0"]

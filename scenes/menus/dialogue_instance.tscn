@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dcne32iho2ohv"]
 
-[ext_resource type="Script" path="res://scripts/dialogue_instance.gd" id="1_g7hym"]
+[ext_resource type="Script" path="res://scripts/menus/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
 [ext_resource type="Texture2D" uid="uid://iscucwpdb2an" path="res://ui/textures/Textbox.png" id="3_uxotw"]
 [ext_resource type="Texture2D" uid="uid://bwlv35ivqvykb" path="res://textures/backgrounds/parlour.png" id="4_yg5ib"]

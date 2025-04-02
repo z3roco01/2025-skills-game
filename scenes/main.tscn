@@ -1,12 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cmfhgbxk0ajfg"]
+[gd_scene load_steps=2 format=3 uid="uid://cmfhgbxk0ajfg"]
 
-[ext_resource type="PackedScene" uid="uid://cd6l47088vw3t" path="res://scenes/testworld.tscn" id="1_drymr"]
-[ext_resource type="Script" path="res://scripts/sceneComposer.gd" id="1_njmam"]
-[ext_resource type="PackedScene" uid="uid://ic4bic7a2os3" path="res://testBuildStuff/playButton.tscn" id="2_h7r2u"]
+[ext_resource type="PackedScene" uid="uid://ctvjf4hvmt5g6" path="res://scenes/menus/main_menu.tscn" id="1_t0528"]
 
 [node name="main" type="Node"]
 
-[node name="fart" type="Node2D" parent="."]
-script = ExtResource("1_njmam")
-scenes = Array[PackedScene]([ExtResource("2_h7r2u"), ExtResource("1_drymr")])
-propertyOverides = Array[Dictionary]([{}, {}])
+[node name="mainMenu" parent="." instance=ExtResource("1_t0528")]

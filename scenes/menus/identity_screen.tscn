@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bvf2p4gkggk0n"]
 
-[ext_resource type="Script" path="res://scripts/identity_screen.gd" id="1_520kf"]
+[ext_resource type="Script" path="res://scripts/menus/identity_screen.gd" id="1_520kf"]
 
 [node name="identityScreen" type="Control"]
 layout_mode = 3

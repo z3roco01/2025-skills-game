@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://bsppl8deqka7n"]
 
 [ext_resource type="Script" path="res://scripts/sceneComposer.gd" id="1_kc4s3"]
-[ext_resource type="PackedScene" uid="uid://bvf2p4gkggk0n" path="res://scenes/identity_screen.tscn" id="2_5p7s4"]
-[ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/dialogue_instance.tscn" id="3_fdika"]
+[ext_resource type="PackedScene" uid="uid://bvf2p4gkggk0n" path="res://scenes/menus/identity_screen.tscn" id="2_5p7s4"]
+[ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/menus/dialogue_instance.tscn" id="3_fdika"]
 [ext_resource type="PackedScene" uid="uid://cd6l47088vw3t" path="res://scenes/testworld.tscn" id="4_7ca5d"]
 [ext_resource type="Texture2D" uid="uid://dm2e86y8xy36c" path="res://textures/emil/Émil_Smile_1.png" id="5_flfvc"]
 [ext_resource type="Texture2D" uid="uid://c4cyfofvw5xop" path="res://textures/emil/Émil_Angry_1.png" id="6_qc7p2"]
