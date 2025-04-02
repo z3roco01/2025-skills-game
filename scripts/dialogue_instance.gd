@@ -162,7 +162,7 @@ class DialogueBox:
 				dialogueText = dialogueText.replace("[" + matched + "]", choice)
 			elif(matched.begins_with("name ")): # when this tag appears, set the name for this box
 				# strip off the formatting and set the name
-				nameText = matched.lstrip("name ")
+				nameText = matched.lstrip("name")
 				# remove the tag from the dialogue
 				dialogueText = dialogueText.replace("[" + matched + "]", "")
 			elif(matched.begins_with("question ")): # WE ARE DOING A QUESTION, BIG THINGS COMING
