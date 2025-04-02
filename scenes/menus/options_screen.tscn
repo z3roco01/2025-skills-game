@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c3rj44358t1hs"]
+[gd_scene load_steps=6 format=3 uid="uid://c3rj44358t1hs"]
 
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_nujkm"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="3_5lxlk"]
 [ext_resource type="FontFile" uid="uid://dfyug0ly7cnnn" path="res://ui/fonts/Rosamby.ttf" id="4_v3sct"]
+[ext_resource type="Script" path="res://scripts/menus/action_bind_button.gd" id="4_y445r"]
 [ext_resource type="Script" path="res://scripts/menus/back_button.gd" id="5_5rv80"]
 
 [node name="options_screen" type="Control"]
@@ -166,6 +167,8 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+script = ExtResource("4_y445r")
+actionName = "up"
 
 [node name="downOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -189,6 +192,8 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+script = ExtResource("4_y445r")
+actionName = "back"
 
 [node name="leftOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -212,6 +217,8 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+script = ExtResource("4_y445r")
+actionName = "left"
 
 [node name="rightOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -235,6 +242,8 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+script = ExtResource("4_y445r")
+actionName = "right"
 
 [node name="slashOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -258,6 +267,8 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+script = ExtResource("4_y445r")
+actionName = "primaryAttack"
 
 [node name="stabOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -281,6 +292,8 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+script = ExtResource("4_y445r")
+actionName = "secondaryAttack"
 
 [node name="dashOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -304,6 +317,8 @@ size_flags_stretch_ratio = 0.0
 theme_override_fonts/font = ExtResource("4_v3sct")
 theme_override_font_sizes/font_size = 50
 text = "???"
+script = ExtResource("4_y445r")
+actionName = "dash"
 
 [node name="backButton" type="Button" parent="ScrollContainer/VBoxContainer" node_paths=PackedStringArray("root")]
 custom_minimum_size = Vector2(350, 100)
