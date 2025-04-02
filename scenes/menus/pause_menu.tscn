@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpby85o5a8q54"]
+
+[ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_l84ic"]
+[ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="1_of3sp"]
+[ext_resource type="Script" path="res://scripts/menus/pause_menu.gd" id="2_p2qhh"]
+[ext_resource type="Script" path="res://scripts/menus/back_button.gd" id="3_jiuyp"]
+[ext_resource type="Script" path="res://scripts/menus/scene_switch_button.gd" id="4_f63e6"]
+[ext_resource type="PackedScene" uid="uid://c3rj44358t1hs" path="res://scenes/menus/options_screen.tscn" id="5_0u3wd"]
+[ext_resource type="Script" path="res://scripts/menus/quit_button.gd" id="6_xqpdl"]
+
+[node name="pauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l84ic")
+script = ExtResource("2_p2qhh")
+
+[node name="bg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.646591, 0.309906, 0.524179, 0.509804)
+
+[node name="bgTop" type="ColorRect" parent="bg"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -930.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.28524, 0.111112, 0.223299, 0.509804)
+
+[node name="pauseLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -263.0
+offset_right = 263.0
+offset_bottom = 135.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.135748, 0.0587311, 0.107874, 1)
+theme_override_fonts/font = ExtResource("1_of3sp")
+theme_override_font_sizes/font_size = 100
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -250.0
+offset_right = 361.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="playButton" type="Button" parent="buttons" node_paths=PackedStringArray("root")]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "BACK"
+script = ExtResource("3_jiuyp")
+root = NodePath("../..")
+
+[node name="optionsButton" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "OPTIONS"
+script = ExtResource("4_f63e6")
+scene = ExtResource("5_0u3wd")
+
+[node name="quitButton" type="Button" parent="buttons"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "QUIT"
+script = ExtResource("6_xqpdl")

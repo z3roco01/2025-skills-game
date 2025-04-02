@@ -320,6 +320,31 @@ text = "???"
 script = ExtResource("4_y445r")
 actionName = "dash"
 
+[node name="pauseOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/pauseOption"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5lxlk")
+text = "DASH"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/pauseOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="pause" type="Button" parent="ScrollContainer/VBoxContainer/pauseOption"]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+theme_override_fonts/font = ExtResource("4_v3sct")
+theme_override_font_sizes/font_size = 50
+text = "???"
+script = ExtResource("4_y445r")
+actionName = "pause"
+
 [node name="backButton" type="Button" parent="ScrollContainer/VBoxContainer" node_paths=PackedStringArray("root")]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
