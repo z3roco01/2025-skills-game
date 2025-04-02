@@ -17,6 +17,10 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.png"
 
+[audio]
+
+buses/default_bus_layout="res://audioBuses.tres"
+
 [autoload]
 
 Identity="*res://scripts/identity.gd"
