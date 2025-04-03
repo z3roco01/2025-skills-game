@@ -1,58 +1,56 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdv8ta3fqmx2x"]
+[gd_scene load_steps=7 format=3 uid="uid://bdv8ta3fqmx2x"]
 
-[ext_resource type="Texture2D" uid="uid://qg02kmniv2jw" path="res://textures/backgrounds/fireMap.png" id="1_ir1bw"]
+[ext_resource type="Texture2D" uid="uid://tfnoqj42kaib" path="res://textures/backgrounds/map.png" id="1_lu4fd"]
 [ext_resource type="PackedScene" uid="uid://bpqfjg4bc33l8" path="res://scenes/world/world_player.tscn" id="2_hje1m"]
 [ext_resource type="PackedScene" uid="uid://b8kbsq1vlbbow" path="res://scenes/world/door.tscn" id="3_ciumx"]
 [ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/menus/dialogue_instance.tscn" id="4_brdh0"]
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_qi2wn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orbvg"]
-size = Vector2(628, 23)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpmc3"]
-size = Vector2(856.715, 210.347)
+size = Vector2(556, 43.5)
 
 [node name="world" type="Node2D"]
 
 [node name="worldBg" type="Sprite2D" parent="."]
-scale = Vector2(0.666, 0.666)
-texture = ExtResource("1_ir1bw")
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_lu4fd")
 
 [node name="buildingCollider" type="StaticBody2D" parent="."]
-position = Vector2(-991, -186)
+position = Vector2(-3219, 1109)
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="buildingCollider"]
 polygon = PackedVector2Array(-6, -3, 6, -272, 60, -360, 170, -407, 175, -431, -25, -500, -25, -531, 154, -568, 324, -561, 356, -594, 362, -639, 422, -623, 611, -734, 507, -771, 505, -828, 554, -856, 762, -847, 838, -901, 866, -967, 978, -997, 1048, -960, 1346, -1037, 1555, -1038, 1576, -1182, -132, -703)
 
 [node name="blockage1" type="StaticBody2D" parent="."]
-position = Vector2(-690, -170)
+position = Vector2(-885, -91)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blockage1"]
+position = Vector2(54, -10.25)
 shape = SubResource("RectangleShape2D_orbvg")
 
 [node name="bloackage2" type="StaticBody2D" parent="."]
-position = Vector2(242, -873)
+position = Vector2(-111, -1300)
+rotation = 1.5708
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bloackage2"]
-rotation = -1.12016
-shape = SubResource("RectangleShape2D_cpmc3")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bloackage2"]
+polygon = PackedVector2Array(356, -1.52588e-05, 433, -54, 852, -54, 240, -126, 2, 0)
 
 [node name="areanCollider" type="StaticBody2D" parent="."]
 position = Vector2(-376, -193)
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="areanCollider"]
-polygon = PackedVector2Array(0, 2, 53, -77, 147, -145, 311, -218, 486, -257, 568, -250)
 
 [node name="worldPlayer" parent="." instance=ExtResource("2_hje1m")]
 position = Vector2(-513, -515)
 
 [node name="lanceDoor" parent="." instance=ExtResource("3_ciumx")]
-position = Vector2(-466, -866)
-rotation = -0.547963
+position = Vector2(-766, -978)
+rotation = -0.802488
+scale = Vector2(1.85274, 1.881)
 buildingScene = ExtResource("4_brdh0")
 dialogue = "fartfartfart[nb]peeeee"
 expressions = {
