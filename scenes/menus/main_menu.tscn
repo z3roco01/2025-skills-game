@@ -18,6 +18,7 @@ grow_vertical = 2
 theme = ExtResource("1_ccp44")
 
 [node name="bg" type="TextureRect" parent="."]
+modulate = Color(0.903248, 0.893187, 0.852235, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

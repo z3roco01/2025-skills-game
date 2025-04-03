@@ -328,7 +328,7 @@ func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 # things to do when an attack is starting
 func attackStarted() -> void:
 	attackBlocking = true
-	dazed = false # become dazed
+	dazed = false # no daze
 	# un collidable
 	add_collision_exception_with(player)
 	resetSprite()
@@ -345,7 +345,9 @@ func attackFinished() -> void:
 		attackPhase += 1
 	# collidable
 	remove_collision_exception_with(player)
-	resetSprite()
+	resetSprite() # make sure sprite is reset before dazed animation
+	sprite.play("dazed") # dazed animation
+	sprite.material.set_shader_parameter("enabled", true)
 
 # sprite will go back to default
 func resetSprite() -> void:

@@ -1,25 +1,51 @@
-[gd_scene load_steps=40 format=3 uid="uid://b53u1qvna51bu"]
+[gd_scene load_steps=66 format=3 uid="uid://b53u1qvna51bu"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_enemy.gd" id="1_cvgbt"]
 [ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_h73si"]
 [ext_resource type="Texture2D" uid="uid://7w7a37p62rol" path="res://textures/lance/LANCE CHIBI neutral.png" id="2_y38dd"]
+[ext_resource type="Texture2D" uid="uid://8cmy743lr8ur" path="res://animations/lance/dazed/ezgif-frame-001.png" id="3_uww7g"]
 [ext_resource type="Texture2D" uid="uid://cmrm4qt2601yk" path="res://animations/lance/dashing/ezgif-frame-001.png" id="4_n66d6"]
+[ext_resource type="Texture2D" uid="uid://irawwob04de3" path="res://animations/lance/dazed/ezgif-frame-002.png" id="4_rfuml"]
 [ext_resource type="Texture2D" uid="uid://c4qsifn7rk6ml" path="res://animations/lance/dashing/ezgif-frame-002.png" id="5_0p4dv"]
+[ext_resource type="Texture2D" uid="uid://btc1e4dowmvp4" path="res://animations/lance/dazed/ezgif-frame-003.png" id="5_iug77"]
+[ext_resource type="Texture2D" uid="uid://djsxi7ojjeisu" path="res://animations/lance/dazed/ezgif-frame-004.png" id="6_qosnp"]
 [ext_resource type="Texture2D" uid="uid://14mu2rb3md8h" path="res://animations/lance/dashing/ezgif-frame-003.png" id="6_ttjdt"]
+[ext_resource type="Texture2D" uid="uid://bk1781s2r2713" path="res://animations/lance/dazed/ezgif-frame-005.png" id="7_ov77n"]
 [ext_resource type="Texture2D" uid="uid://ksjjo1j6uibx" path="res://animations/lance/dashing/ezgif-frame-004.png" id="7_ukmvl"]
 [ext_resource type="Texture2D" uid="uid://d18h4bf7kkah3" path="res://animations/lance/dashing/ezgif-frame-005.png" id="8_6owsn"]
+[ext_resource type="Texture2D" uid="uid://c2nabvpo8xm2j" path="res://animations/lance/dazed/ezgif-frame-006.png" id="8_qmdfr"]
 [ext_resource type="Texture2D" uid="uid://ll3p3vu3p6ef" path="res://animations/lance/dashing/ezgif-frame-006.png" id="9_dbkbq"]
+[ext_resource type="Texture2D" uid="uid://cyqbu42pp7r4x" path="res://animations/lance/dazed/ezgif-frame-007.png" id="9_ipcxr"]
 [ext_resource type="Texture2D" uid="uid://dcvl7ptqyx6k7" path="res://animations/lance/dashing/ezgif-frame-007.png" id="10_0ot8y"]
+[ext_resource type="Texture2D" uid="uid://dibmslnk62ocu" path="res://animations/lance/dazed/ezgif-frame-008.png" id="10_hnx12"]
 [ext_resource type="Texture2D" uid="uid://dkx8dstny65wk" path="res://animations/lance/dashing/ezgif-frame-008.png" id="11_clog6"]
+[ext_resource type="Texture2D" uid="uid://deo6ak4hgavqs" path="res://animations/lance/dazed/ezgif-frame-009.png" id="11_plnnu"]
 [ext_resource type="Texture2D" uid="uid://p7cnf4g7rktg" path="res://animations/lance/dashing/ezgif-frame-009.png" id="12_h2tl3"]
+[ext_resource type="Texture2D" uid="uid://cr6fcn6g8rkgf" path="res://animations/lance/dazed/ezgif-frame-010.png" id="12_p5qki"]
+[ext_resource type="Texture2D" uid="uid://b5e64dgi7wo7n" path="res://animations/lance/dazed/ezgif-frame-011.png" id="13_5iip6"]
 [ext_resource type="Texture2D" uid="uid://dp8ipb13smmls" path="res://animations/lance/dashing/ezgif-frame-010.png" id="13_ktihs"]
 [ext_resource type="Texture2D" uid="uid://8ge6edg5mno3" path="res://animations/lance/dashing/ezgif-frame-011.png" id="14_q1oj7"]
+[ext_resource type="Texture2D" uid="uid://dcg74v7jxu1ka" path="res://animations/lance/dazed/ezgif-frame-012.png" id="14_wqwaq"]
 [ext_resource type="Texture2D" uid="uid://c82o6xdo26a8" path="res://animations/lance/dashing/ezgif-frame-012.png" id="15_8ve8g"]
+[ext_resource type="Texture2D" uid="uid://dg5pny213l5yy" path="res://animations/lance/dazed/ezgif-frame-013.png" id="15_c48ma"]
 [ext_resource type="Texture2D" uid="uid://dl1uo0v3r64bc" path="res://animations/lance/dashing/ezgif-frame-013.png" id="16_36uc8"]
+[ext_resource type="Texture2D" uid="uid://ciarth6ptsf5h" path="res://animations/lance/dazed/ezgif-frame-014.png" id="16_du42t"]
+[ext_resource type="Texture2D" uid="uid://bdakwwqxyrw5d" path="res://animations/lance/dazed/ezgif-frame-015.png" id="17_eyfhm"]
 [ext_resource type="Texture2D" uid="uid://d1kpmxlcb1rs2" path="res://animations/lance/dashing/ezgif-frame-014.png" id="17_jfl6j"]
 [ext_resource type="Texture2D" uid="uid://bjxysqdd0jy7x" path="res://animations/lance/dashing/ezgif-frame-015.png" id="18_smqyl"]
+[ext_resource type="Texture2D" uid="uid://e5ousr46rxd2" path="res://animations/lance/dazed/ezgif-frame-016.png" id="18_x54v5"]
+[ext_resource type="Texture2D" uid="uid://drsfcx75wnpoq" path="res://animations/lance/dazed/ezgif-frame-017.png" id="19_b5sm5"]
 [ext_resource type="Texture2D" uid="uid://df65575lvhgbv" path="res://animations/lance/dashing/ezgif-frame-016.png" id="19_xgle3"]
+[ext_resource type="Texture2D" uid="uid://cerw5pc8cvh8" path="res://animations/lance/dazed/ezgif-frame-018.png" id="20_ivjyh"]
 [ext_resource type="Texture2D" uid="uid://ccrquf518450m" path="res://textures/lance/spritesheetDash.png" id="20_p7l0a"]
+[ext_resource type="Texture2D" uid="uid://dannr8qoka8yn" path="res://animations/lance/dazed/ezgif-frame-019.png" id="21_e6shu"]
+[ext_resource type="Texture2D" uid="uid://cs44gtf0n7fmv" path="res://animations/lance/dazed/ezgif-frame-020.png" id="22_7se2c"]
+[ext_resource type="Texture2D" uid="uid://i0iolniqocr5" path="res://animations/lance/dazed/ezgif-frame-021.png" id="23_pxjib"]
+[ext_resource type="Texture2D" uid="uid://dktbwp72jx5vi" path="res://animations/lance/dazed/ezgif-frame-022.png" id="24_4gdbg"]
+[ext_resource type="Texture2D" uid="uid://pbwe808buxt7" path="res://animations/lance/dazed/ezgif-frame-023.png" id="25_a3iq2"]
+[ext_resource type="Texture2D" uid="uid://be0r8ldln3mdi" path="res://animations/lance/dazed/ezgif-frame-024.png" id="26_m3g7i"]
+[ext_resource type="Texture2D" uid="uid://b1tbhce6x7xw" path="res://animations/lance/dazed/ezgif-frame-025.png" id="27_upam2"]
+[ext_resource type="Texture2D" uid="uid://cfla0foo7ond0" path="res://animations/lance/dazed/ezgif-frame-026.png" id="28_o1aib"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jlk8e"]
 shader = ExtResource("2_h73si")
@@ -30,6 +56,89 @@ shader_parameter/enabled = true
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ig4jo"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_uww7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rfuml")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iug77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qosnp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ov77n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qmdfr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ipcxr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hnx12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_plnnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p5qki")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5iip6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_wqwaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_c48ma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_du42t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_eyfhm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_x54v5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_b5sm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ivjyh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_e6shu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_7se2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_pxjib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_4gdbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_a3iq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_m3g7i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_upam2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_o1aib")
+}],
+"loop": true,
+"name": &"dazed",
+"speed": 30.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_y38dd")
@@ -260,7 +369,7 @@ script = ExtResource("1_cvgbt")
 material = SubResource("ShaderMaterial_jlk8e")
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_ig4jo")
-animation = &"neutral"
+animation = &"dazed"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="lanceSprite"]
 libraries = {
