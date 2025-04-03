@@ -50,8 +50,6 @@ const SPRITE_HEIGHT = 120.0
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
 
-@onready var colorTweener = create_tween()
-
 func idleAction() -> void:
 	pass 
 
@@ -361,6 +359,7 @@ func hitAnimation() -> void:
 	colorFade(Color.RED)
 
 func colorFade(new_color:Color):
+	var colorTweener = create_tween()
 	 # tweens the color of lance
 	sprite.material.set_shader_parameter("colour", new_color)
 	colorTweener.tween_method(
@@ -372,5 +371,5 @@ func colorFade(new_color:Color):
 
 # helper method for colorFade
 func set_color_hitAnimation(value: float):
-	sprite.material.set_shader_parameter("colour", lerp(Color.RED, Color.WHITE, value))
+	sprite.material.set_shader_parameter("colour", lerp(Color.WHITE, Color.RED, value))
 	print(value)
