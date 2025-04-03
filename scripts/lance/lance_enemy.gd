@@ -46,6 +46,7 @@ const SPRITE_HEIGHT = 120.0
 @onready var stabHitboxInd = $rotators/stabHitbox
 @onready var stabHitbox = $rotators/stabAttackHitbox
 @onready var sprite = $lanceSprite
+@onready var animPlayer = $lanceSprite/AnimationPlayer # plays hurt animation
 
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
@@ -317,6 +318,8 @@ func damage(health: int) -> void:
 	# only do damage if dazed (not attacking)
 	if(dazed):
 		super.damage(health)
+		animPlayer.stop() 
+		animPlayer.play("hurt") # hurt animation
 
 func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 	if(dashAttacking && body == player): #check for dash hit
@@ -346,8 +349,8 @@ func attackFinished() -> void:
 
 # sprite will go back to default
 func resetSprite() -> void:
-	sprite.play("neutral") # reset sprite
+	sprite.play("neutral") # reset sprite anim
 	sprite.material.set_shader_parameter("enabled", false)
-	sprite.rotation = 0
-	sprite.flip_h = false
+	sprite.rotation = 0 # reset sprite rotation
+	sprite.flip_h = false # reset sprite flips
 	sprite.flip_v = false

@@ -21,9 +21,9 @@ var speed = DEFAULT_SPEED
 @onready var slashTimer = $slashTimer
 @onready var slashArea = $rotators/slashArea
 @onready var sprite = $playerSprite
+@onready var animPlayer = $playerSprite/AnimationPlayer # plays hurt animation
 # create a tween
 @onready var tween = get_tree().create_tween()
-
 
 # damage that should be delt to the enemey each physics tick
 var enemyDamage = 0
@@ -92,7 +92,8 @@ func damage(amount:int):
 	
 	# update health :)
 	healthLabel.text = str(currentHealth)
-	#ts pmo
+	animPlayer.stop() # play hurt animation
+	animPlayer.play("hurt")
 
 # called once the tween for the dash speed has finished
 func dashTweenFinish():
