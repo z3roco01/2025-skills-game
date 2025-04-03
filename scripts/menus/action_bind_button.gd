@@ -12,7 +12,8 @@ func _pressed() -> void:
 	text = "Waiting..."
 
 func _input(event: InputEvent) -> void:
-	if(gettingInput):
+	# check if event is not a mouse motion
+	if(gettingInput && not(event is InputEventMouseMotion)):
 		InputMap.action_erase_events(actionName)
 		InputMap.action_add_event(actionName, event)
 		gettingInput = false
