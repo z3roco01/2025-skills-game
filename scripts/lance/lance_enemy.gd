@@ -46,10 +46,11 @@ const SPRITE_HEIGHT = 120.0
 @onready var stabHitboxInd = $rotators/stabHitbox
 @onready var stabHitbox = $rotators/stabAttackHitbox
 @onready var sprite = $lanceSprite
-@onready var animPlayer = $lanceSprite/AnimationPlayer # plays hurt animation
 
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
+
+@onready var colorTweener = create_tween()
 
 func idleAction() -> void:
 	pass 
@@ -318,8 +319,7 @@ func damage(health: int) -> void:
 	# only do damage if dazed (not attacking)
 	if(dazed):
 		super.damage(health)
-		animPlayer.stop() 
-		animPlayer.play("hurt") # hurt animation
+		hitAnimation()
 
 func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 	if(dashAttacking && body == player): #check for dash hit
@@ -356,3 +356,21 @@ func resetSprite() -> void:
 	sprite.rotation = 0 # reset sprite rotation
 	sprite.flip_h = false # reset sprite flips
 	sprite.flip_v = false
+
+func hitAnimation() -> void:
+	colorFade(Color.RED)
+
+func colorFade(new_color:Color):
+	 # tweens the color of lance
+	sprite.material.set_shader_parameter("colour", new_color)
+	colorTweener.tween_method(
+		set_color_hitAnimation,
+		1.0,
+		0.0,
+		0.2
+	)
+
+# helper method for colorFade
+func set_color_hitAnimation(value: float):
+	sprite.material.set_shader_parameter("colour", lerp(Color.RED, Color.WHITE, value))
+	print(value)

@@ -4,6 +4,7 @@ uniform vec3 chroma : source_color = vec3(1);
 uniform float tolerance : hint_range(0, 1) = 0.6;
 uniform float fadeAmount : hint_range(0, 1) = 0.5;
 uniform bool enabled = true;
+uniform vec4 colour : source_color = vec4(1.0); // modulate
 
 float compare_rbg_values(vec3 orig, vec3 transparent) {
 	float r = abs(orig.r - transparent.r);
@@ -15,6 +16,9 @@ float compare_rbg_values(vec3 orig, vec3 transparent) {
 void fragment() {
 	if(enabled) {
 		float comparison = compare_rbg_values(COLOR.rgb, chroma.rgb);
-		COLOR = vec4(COLOR.rgb,comparison);
+		COLOR = vec4(COLOR.rgb,comparison) * colour;
+	}
+	else{
+		COLOR = COLOR * colour;
 	}
 }
