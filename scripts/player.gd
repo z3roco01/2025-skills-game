@@ -5,6 +5,7 @@ var currentHealth = startHealth
 
 const DEFAULT_SPEED = 700.0
 const DASH_SPEED = 3000
+const HIT_COLOUR = Color.RED # color to turn into when hit
 
 var speed = DEFAULT_SPEED
 @export var enemy: Node2D
@@ -21,13 +22,13 @@ var speed = DEFAULT_SPEED
 @onready var slashTimer = $slashTimer
 @onready var slashArea = $rotators/slashArea
 @onready var sprite = $playerSprite
-@onready var animPlayer = $playerSprite/AnimationPlayer # plays hurt animation
 # create a tween
 @onready var tween = get_tree().create_tween()
 
 # damage that should be delt to the enemey each physics tick
 var enemyDamage = 0
 var stabbing = false
+
 
 #tracks if enemy is going to be hit by slash
 #tracks if slash has already hit the enemy
@@ -47,7 +48,8 @@ func _physics_process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("dash") and dashCooldown.is_stopped() and direction != Vector2.ZERO):
 		# ensure the speed is at default so tween will work
 		speed = DEFAULT_SPEED
-		
+		sprite.play("dash") # play dash animation
+		sprite.material.set_shader_parameter("enabled", true)
 		# create a new tween since it was just killed
 		tween = get_tree().create_tween()
 		# start tweening the speed to the final speed
@@ -86,14 +88,13 @@ func damage(amount:int):
 	# check for death
 	if(currentHealth - amount > 0):
 		currentHealth -= amount
+		hitAnimation()
 	else:
 		currentHealth = 0
 		# TODO death stuff
 	
 	# update health :)
 	healthLabel.text = str(currentHealth)
-	animPlayer.stop() # play hurt animation
-	animPlayer.play("hurt")
 
 # called once the tween for the dash speed has finished
 func dashTweenFinish():
@@ -121,3 +122,26 @@ func _on_slash_timer_timeout() -> void:
 	# reset slash tracking vars
 	slashing = false
 	slashHitEnemy = false
+
+
+func hitAnimation():
+	var colorTweener = create_tween()
+	 # tweens the color of lance
+	colorTweener.tween_method(
+		set_color_hitAnimation,
+		1.0,
+		0.0,
+		0.2
+	)
+
+# helper method for colorFade
+func set_color_hitAnimation(value: float):
+	sprite.material.set_shader_parameter(
+		"colour", 
+		lerp(Color.WHITE, HIT_COLOUR, value)
+	)
+
+# go back to neutral once sprite animation is done
+func _on_player_sprite_animation_finished() -> void:
+	sprite.play("neutral")
+	sprite.material.set_shader_parameter("enabled", false)

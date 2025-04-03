@@ -52,7 +52,7 @@ shader = ExtResource("2_h73si")
 shader_parameter/chroma = Color(0.0627451, 1, 0.313726, 1)
 shader_parameter/tolerance = 0.427
 shader_parameter/fadeAmount = 0.5
-shader_parameter/enabled = true
+shader_parameter/enabled = false
 shader_parameter/colour = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ig4jo"]
@@ -333,7 +333,7 @@ script = ExtResource("1_cvgbt")
 material = SubResource("ShaderMaterial_jlk8e")
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_ig4jo")
-animation = &"dazed"
+animation = &"neutral"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

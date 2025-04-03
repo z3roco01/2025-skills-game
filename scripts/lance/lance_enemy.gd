@@ -50,6 +50,10 @@ const SPRITE_HEIGHT = 120.0
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
 
+# colors to turn into when hit
+const SHIELDED_HIT_COLOUR = Color.ROYAL_BLUE
+const HIT_COLOUR = Color.RED
+
 func idleAction() -> void:
 	pass 
 
@@ -317,7 +321,9 @@ func damage(health: int) -> void:
 	# only do damage if dazed (not attacking)
 	if(dazed):
 		super.damage(health)
-		hitAnimation()
+		hitAnimation() # play hit animation
+	else:
+		shieldedHitAnimation() # show lance cannot be hit
 
 func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 	if(dashAttacking && body == player): #check for dash hit
@@ -356,14 +362,16 @@ func resetSprite() -> void:
 	sprite.flip_v = false
 
 func hitAnimation() -> void:
-	colorFade(Color.RED)
+	colorFade(set_color_hitAnimation)
 
-func colorFade(new_color:Color):
+func shieldedHitAnimation() -> void:
+	colorFade(set_color_shieldedHitAnimation)
+
+func colorFade(method:Callable):
 	var colorTweener = create_tween()
 	 # tweens the color of lance
-	sprite.material.set_shader_parameter("colour", new_color)
 	colorTweener.tween_method(
-		set_color_hitAnimation,
+		method,
 		1.0,
 		0.0,
 		0.2
@@ -371,5 +379,14 @@ func colorFade(new_color:Color):
 
 # helper method for colorFade
 func set_color_hitAnimation(value: float):
-	sprite.material.set_shader_parameter("colour", lerp(Color.WHITE, Color.RED, value))
-	print(value)
+	sprite.material.set_shader_parameter(
+		"colour", 
+		lerp(Color.WHITE, HIT_COLOUR, value)
+	)
+
+# another helper method for a shielded hit
+func set_color_shieldedHitAnimation(value: float):
+	sprite.material.set_shader_parameter(
+		"colour", 
+		lerp(Color.WHITE, SHIELDED_HIT_COLOUR, value)
+	)

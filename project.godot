@@ -38,6 +38,7 @@ window/stretch/mode="viewport"
 
 folder_colors={
 "res://animations/lance/": "pink",
+"res://animations/mc/": "red",
 "res://scenes/clementine/": "orange",
 "res://scenes/lance/": "pink",
 "res://scripts/clementine/": "orange",

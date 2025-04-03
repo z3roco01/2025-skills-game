@@ -1,10 +1,108 @@
-[gd_scene load_steps=10 format=3 uid="uid://6vtbxytds8cv"]
+[gd_scene load_steps=30 format=3 uid="uid://6vtbxytds8cv"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_noueq"]
 [ext_resource type="Texture2D" uid="uid://cvap1snxvunef" path="res://textures/mc/MC CHIBI neutral.png" id="2_46jye"]
+[ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_pgk6w"]
+[ext_resource type="Texture2D" uid="uid://ck7dati101a36" path="res://animations/mc/dash/ezgif-frame-001.png" id="3_o7uwx"]
+[ext_resource type="Texture2D" uid="uid://bsv46bn8pikah" path="res://animations/mc/dash/ezgif-frame-002.png" id="4_4tdx4"]
+[ext_resource type="Texture2D" uid="uid://dumeog2pw2dna" path="res://animations/mc/dash/ezgif-frame-003.png" id="5_px87b"]
+[ext_resource type="Texture2D" uid="uid://4d37a6qji08w" path="res://animations/mc/dash/ezgif-frame-004.png" id="6_oo2a3"]
+[ext_resource type="Texture2D" uid="uid://bpuxuuvg33hwj" path="res://animations/mc/dash/ezgif-frame-005.png" id="7_ldia4"]
+[ext_resource type="Texture2D" uid="uid://dm3myfs0d0ihd" path="res://animations/mc/dash/ezgif-frame-006.png" id="8_60wlj"]
+[ext_resource type="Texture2D" uid="uid://djb8uy3ppm3d8" path="res://animations/mc/dash/ezgif-frame-007.png" id="9_l0oob"]
+[ext_resource type="Texture2D" uid="uid://b55muroshww0w" path="res://animations/mc/dash/ezgif-frame-008.png" id="10_k6p47"]
+[ext_resource type="Texture2D" uid="uid://c1xnuos5nvwqg" path="res://animations/mc/dash/ezgif-frame-009.png" id="11_fn5qk"]
+[ext_resource type="Texture2D" uid="uid://d22ba886uyugi" path="res://animations/mc/dash/ezgif-frame-010.png" id="12_87o58"]
+[ext_resource type="Texture2D" uid="uid://bv3mcmfdks8h1" path="res://animations/mc/dash/ezgif-frame-011.png" id="13_e8cae"]
+[ext_resource type="Texture2D" uid="uid://bsp0uojjmvdy7" path="res://animations/mc/dash/ezgif-frame-012.png" id="14_21ek1"]
+[ext_resource type="Texture2D" uid="uid://b525cepq2ufak" path="res://animations/mc/dash/ezgif-frame-013.png" id="15_fck8h"]
+[ext_resource type="Texture2D" uid="uid://4h7oe2punxio" path="res://animations/mc/dash/ezgif-frame-014.png" id="16_yrcdu"]
+[ext_resource type="Texture2D" uid="uid://buxw1owkd5g72" path="res://animations/mc/dash/ezgif-frame-015.png" id="17_d66kf"]
+[ext_resource type="Texture2D" uid="uid://b8dpe5woyjosr" path="res://animations/mc/dash/ezgif-frame-016.png" id="18_2p1ds"]
+[ext_resource type="Texture2D" uid="uid://51x7fnx0r2h0" path="res://animations/mc/dash/ezgif-frame-017.png" id="19_fm2kh"]
+[ext_resource type="Texture2D" uid="uid://duo86tvk7skm2" path="res://animations/mc/dash/ezgif-frame-018.png" id="20_cal3e"]
+[ext_resource type="Texture2D" uid="uid://d0av2jp5orq1d" path="res://animations/mc/dash/ezgif-frame-019.png" id="21_3rtfc"]
+[ext_resource type="Texture2D" uid="uid://dgrok5p3ubenu" path="res://animations/mc/dash/ezgif-frame-020.png" id="22_n1hu1"]
+[ext_resource type="Texture2D" uid="uid://5eqavx0m0khb" path="res://animations/mc/dash/ezgif-frame-021.png" id="23_s8ov1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5hv7f"]
+shader = ExtResource("2_pgk6w")
+shader_parameter/chroma = Color(0.0745098, 1, 0.117647, 1)
+shader_parameter/tolerance = 0.51
+shader_parameter/fadeAmount = 0.0
+shader_parameter/enabled = false
+shader_parameter/colour = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b8s3n"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_o7uwx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4tdx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_px87b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oo2a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ldia4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_60wlj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_l0oob")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k6p47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_fn5qk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_87o58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_e8cae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_21ek1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_fck8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yrcdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_d66kf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_2p1ds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_fm2kh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_cal3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_3rtfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_n1hu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_s8ov1")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 60.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_46jye")
@@ -13,43 +111,6 @@ animations = [{
 "name": &"neutral",
 "speed": 5.0
 }]
-
-[sub_resource type="Animation" id="Animation_2rvqt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_66kgb"]
-resource_name = "hurt"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 0.933033),
-"update": 0,
-"values": [Color(0.559987, 0, 0.205395, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_5bh6u"]
-_data = {
-"RESET": SubResource("Animation_2rvqt"),
-"hurt": SubResource("Animation_66kgb")
-}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2wxn"]
 size = Vector2(39.625, 96)
@@ -66,16 +127,13 @@ motion_mode = 1
 script = ExtResource("1_noueq")
 
 [node name="playerSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_5hv7f")
 scale = Vector2(0.06, 0.06)
 sprite_frames = SubResource("SpriteFrames_b8s3n")
 animation = &"neutral"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="playerSprite"]
-libraries = {
-"": SubResource("AnimationLibrary_5bh6u")
-}
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_d2wxn")
 
 [node name="dashCooldown" type="Timer" parent="."]
@@ -129,6 +187,7 @@ grow_vertical = 2
 color = Color(0.0941176, 0.478431, 0.121569, 0.494118)
 metadata/_edit_use_anchors_ = true
 
+[connection signal="animation_finished" from="playerSprite" to="." method="_on_player_sprite_animation_finished"]
 [connection signal="timeout" from="slashTimer" to="." method="_on_slash_timer_timeout"]
 [connection signal="body_entered" from="rotators/slashArea" to="." method="_on_slash_area_body_entered"]
 [connection signal="body_entered" from="rotators/stabArea" to="." method="_on_stab_area_body_entered"]
