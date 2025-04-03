@@ -36,6 +36,10 @@ func _ready() -> void:
 	# set the characters expression to the default
 	characterTexture.texture = expressions[defaultExpression]
 	
+	print(dialogueScript)
+	print(expressions)
+	print(defaultExpression)
+	
 	# populate the dialogue variables with things such as pronouns and name
 	dialogueVariables["name"] = Identity.playerName
 	dialogueVariables["subject"] = Identity.pronounSubjective

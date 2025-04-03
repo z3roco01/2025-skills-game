@@ -26,8 +26,10 @@ expressions = {
 defaultExpression = "content"
 dialogueScript = "test text wow omg hello[nb]im ohios sigmest rizzler !!"
 
-[node name="Parlour" type="Sprite2D" parent="."]
-position = Vector2(962, 541)
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 5760.0
+offset_bottom = 3240.0
 scale = Vector2(0.334, 0.334)
 texture = ExtResource("4_yg5ib")
 
@@ -48,8 +50,16 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_pn675")
 stretch_mode = 4
 
-[node name="McSprite" type="Sprite2D" parent="."]
-position = Vector2(1511, 766)
+[node name="McSprite" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -830.0
+offset_top = 19.0
+offset_right = 1040.0
+offset_bottom = 3339.0
+grow_horizontal = 0
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("6_7n0wu")
 
