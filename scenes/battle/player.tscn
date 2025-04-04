@@ -1,6 +1,6 @@
 [gd_scene load_steps=73 format=3 uid="uid://6vtbxytds8cv"]
 
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_noueq"]
+[ext_resource type="Script" path="res://scripts/battle/player.gd" id="1_noueq"]
 [ext_resource type="Texture2D" uid="uid://cvap1snxvunef" path="res://textures/mc/MC CHIBI neutral.png" id="2_46jye"]
 [ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_pgk6w"]
 [ext_resource type="Texture2D" uid="uid://ck7dati101a36" path="res://animations/mc/dash/ezgif-frame-001.png" id="3_o7uwx"]
@@ -310,7 +310,6 @@ sprite_frames = SubResource("SpriteFrames_b8s3n")
 animation = &"neutral"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_d2wxn")
 
 [node name="dashCooldown" type="Timer" parent="."]
