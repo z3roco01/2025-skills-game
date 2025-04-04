@@ -57,6 +57,13 @@ func _physics_process(_delta: float) -> void:
 		tween.tween_callback(dashTweenFinish)
 		# start dash cooldown timer
 		dashCooldown.start()
+	elif(direction != Vector2.ZERO && sprite.animation != "dash"):
+		sprite.material.set_shader_parameter("enabled", true)
+		sprite.play("walk")
+	elif(sprite.animation != "dash"):
+		sprite.material.set_shader_parameter("enabled", false)
+		sprite.play("neutral")
+		
 	
 	# apply the speed based on the inputted direction
 	velocity = direction * speed
