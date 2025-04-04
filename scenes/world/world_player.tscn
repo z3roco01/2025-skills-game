@@ -208,6 +208,7 @@ radius = 31.0
 height = 94.0
 
 [node name="worldPlayer" type="CharacterBody2D"]
+scale = Vector2(1.6, 1.6)
 script = ExtResource("1_4q800")
 
 [node name="Camera2D" type="Camera2D" parent="."]
