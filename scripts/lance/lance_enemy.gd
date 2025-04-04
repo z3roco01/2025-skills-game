@@ -30,7 +30,7 @@ const LEFT_WALL = 2
 const RIGHT_WALL = 3
 
 const ARENA_WIDTH = 1920.0
-const ARENA_HEIGHT = 1080.0
+const ARENA_HEIGHT = 920.0
 
 const SPRITE_WIDTH = 60.0
 const SPRITE_HEIGHT = 120.0

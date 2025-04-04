@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=14 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/testworld.gd" id="1_jgkv1"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b53u1qvna51bu" path="res://scenes/lance/lance_enemy.tscn" id="3_qi556"]
 [ext_resource type="Texture2D" uid="uid://bh27tgqisjnse" path="res://ui/textures/Lance health bar.png" id="4_65vbi"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="6_uvmqu"]
+[ext_resource type="Texture2D" uid="uid://231o8i766cy3" path="res://ui/textures/VS_background.png" id="6_yjiww"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
 normal = Vector2(0, 1)
@@ -38,51 +39,89 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -980.0
-offset_top = -560.0
+offset_top = -400.0
 offset_right = 940.0
-offset_bottom = 520.0
+offset_bottom = 680.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_waway")
 expand_mode = 3
 stretch_mode = 6
 
-[node name="mcHealthBg" type="TextureRect" parent="uis"]
+[node name="ColorRect" type="ColorRect" parent="uis"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -982.0
-offset_top = 330.0
-offset_right = 938.0
-offset_bottom = 1410.0
+offset_left = -980.0
+offset_top = 511.0
+offset_right = 940.0
+offset_bottom = 679.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.243137, 0.215686, 0.207843, 0.266667)
+
+[node name="mcHealthBg" type="TextureRect" parent="uis"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -991.0
+offset_top = 500.0
+offset_right = 929.0
+offset_bottom = 1580.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_gnibq")
 
 [node name="laneHealthBg" type="TextureRect" parent="uis"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -969.0
-offset_top = 339.0
-offset_right = 951.0
-offset_bottom = 1419.0
+offset_left = -973.0
+offset_top = 505.0
+offset_right = 947.0
+offset_bottom = 1585.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_65vbi")
 
+[node name="TextureRect" type="TextureRect" parent="uis"]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = 430.0
+offset_right = 130.0
+offset_bottom = 730.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_yjiww")
+expand_mode = 2
+stretch_mode = 4
+
 [node name="health" type="Label" parent="uis"]
+z_index = 1
 layout_mode = 0
-offset_left = -772.0
-offset_top = 385.0
-offset_right = -616.0
-offset_bottom = 487.0
+offset_left = -781.0
+offset_top = 558.0
+offset_right = -625.0
+offset_bottom = 660.0
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("6_uvmqu")
 theme_override_font_sizes/font_size = 75
@@ -91,11 +130,12 @@ text = "100
 vertical_alignment = 2
 
 [node name="enemyHealth" type="Label" parent="uis"]
+z_index = 1
 layout_mode = 0
-offset_left = 631.0
-offset_top = 385.0
-offset_right = 787.0
-offset_bottom = 487.0
+offset_left = 625.0
+offset_top = 562.0
+offset_right = 781.0
+offset_bottom = 664.0
 theme_override_colors/font_color = Color(0.924096, 0.248702, 0.693218, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -105,9 +145,10 @@ text = "100
 "
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, 160)
 
 [node name="wall2" type="StaticBody2D" parent="."]
-position = Vector2(0, -540)
+position = Vector2(0, -380)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall2"]
 shape = SubResource("WorldBoundaryShape2D_vgk6v")
