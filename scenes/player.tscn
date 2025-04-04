@@ -29,7 +29,7 @@
 shader = ExtResource("2_pgk6w")
 shader_parameter/chroma = Color(0.0745098, 1, 0.117647, 1)
 shader_parameter/tolerance = 0.51
-shader_parameter/fadeAmount = 0.0
+shader_parameter/fadeAmount = 0.1
 shader_parameter/enabled = false
 shader_parameter/colour = Color(1, 1, 1, 1)
 

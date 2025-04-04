@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://b53u1qvna51bu"]
+[gd_scene load_steps=78 format=3 uid="uid://b53u1qvna51bu"]
 
 [ext_resource type="Script" path="res://scripts/lance/lance_enemy.gd" id="1_cvgbt"]
 [ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="2_h73si"]
@@ -46,6 +46,19 @@
 [ext_resource type="Texture2D" uid="uid://be0r8ldln3mdi" path="res://animations/lance/dazed/ezgif-frame-024.png" id="26_m3g7i"]
 [ext_resource type="Texture2D" uid="uid://b1tbhce6x7xw" path="res://animations/lance/dazed/ezgif-frame-025.png" id="27_upam2"]
 [ext_resource type="Texture2D" uid="uid://cfla0foo7ond0" path="res://animations/lance/dazed/ezgif-frame-026.png" id="28_o1aib"]
+[ext_resource type="Texture2D" uid="uid://caggfqhsj5vtb" path="res://animations/lance/scissorslash/ezgif-frame-001.png" id="46_5qkxj"]
+[ext_resource type="Texture2D" uid="uid://bwqt04pgns6eq" path="res://animations/lance/scissorslash/ezgif-frame-002.png" id="47_pcpf6"]
+[ext_resource type="Texture2D" uid="uid://7v1wobfsdpfx" path="res://animations/lance/scissorslash/ezgif-frame-003.png" id="48_6831d"]
+[ext_resource type="Texture2D" uid="uid://doav15vegu18j" path="res://animations/lance/scissorslash/ezgif-frame-004.png" id="49_46av1"]
+[ext_resource type="Texture2D" uid="uid://bss4tcj73i2kx" path="res://animations/lance/scissorslash/ezgif-frame-005.png" id="50_y8fw4"]
+[ext_resource type="Texture2D" uid="uid://dmqq7xbolmr1d" path="res://animations/lance/scissorslash/ezgif-frame-006.png" id="51_3we82"]
+[ext_resource type="Texture2D" uid="uid://cem4iy6pfo0ie" path="res://animations/lance/scissorslash/ezgif-frame-007.png" id="52_hj3ga"]
+[ext_resource type="Texture2D" uid="uid://brn4yuw4h1102" path="res://animations/lance/scissorslash/ezgif-frame-008.png" id="53_3lgdt"]
+[ext_resource type="Texture2D" uid="uid://cxhwqnfib0qki" path="res://animations/lance/scissorslash/ezgif-frame-009.png" id="54_6ieo8"]
+[ext_resource type="Texture2D" uid="uid://dscvxrfhofv14" path="res://animations/lance/scissorslash/ezgif-frame-010.png" id="55_wagt5"]
+[ext_resource type="Texture2D" uid="uid://dweqscf71jtnq" path="res://animations/lance/scissorslash/ezgif-frame-011.png" id="56_j6ysy"]
+[ext_resource type="Texture2D" uid="uid://pngkrqnc3rcd" path="res://animations/lance/scissorslash/ezgif-frame-012.png" id="57_bhd5y"]
+[ext_resource type="Texture2D" uid="uid://dsdu4nw7vcg6y" path="res://animations/lance/scissorslash/ezgif-frame-013.png" id="58_ulf5h"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jlk8e"]
 shader = ExtResource("2_h73si")
@@ -210,8 +223,63 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7rqhy"]
 size = Vector2(60, 120)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trb1k"]
+shader = ExtResource("2_h73si")
+shader_parameter/chroma = Color(0.0862745, 0.929412, 0.313726, 1)
+shader_parameter/tolerance = 0.6
+shader_parameter/fadeAmount = 0.218
+shader_parameter/enabled = true
+shader_parameter/colour = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1hcs8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_5qkxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_pcpf6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_6831d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_46av1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_y8fw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_3we82")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_hj3ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_3lgdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_6ieo8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_wagt5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_j6ysy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_bhd5y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_ulf5h")
+}],
+"loop": false,
+"name": &"default",
+"speed": 40.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6f56f"]
-size = Vector2(80, 400)
+size = Vector2(80, 300)
 
 [sub_resource type="Animation" id="Animation_ddjqd"]
 length = 0.001
@@ -343,12 +411,20 @@ shape = SubResource("RectangleShape2D_7rqhy")
 [node name="rotators" type="Node2D" parent="."]
 position = Vector2(2, 0)
 
+[node name="scissorSlash" type="AnimatedSprite2D" parent="rotators"]
+visible = false
+material = SubResource("ShaderMaterial_trb1k")
+position = Vector2(156, 0)
+scale = Vector2(0.175, 0.175)
+sprite_frames = SubResource("SpriteFrames_1hcs8")
+frame = 12
+frame_progress = 1.0
+
 [node name="stabAttackHitbox" type="Area2D" parent="rotators"]
 position = Vector2(-2, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rotators/stabAttackHitbox"]
-visible = false
-position = Vector2(112, -1.5)
+position = Vector2(120, 0)
 shape = SubResource("RectangleShape2D_6f56f")
 
 [node name="dashArrow" type="ColorRect" parent="rotators"]
@@ -368,21 +444,6 @@ color = Color(1, 0.607843, 1, 0.192157)
 libraries = {
 "": SubResource("AnimationLibrary_3ng6d")
 }
-
-[node name="stabHitbox" type="ColorRect" parent="rotators"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 70.0
-offset_top = -200.0
-offset_right = 150.0
-offset_bottom = 200.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.65098, 1, 0.611765)
 
 [node name="dashWaitTimer" type="Timer" parent="."]
 wait_time = 0.4

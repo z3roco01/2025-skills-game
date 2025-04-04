@@ -43,9 +43,9 @@ const SPRITE_HEIGHT = 120.0
 @onready var dashArrow = $rotators/dashArrow
 @onready var dashArrowAnim = $rotators/dashArrow/AnimationPlayer
 @onready var dashParticles = $dashParticles
-@onready var stabHitboxInd = $rotators/stabHitbox
 @onready var stabHitbox = $rotators/stabAttackHitbox
 @onready var sprite = $lanceSprite
+@onready var scissorAnim = $rotators/scissorSlash
 
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
@@ -274,15 +274,16 @@ func scissorHit():
 	sprite.material.set_shader_parameter("enabled", false)
 	rotators.look_at(player.position) # point stab towards player
 	# show stab 
-	stabHitboxInd.visible = true
 	# start timer to count towards attack
 	stabTimer.start()
+	scissorAnim.visible = true
+	scissorAnim.play("default")
 	await stabTimer.timeout
 	# actually do attack
+	scissorAnim.visible = false
 	if(stabHitbox.overlaps_body(player)):
 		player.damage(10)
 	# hide hitbox
-	stabHitboxInd.visible = false
 
 # helper method that gives a random Vector2 on one of the side walls of arena
 func randomiseWallPosition(wall: int) -> Vector2:
