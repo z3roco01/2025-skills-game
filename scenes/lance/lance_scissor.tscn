@@ -60,7 +60,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 100.0
+"speed": 50.0
 }]
 
 [node name="lance_scissor" type="Node2D"]

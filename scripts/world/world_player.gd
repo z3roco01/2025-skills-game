@@ -21,6 +21,14 @@ func _physics_process(delta: float) -> void:
 	# apply the speed based on the inputted direction
 	velocity = direction * speed
 	
+	# check which animation to play
+	if(direction != Vector2.ZERO):
+		sprite.material.set_shader_parameter("enabled", true)
+		sprite.play("walk")
+	else:
+		sprite.material.set_shader_parameter("enabled", false)
+		sprite.play("neutral")
+	
 	if(!insideBuilding):
 		move_and_slide()
 

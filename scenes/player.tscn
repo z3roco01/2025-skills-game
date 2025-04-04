@@ -307,7 +307,7 @@ script = ExtResource("1_noueq")
 material = SubResource("ShaderMaterial_5hv7f")
 scale = Vector2(0.06, 0.06)
 sprite_frames = SubResource("SpriteFrames_b8s3n")
-animation = &"walk"
+animation = &"neutral"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
