@@ -58,41 +58,40 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_vikk8")
 
-[node name="buttons" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -262.0
-offset_top = 18.0
-offset_right = 218.0
-offset_bottom = 447.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 30
-alignment = 1
-
-[node name="playButton" type="Button" parent="buttons"]
+[node name="playButton" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+offset_left = 698.0
+offset_top = 560.0
+offset_right = 1178.0
+offset_bottom = 680.0
+pivot_offset = Vector2(240, 60)
 theme_override_font_sizes/font_size = 64
 text = "PLAY"
 script = ExtResource("4_kpetd")
 scene = ExtResource("5_36uwm")
 
-[node name="optionsButton" type="Button" parent="buttons"]
+[node name="optionsButton" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+offset_left = 698.0
+offset_top = 700.0
+offset_right = 1178.0
+offset_bottom = 820.0
+pivot_offset = Vector2(240, 60)
 theme_override_font_sizes/font_size = 64
 text = "OPTIONS"
 script = ExtResource("4_kpetd")
 scene = ExtResource("6_ftqp3")
 
-[node name="quitButton" type="Button" parent="buttons"]
+[node name="quitButton" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+offset_left = 698.0
+offset_top = 840.0
+offset_right = 1178.0
+offset_bottom = 960.0
+pivot_offset = Vector2(240, 60)
 theme_override_font_sizes/font_size = 64
 text = "QUIT"
 script = ExtResource("7_6nhgd")

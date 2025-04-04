@@ -1,4 +1,4 @@
-extends Button
+extends MenuButtonGrow
 
 # the scene to be switched to
 @export var scene : PackedScene
