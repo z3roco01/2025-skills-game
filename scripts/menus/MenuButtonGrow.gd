@@ -2,18 +2,33 @@ extends Button
 
 class_name MenuButtonGrow
 
-var MIN_SCALE = scale.x
+@export var shouldGrow = true
+@onready var defaultScale = scale
 const MAX_SCALE = 1.1 # max scale for button
-const SCALE_SPEED = 5.0 # how fast to scale at
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if(is_hovered() && self.scale.x < MAX_SCALE): # check if hovered on
-		# grow
-		var newScale = scale.x + delta * SCALE_SPEED
-		scale.x = newScale
-		scale.y = newScale
-	elif(!is_hovered() && self.scale.y > MIN_SCALE):
-		# shrink
-		var newScale = scale.x - delta * SCALE_SPEED
-		scale.x = newScale
-		scale.y = newScale
+# the current tween, will either be for growing for shrinking
+var curTween : Tween 
+
+func _ready() -> void:
+	print("fart")
+	mouse_entered.connect(onMouse)
+	mouse_exited.connect(onUnmouse)
+
+# when focus is gained, stop any previous tween and grow
+func onMouse() -> void:
+	print("foc")
+	startNewTween(MAX_SCALE)
+
+# when focus is lost, do the same as gain but shrink
+func onUnmouse() -> void:
+	print("unfoc")
+	startNewTween(1)
+
+# stops old tween and start the new one
+func startNewTween(scale: float) -> void:
+	if(!shouldGrow): return
+	
+	# only stop if it exists and is running
+	if(curTween != null and curTween.is_running()):
+		curTween.stop()
+	curTween = get_tree().create_tween()
+	curTween.tween_property(self, "scale", defaultScale * scale, 0.1)
