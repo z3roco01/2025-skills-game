@@ -42,10 +42,11 @@ metadata/_edit_group_ = true
 polygon = PackedVector2Array(356, -1.52588e-05, 433, -54, 852, -54, 240, -126, 2, 0)
 
 [node name="arenaCollider" type="StaticBody2D" parent="."]
-position = Vector2(-376, -193)
+position = Vector2(-557, -119)
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="arenaCollider"]
+polygon = PackedVector2Array(0, 1, 36, -99, 102, -200, 196, -269, 338, -312, 460, -337, 502, -340)
 
 [node name="worldPlayer" parent="." instance=ExtResource("2_hje1m")]
 position = Vector2(-513, -515)
