@@ -4,6 +4,7 @@ extends Node2D
 @onready var waittimer = $waittimer
 
 func _ready() -> void:
+	MusicPlayer.playMusic("lanceBattle")
 	carmile.connect("death", onCarmileDeath)
 
 func onCarmileDeath() -> void:

@@ -25,6 +25,7 @@ buses/default_bus_layout="res://audioBuses.tres"
 
 Identity="*res://scripts/identity.gd"
 Prefs="*res://scripts/prefs.gd"
+MusicPlayer="*res://music/music_player.tscn"
 
 [display]
 

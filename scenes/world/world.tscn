@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdv8ta3fqmx2x"]
+[gd_scene load_steps=8 format=3 uid="uid://bdv8ta3fqmx2x"]
 
+[ext_resource type="Script" path="res://scripts/change_music.gd" id="1_6kfqu"]
 [ext_resource type="Texture2D" uid="uid://tfnoqj42kaib" path="res://textures/backgrounds/map.png" id="1_lu4fd"]
 [ext_resource type="PackedScene" uid="uid://bpqfjg4bc33l8" path="res://scenes/world/world_player.tscn" id="2_hje1m"]
 [ext_resource type="PackedScene" uid="uid://b8kbsq1vlbbow" path="res://scenes/world/door.tscn" id="3_ciumx"]
@@ -10,6 +11,8 @@
 size = Vector2(556, 43.5)
 
 [node name="world" type="Node2D"]
+script = ExtResource("1_6kfqu")
+musicId = "alleyway"
 
 [node name="worldBg" type="Sprite2D" parent="."]
 scale = Vector2(0.8, 0.8)
@@ -38,11 +41,11 @@ metadata/_edit_group_ = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bloackage2"]
 polygon = PackedVector2Array(356, -1.52588e-05, 433, -54, 852, -54, 240, -126, 2, 0)
 
-[node name="areanCollider" type="StaticBody2D" parent="."]
+[node name="arenaCollider" type="StaticBody2D" parent="."]
 position = Vector2(-376, -193)
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="areanCollider"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="arenaCollider"]
 
 [node name="worldPlayer" parent="." instance=ExtResource("2_hje1m")]
 position = Vector2(-513, -515)

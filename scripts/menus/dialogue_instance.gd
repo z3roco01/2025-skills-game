@@ -207,3 +207,6 @@ func _on_next_char_timer_timeout() -> void:
 		curTextIdx += 1
 	if(curTextIdx < textToShow.length()):
 		nextCharTimer.start()
+
+class QuestionBox extends DialogueBox:
+	pass
