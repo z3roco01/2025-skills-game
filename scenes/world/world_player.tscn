@@ -50,8 +50,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7jgrc"]
 shader = ExtResource("2_l64v3")
 shader_parameter/chroma = Color(0.0862745, 0.929412, 0.313726, 1)
-shader_parameter/tolerance = 0.191
-shader_parameter/fadeAmount = 0.674
+shader_parameter/tolerance = 0.4
+shader_parameter/fadeAmount = 0.283
 shader_parameter/enabled = true
 shader_parameter/colour = Color(1, 1, 1, 1)
 
