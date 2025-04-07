@@ -25,7 +25,7 @@ expressions = {
 "content": ExtResource("4_t4qme")
 }
 defaultExpression = "content"
-dialogueScript = "[name LANCE][dark mc] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][dark char][light mc] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
+dialogueScript = "[name LANCE][overlay #000000ff][dark mc] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][dark char][light mc] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -63,6 +63,15 @@ offset_bottom = 3339.0
 grow_horizontal = 0
 scale = Vector2(0.45, 0.45)
 texture = ExtResource("6_7n0wu")
+
+[node name="overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [node name="textBox" type="TextureRect" parent="."]
 layout_mode = 0

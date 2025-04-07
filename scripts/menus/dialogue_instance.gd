@@ -15,7 +15,8 @@ extends Control
 @onready var characterTexture = $characterTexture
 @onready var mcTexture = $mcTexture
 @onready var nextCharTimer = $nextCharTimer
-
+# used for things like black screen
+@onready var overlay = $overlay
 # the color that modulate will be set to when darkening
 @export var darkenColor = Color(0.56, 0.56, 0.56)
 # the color that module will be set to when lightening
@@ -108,7 +109,7 @@ func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STAUTS) -> void:
 		characterTexture.modulate = darknessColor
 
 # called by a dialogue box, will show its text and expression
-func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary) -> void:
+func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary, overlayColor: Color) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
 	if(!nameText.is_empty()): # only set name when it is being changed
@@ -118,6 +119,7 @@ func showBox(text: String, expressionId: String, nameText: String, darknessDict:
 	darkenCharacter("mc", darknessDict["mc"])
 	darkenCharacter("char", darknessDict["char"])
 	changeExpression(expressionId)
+	overlay.color = overlayColor
 	nextCharTimer.start()
 
 # called by a dialogue box, will get the variables value then put it in the array
@@ -139,10 +141,12 @@ func _on_gui_input(event: InputEvent) -> void:
 # such as the text to display and the expression to set
 class DialogueBox:
 	# singal that will be connected in the main dialogue instance, will show our text
-	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary)
+	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color)
 	# signal that will lookup a variable then put its value in the first element of the passed array
 	signal lookupVar(varName: String, returnArray: Array)
 	
+	# the color the overlay will be set to for this box
+	var overlayColor = Color(0, 0, 0, 0)
 	# the text that well be shown in the text box
 	var dialogueText: String
 	# the expression that will be set at the start of the box
@@ -216,6 +220,8 @@ class DialogueBox:
 					darkenStatus["mc"] = DARKEN_STAUTS.LIGHTEN
 				if(charsToDarken.contains("char")):
 					darkenStatus["char"] = DARKEN_STAUTS.LIGHTEN
+			elif(matched.begins_with("overlay ")): # [overlay #041fcaff]
+				overlayColor = Color(withoutTag(matched, "overlay "))
 			
 			replaceTag(matched, tagReplacement)
 	
@@ -238,7 +244,7 @@ class DialogueBox:
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
-		showBox.emit(dialogueText, expressionId, nameText, darkenStatus)
+		showBox.emit(dialogueText, expressionId, nameText, darkenStatus, overlayColor)
 	
 	enum DARKEN_STAUTS { DARKEN, LIGHTEN, UNCHANGED}
 
