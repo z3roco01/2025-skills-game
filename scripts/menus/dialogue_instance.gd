@@ -13,11 +13,11 @@ extends Control
 @onready var nameTextNode = $dialoguePanel/nameText
 # gets the node that holds the characters image
 @onready var characterTexture = $characterTexture
+@onready var mcTexture = $mcTexture
 @onready var nextCharTimer = $nextCharTimer
 
 # the script containing the script with the markup
-#@export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
-@export var dialogueScript = "[question fartface[$name]|poopy{deez|nuts}]"
+@export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -35,10 +35,6 @@ var curTextIdx = 0
 func _ready() -> void:
 	# set the characters expression to the default
 	characterTexture.texture = expressions[defaultExpression]
-	
-	print(dialogueScript)
-	print(expressions)
-	print(defaultExpression)
 	
 	# populate the dialogue variables with things such as pronouns and name
 	dialogueVariables["name"] = Identity.playerName
@@ -128,12 +124,19 @@ class DialogueBox:
 	var defaultExpression: String
 	# the name being shown
 	var nameText = ""
+	# determins if characters will be darkened, lightened or unchanged
+	# key for mc is "mc" key for the other character is "char"
+	var darkenStatus : Dictionary
 	
 	# create the regex and format the text
 	func _init() -> void:
 		# compile the regex for matching tags
 		# need to match everything but right bracket since godot implementation is broken
 		tagRegex.compile("\\[[^\\]]+\\]")
+		
+		# set the darken status of all characters to unchanged
+		darkenStatus["mc"] = DARKEN_STAUTS.UNCHANGED
+		darkenStatus["char"] = DARKEN_STAUTS.UNCHANGED
 	
 	# formats the dialogue text by replacing and parsing tags
 	func formatText() -> void:
@@ -147,58 +150,68 @@ class DialogueBox:
 			# strip the brackets from the matched string
 			matched = matched.lstrip("[").rstrip("]")
 			
+			# what the tag will be replaced with in the original script
+			var tagReplacement = ""
+			
 			# now find which type of tag it is
 			# if it starts with a $ then its a varaible tag
 			if(matched.begins_with("$")):
-				# pass the variable name with the $ over to varReplace which handles the rest
-				varReplace(matched)
+				# pass the variable name with the $ over to getVar, which will get the value for replacement
+				tagReplacement = getVar(matched)
 			elif(matched.begins_with("expr ")): # if this tag beings with "expr " then it is an expression change
 				# set the expression id to the tag minus the "expr " at the start
-				expressionId = matched.lstrip("expr ")
-				# then remove the tag by replacing it with nothing
-				dialogueText = dialogueText.replace("[" + matched + "]", "")
+				expressionId = withoutTag(matched, "expr ")
 			elif(matched.begins_with("dec ")): # if the tag begins with "dec " then its a decider
 				# strip the tag type off of the left, then split by | up to 3 options
-				var choices = matched.lstrip("dec ").split("|", true, 3)
+				var choices = withoutTag(matched, "dec ").split("|", true, 3)
 				# choose the one that lines up with the players descriptor choice
 				var choice = choices[Identity.descriptors]
-				# then replace the instance of this tag with the decided string
-				dialogueText = dialogueText.replace("[" + matched + "]", choice)
+				# then replace the tag with the chosen string
+				tagReplacement = choice
 			elif(matched.begins_with("name ")): # when this tag appears, set the name for this box
 				# strip off the formatting and set the name
-				nameText = matched.lstrip("name")
-				# remove the tag from the dialogue
-				dialogueText = dialogueText.replace("[" + matched + "]", "")
-			elif(matched.begins_with("question ")): # WE ARE DOING A QUESTION, BIG THINGS COMING
-				#q1|q2|q3[a1|a2|a3]
-				# strip off the question  first so that the lenght and index is right
-				var striped = matched.lstrip("question ")
-				# strip off the answers and split the questions into an array of 3
-				var quests = striped.substr(0, striped.length()-striped.find("{")).split("|", true, 3)
-				# strip off questions and split anwsers into an array
-				var ans = striped.substr(striped.find("{")+1).rstrip("}").split("|", true, 3)
-				var questBoxes = []
+				nameText = withoutTag(matched, "name")
+			elif(matched.begins_with("dark ")): # will contain the character to darken this box
+				# get it as lowercase so case doesnt matter
+				var charsToDarken = withoutTag(matched, "dark ").to_lower()
 				
-				for quest in quests:
-					var box = DialogueBox.new()
-					box.dialogueText = quest
-					box.formatText()
-					questBoxes.append(box)
-				for fart in questBoxes:
-					print(fart.dialogueText)
+				if(charsToDarken.contains("mc")):
+					darkenStatus["mc"] = DARKEN_STAUTS.DARKEN
+				if(charsToDarken.contains("char")):
+					darkenStatus["char"] = DARKEN_STAUTS.DARKEN
+			elif(matched.begins_with("light ")): # will contain the characters to lighten this box
+				# get it as lowercase so case doesnt matter
+				var charsToDarken = withoutTag(matched, "lighten ").to_lower()
+				
+				if(charsToDarken.contains("mc")):
+					darkenStatus["mc"] = DARKEN_STAUTS.DARKEN
+				if(charsToDarken.contains("char")):
+					darkenStatus["char"] = DARKEN_STAUTS.DARKEN
+			
+			replaceTag(matched, tagReplacement)
 	
-	# replaces the passed variable with the value from the dictionary, replaces in the dialogue texture
-	func varReplace(varName: String) -> void:
+	# returns matched without the tag
+	func withoutTag(matched: String, tag: String) -> String:
+		return matched.lstrip(tag)
+	
+	# replaced the passed tag with the passed string in the original dialogue
+	func replaceTag(tag: String, newStr: String) -> void:
+		dialogueText = dialogueText.replace("[" + tag + "]", newStr)
+	
+	# finds the value of a dialogue variable
+	func getVar(varName: String) -> String:
 		var returnedVal = [""]
 		# emit a signal to the dialogue instance that looks up the variable and puts it in the passed array
 		# need to remove the $ first
 		lookupVar.emit(varName.lstrip("$"), returnedVal)
 		
-		dialogueText = dialogueText.replace("[" + varName + "]", returnedVal[0])
+		return returnedVal[0]
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
 		showBox.emit(dialogueText, expressionId, nameText)
+	
+	enum DARKEN_STAUTS { DARKEN, LIGHTEN, UNCHANGED}
 
 # means we are ready to show the next character
 func _on_next_char_timer_timeout() -> void:
