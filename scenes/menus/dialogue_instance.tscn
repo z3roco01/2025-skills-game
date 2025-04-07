@@ -25,7 +25,7 @@ expressions = {
 "content": ExtResource("4_t4qme")
 }
 defaultExpression = "content"
-dialogueScript = "[name LANCE][overlay #000000ff][dark mc] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][dark char][light mc] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
+dialogueScript = "[name LANCE][overlay #000000ff][dark mc] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][dark char][light mc] peeeee[nb][name mc] but i hate [$object] [expr anger]"
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1

@@ -31,7 +31,7 @@ var dialogueBoxes = []
 # keeps track of how many dialogue boxes we have
 var dialogueBoxCount = 0
 # the current dialogue box we are showing
-var curDialogueBox = 0
+var curDialogueBox = 1
 # text to show, needed so we can have the typing effect
 var textToShow = ""
 # how far we are into showing out text
@@ -112,10 +112,14 @@ func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STAUTS) -> void:
 func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary, overlayColor: Color) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
+	
+	var lookupReturn : Array[String]
 	if(!nameText.is_empty()): # only set name when it is being changed
 		nameTextNode.text = nameText
+	if(nameText == "mc"): # replace mc with the players name
+		nameTextNode.text = getVar("name")
+	
 	curTextIdx = 0
-	print(darknessDict)
 	darkenCharacter("mc", darknessDict["mc"])
 	darkenCharacter("char", darknessDict["char"])
 	changeExpression(expressionId)
@@ -123,8 +127,13 @@ func showBox(text: String, expressionId: String, nameText: String, darknessDict:
 	nextCharTimer.start()
 
 # called by a dialogue box, will get the variables value then put it in the array
+# array needed since its a signal and cannot directly return
 func lookupVar(varName: String, returnArray: Array) -> void:
-	returnArray[0] = dialogueVariables[varName]
+	returnArray[0] = getVar(varName)
+
+# gets the dialogue variable passed
+func getVar(varName: String) -> String:
+	return dialogueVariables[varName]
 
 func _on_gui_input(event: InputEvent) -> void:
 	if(event is InputEventMouseButton and !event.is_pressed()): # on mouse button release
@@ -204,6 +213,7 @@ class DialogueBox:
 			elif(matched.begins_with("name ")): # when this tag appears, set the name for this box
 				# strip off the formatting and set the name
 				nameText = withoutTag(matched, "name")
+				nameText = nameText.lstrip(" ")
 			elif(matched.begins_with("dark ")): # will contain the character to darken this box
 				# get it as lowercase so case doesnt matter
 				var charsToDarken = withoutTag(matched, "dark ").to_lower()
