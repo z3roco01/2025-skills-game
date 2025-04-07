@@ -16,6 +16,10 @@ extends Control
 @onready var mcTexture = $mcTexture
 @onready var nextCharTimer = $nextCharTimer
 
+# the color that modulate will be set to when darkening
+@export var darkenColor = Color(0.56, 0.56, 0.56)
+# the color that module will be set to when lightening
+@export var lightenColor = Color(1, 1, 1)
 # the script containing the script with the markup
 @export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
 # a dictionary that holds all the variables used in dialogue
@@ -47,6 +51,11 @@ func _ready() -> void:
 		dialogueVariables["is"] = "is"
 	else: # else means are should be used so set the is variable to "are"
 		dialogueVariables["is"] = "are"
+	
+	# set the characters to the lighten color ( default state )
+	# incase a color differant than white was set
+	characterTexture.modulate = lightenColor
+	mcTexture.modulate = lightenColor
 	
 	# splits the text by the new box tag into every indivdual boxes tet
 	var boxTexts = dialogueScript.split("[nb]", false)
@@ -80,13 +89,34 @@ func changeExpression(expressionId: String) -> void:
 	# then pass that into the expression bank to get the expression texture then set the shown texture to it
 	characterTexture.texture = expressions[expressionId]
 
+# if passed in "mc" for the char it will set the mcs darkness, and same for "char" for the other character
+# if darkness is DARKEN modulate will be set to darkenColor and if LIGTHEN will be set to lightenColor
+func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STAUTS) -> void:
+	var darknessColor : Color
+	# set the color that the darkness is ( or return if unchanged )
+	if(darkness == DialogueBox.DARKEN_STAUTS.UNCHANGED):
+		return
+	elif(darkness == DialogueBox.DARKEN_STAUTS.DARKEN):
+		darknessColor = darkenColor
+	elif(darkness == DialogueBox.DARKEN_STAUTS.LIGHTEN):
+		darknessColor = lightenColor
+	
+	# then set the proper textures modulate value
+	if(char == "mc"):
+		mcTexture.modulate = darknessColor
+	elif(char == "char"):
+		characterTexture.modulate = darknessColor
+
 # called by a dialogue box, will show its text and expression
-func showBox(text: String, expressionId: String, nameText: String) -> void:
+func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
 	if(!nameText.is_empty()): # only set name when it is being changed
 		nameTextNode.text = nameText
 	curTextIdx = 0
+	print(darknessDict)
+	darkenCharacter("mc", darknessDict["mc"])
+	darkenCharacter("char", darknessDict["char"])
 	changeExpression(expressionId)
 	nextCharTimer.start()
 
@@ -96,7 +126,6 @@ func lookupVar(varName: String, returnArray: Array) -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	if(event is InputEventMouseButton and !event.is_pressed()): # on mouse button release
-		print("Fart")
 		if(textToShow == dialogueTextNode.text): # if the text box is completely shown
 			if(curDialogueBox < dialogueBoxCount):
 				dialogueBoxes[curDialogueBox].show()
@@ -110,7 +139,7 @@ func _on_gui_input(event: InputEvent) -> void:
 # such as the text to display and the expression to set
 class DialogueBox:
 	# singal that will be connected in the main dialogue instance, will show our text
-	signal showBox(text: String, expressionId: String, nameText: String)
+	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary)
 	# signal that will lookup a variable then put its value in the first element of the passed array
 	signal lookupVar(varName: String, returnArray: Array)
 	
@@ -184,9 +213,9 @@ class DialogueBox:
 				var charsToDarken = withoutTag(matched, "lighten ").to_lower()
 				
 				if(charsToDarken.contains("mc")):
-					darkenStatus["mc"] = DARKEN_STAUTS.DARKEN
+					darkenStatus["mc"] = DARKEN_STAUTS.LIGHTEN
 				if(charsToDarken.contains("char")):
-					darkenStatus["char"] = DARKEN_STAUTS.DARKEN
+					darkenStatus["char"] = DARKEN_STAUTS.LIGHTEN
 			
 			replaceTag(matched, tagReplacement)
 	
@@ -209,7 +238,7 @@ class DialogueBox:
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
-		showBox.emit(dialogueText, expressionId, nameText)
+		showBox.emit(dialogueText, expressionId, nameText, darkenStatus)
 	
 	enum DARKEN_STAUTS { DARKEN, LIGHTEN, UNCHANGED}
 
