@@ -84,6 +84,7 @@ func p1DashAttack() -> void:
 		var startPoint = randomiseWallPosition(startWall)
 		# find pos to end at
 		var endPoint = randomiseWallPosition(endWall)
+		
 		position = startPoint # move to start point
 		rotators.look_at(endPoint)
 		sprite.rotation = 0
@@ -95,13 +96,18 @@ func p1DashAttack() -> void:
 		else:
 			sprite.flip_h = true
 			sprite.flip_v = true
+			
 		dashParticles.emitting = true # start particle emission
+		
 		sprite.play("p1DashStartup")
 		sprite.material.set_shader_parameter("enabled", true)
+		
 		dashArrowAnim.play("RESET")
 		dashArrow.visible = true # show arrow
 		dashWaitTimer.start() # wait until attacking
+		
 		await dashWaitTimer.timeout
+		
 		dashArrowAnim.play("start",-1,1/0.3 * 2) #play disappear animation
 		sprite.play("p1DashLoop")
 		sprite.material.set_shader_parameter("enabled", true)
@@ -110,9 +116,11 @@ func p1DashAttack() -> void:
 		# play dash sound
 		sfxPlayer.stream = dashSound
 		sfxPlayer.play()
+		
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(self, "position", endPoint, 0.3)
 		await tween.finished
+		
 		dashParticles.emitting = false # stop particle emission
 		dashAttacking = false
 		# wait a little more before starting next dash
@@ -161,8 +169,7 @@ func p2ScissorAttack() -> void:
 					# top left
 					scissorPos = Vector2(
 						currentPosition -ARENA_WIDTH/2, 
-						-ARENA_HEIGHT/2 - P2_SCISSOR_SIZE
-						)
+						-ARENA_HEIGHT/2 - P2_SCISSOR_SIZE)
 				elif(scissorWall == LEFT_WALL):
 					# top left
 					scissorPos = Vector2(
@@ -183,17 +190,12 @@ func p2ScissorAttack() -> void:
 						)
 				
 				# spawn scissor
-				createScissor(
-				scissorPos, 
-				P2_SCISSOR_SPEED, 
-				P2_SCISSOR_DELAY, 
-				P2_SCISSOR_SIZE, 
-				scissorRot
-				)
+				createScissor(scissorPos, P2_SCISSOR_SPEED, P2_SCISSOR_DELAY, P2_SCISSOR_SIZE, scissorRot)
 				currentPosition += P2_SCISSOR_SIZE * 2  # move to next spot
 			# play scissor sound
 			sfxPlayer.stream = scissorSound
 			sfxPlayer.play()
+			
 			throwWaitTimer.start()
 			await throwWaitTimer.timeout
 	attackFinished()
@@ -211,14 +213,14 @@ func p3PoisonAttack() -> void:
 		else:
 			# randomise a spot in the arena if not
 			targetPos = Vector2(
-			random.randf_range(
-				-ARENA_WIDTH/2 + SPRITE_WIDTH, 
-				ARENA_WIDTH/2 - SPRITE_WIDTH
+				random.randf_range(
+					-ARENA_WIDTH/2 + SPRITE_WIDTH, 
+					ARENA_WIDTH/2 - SPRITE_WIDTH
 				),
-			random.randf_range(
-				-ARENA_HEIGHT/2 + SPRITE_HEIGHT, 
-				ARENA_HEIGHT/2 - SPRITE_HEIGHT
-			)
+				random.randf_range(
+					-ARENA_HEIGHT/2 + SPRITE_HEIGHT, 
+					ARENA_HEIGHT/2 - SPRITE_HEIGHT
+				)
 			)
 		# move lance to spot with a tween
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
@@ -226,19 +228,18 @@ func p3PoisonAttack() -> void:
 		sprite.play("p1DashStartup", 4.0)
 		sprite.material.set_shader_parameter("enabled", true)
 		tween.tween_property(self, "position", targetPos, 0.2)
+		
 		if(targetPos.x > position.x):
 			sprite.flip_h = true
 		else:
 			sprite.flip_h = false
+			
 		await tween.finished # wait for lance to finish moving
+		
 		sprite.play("neutral") # neutral stance
 		sprite.material.set_shader_parameter("enabled", false)
 		# make cloud
-		createPoisonCloud(
-		targetPos,
-		P3_CLOUD_DURATION,
-		P3_CLOUD_SIZE
-		)
+		createPoisonCloud(targetPos, P3_CLOUD_DURATION, P3_CLOUD_SIZE)
 		# play spray sound
 		sfxPlayer.stream = spraySound
 		sfxPlayer.play()
@@ -255,6 +256,7 @@ func createScissor(position:Vector2, speed:float, timeUntilStart:float, size:flo
 	scissor.rotation = rotation
 	scissor.player = player
 	scissor.lanceEnemy = self
+	
 	get_parent().add_child(scissor)
 	scissor.instantiated() # tell scissor its been instantiated]
 
@@ -265,6 +267,7 @@ func createPoisonCloud(position:Vector2, duration:float, size:float):
 	cloud.position = position # set position
 	cloud.duration = duration # set duration
 	cloud.player = player # set player track var
+	
 	get_parent().add_child(cloud) # add to main scene
 	cloud.instantiated() # tell cloud its been instantiated]
 
@@ -278,22 +281,29 @@ func scissorHit():
 	var positionTarget = player.position + (playerFacingVec * 140)
 	# start tween of going towards player
 	var tween = get_tree().create_tween().set_trans(Tween.TRANS_EXPO)
+	
 	tween.tween_property(self, "position", positionTarget, 0.2)
+	
 	sprite.play("p1DashStartup")
 	sprite.material.set_shader_parameter("enabled", true)
+	
 	if(positionTarget.x > position.x):
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
+		
 	await tween.finished # wait for lance to finish moving
+	
 	sprite.play("neutral") # neutral stance
 	sprite.material.set_shader_parameter("enabled", false)
+	
 	rotators.look_at(player.position) # point stab towards player
 	# show stab 
 	# start timer to count towards attack
 	stabTimer.start()
 	scissorAnim.visible = true
 	scissorAnim.play("default")
+	
 	await stabTimer.timeout
 	# actually do attack
 	scissorAnim.visible = false
@@ -303,7 +313,6 @@ func scissorHit():
 
 # helper method that gives a random Vector2 on one of the side walls of arena
 func randomiseWallPosition(wall: int) -> Vector2:
-	
 	# initialise position vector
 	var wallPos = Vector2(0,0)
 	
@@ -373,6 +382,7 @@ func attackFinished() -> void:
 	# collidable
 	remove_collision_exception_with(player)
 	resetSprite() # make sure sprite is reset before dazed animation
+	
 	sprite.play("dazed") # dazed animation
 	sprite.material.set_shader_parameter("enabled", true)
 
@@ -393,23 +403,12 @@ func shieldedHitAnimation() -> void:
 func colorFade(method:Callable):
 	var colorTweener = create_tween()
 	 # tweens the color of lance
-	colorTweener.tween_method(
-		method,
-		1.0,
-		0.0,
-		0.2
-	)
+	colorTweener.tween_method(method, 1.0, 0.0, 0.2)
 
 # helper method for colorFade
 func set_color_hitAnimation(value: float):
-	sprite.material.set_shader_parameter(
-		"colour", 
-		lerp(Color.WHITE, HIT_COLOUR, value)
-	)
+	sprite.material.set_shader_parameter("colour", lerp(Color.WHITE, HIT_COLOUR, value))
 
 # another helper method for a shielded hit
 func set_color_shieldedHitAnimation(value: float):
-	sprite.material.set_shader_parameter(
-		"colour", 
-		lerp(Color.WHITE, SHIELDED_HIT_COLOUR, value)
-	)
+	sprite.material.set_shader_parameter("colour", lerp(Color.WHITE, SHIELDED_HIT_COLOUR, value))
