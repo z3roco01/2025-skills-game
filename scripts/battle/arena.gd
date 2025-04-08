@@ -22,8 +22,7 @@ func onenemyDeath() -> void:
 	switchToScene(winScene)
 
 func onPlayerDeath() -> void:
-	pass
-	#switchToScene(loseScene)
+	switchToScene(loseScene)
 
 # switches to the passed scene
 func switchToScene(scene: PackedScene) -> void:
