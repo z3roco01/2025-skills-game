@@ -26,7 +26,6 @@ expressions = {
 "mc": ExtResource("6_7n0wu")
 }
 defaultExpression = "content"
-mcDefaultExpression = "mc"
 dialogueScript = "[name LANCE][overlay #000000ff][dark mc] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][dark char][light mc] peeeee[nb][name mc] but i hate [$object] [expr anger]"
 
 [node name="background" type="TextureRect" parent="."]

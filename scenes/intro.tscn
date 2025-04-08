@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpu7rcttwtvxt"]
+[gd_scene load_steps=4 format=3 uid="uid://ckuxsmprwbbq6"]
 
 [ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/menus/dialogue_instance.tscn" id="1_lmm7e"]
 [ext_resource type="Texture2D" uid="uid://bkq2u873s6gr" path="res://textures/emil/Émil_Neutral.png" id="2_pchbj"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="3_amj6c"]
-[ext_resource type="Texture2D" uid="uid://dehnt0b70veny" path="res://textures/backgrounds/alleyway🔥.png" id="4_smvxi"]
-[ext_resource type="Texture2D" uid="uid://6p7fga0kjxux" path="res://textures/backgrounds/arenacg.png" id="5_6huc3"]
 
 [node name="intro" type="Control"]
 layout_mode = 3
@@ -21,11 +19,5 @@ expressions = {
 "oldman_neutral": ExtResource("2_pchbj")
 }
 defaultExpression = "oldman_neutral"
-mcDefaultExpression = "mc_neutral"
-backgrounds = {
-"alleyway": ExtResource("4_smvxi"),
-"arena": ExtResource("5_6huc3")
-}
-startingBackground = "alleyway"
 darkenColor = Color(0, 0, 0, 1)
 dialogueScript = "asdasd[nb][bg arena]farttt"

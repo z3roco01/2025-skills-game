@@ -6,10 +6,6 @@ extends Control
 @export var expressions = {}
 # the expression that the character will start on 
 @export var defaultExpression: String
-@export var mcDefaultExpression: String
-# the different background that can be used 
-@export var backgrounds = {}
-@export var startingBackground : String
 
 # the node that holds the dialogue text 
 @onready var dialogueTextNode = $dialoguePanel/text
@@ -19,7 +15,6 @@ extends Control
 @onready var characterTexture = $characterTexture
 @onready var mcTexture = $mcTexture
 @onready var nextCharTimer = $nextCharTimer
-@onready var background = $background
 # used for things like black screen
 @onready var overlay = $overlay
 # the color that modulate will be set to when darkening
@@ -43,11 +38,8 @@ var textToShow = ""
 var curTextIdx = 0
 
 func _ready() -> void:
-	print(backgrounds)
 	# set the characters expression to the default
 	characterTexture.texture = expressions[defaultExpression]
-	mcTexture.texture = expressions[mcDefaultExpression]
-	background.texture = backgrounds[startingBackground]
 	
 	# populate the dialogue variables with things such as pronouns and name
 	dialogueVariables["name"] = Identity.playerName
@@ -117,7 +109,7 @@ func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STAUTS) -> void:
 		characterTexture.modulate = darknessColor
 
 # called by a dialogue box, will show its text and expression
-func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary, overlayColor: Color, bgId: String) -> void:
+func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary, overlayColor: Color) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
 	
@@ -131,17 +123,8 @@ func showBox(text: String, expressionId: String, nameText: String, darknessDict:
 	darkenCharacter("mc", darknessDict["mc"])
 	darkenCharacter("char", darknessDict["char"])
 	changeExpression(expressionId)
-	changeOverlay(overlayColor)
-	if(!bgId.is_empty()):
-		background.texture = backgrounds[bgId]
+	overlay.color = overlayColor
 	nextCharTimer.start()
-
-# called to change the overlay color, will also fade it
-func changeOverlay(newColor: Color) -> void:
-	# dont waste time if theyre equal
-	if(newColor == overlay.color): return
-	var tween = get_tree().create_tween()
-	tween.tween_property(overlay, "color", newColor, 0.25)
 
 # called by a dialogue box, will get the variables value then put it in the array
 # array needed since its a signal and cannot directly return
@@ -167,7 +150,7 @@ func _on_gui_input(event: InputEvent) -> void:
 # such as the text to display and the expression to set
 class DialogueBox:
 	# singal that will be connected in the main dialogue instance, will show our text
-	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color, bgId: String)
+	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color)
 	# signal that will lookup a variable then put its value in the first element of the passed array
 	signal lookupVar(varName: String, returnArray: Array)
 	
@@ -186,8 +169,6 @@ class DialogueBox:
 	# determins if characters will be darkened, lightened or unchanged
 	# key for mc is "mc" key for the other character is "char"
 	var darkenStatus : Dictionary
-	# the new background, if there is one
-	var background = ""
 	
 	# create the regex and format the text
 	func _init() -> void:
@@ -251,9 +232,6 @@ class DialogueBox:
 					darkenStatus["char"] = DARKEN_STAUTS.LIGHTEN
 			elif(matched.begins_with("overlay ")): # [overlay #041fcaff]
 				overlayColor = Color(withoutTag(matched, "overlay "))
-			elif(matched.begins_with("bg ")):
-				background = withoutTag(matched, "bg ")
-				background = background.lstrip(" ")
 			
 			replaceTag(matched, tagReplacement)
 	
@@ -276,7 +254,7 @@ class DialogueBox:
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
-		showBox.emit(dialogueText, expressionId, nameText, darkenStatus, overlayColor, background)
+		showBox.emit(dialogueText, expressionId, nameText, darkenStatus, overlayColor)
 	
 	enum DARKEN_STAUTS { DARKEN, LIGHTEN, UNCHANGED}
 
