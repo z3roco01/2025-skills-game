@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://6vtbxytds8cv"]
+[gd_scene load_steps=85 format=3 uid="uid://6vtbxytds8cv"]
 
 [ext_resource type="Script" path="res://scripts/battle/player.gd" id="1_noueq"]
 [ext_resource type="Texture2D" uid="uid://cvap1snxvunef" path="res://textures/mc/MC CHIBI neutral.png" id="2_46jye"]
@@ -67,6 +67,16 @@
 [ext_resource type="Texture2D" uid="uid://dcu83cq7kblst" path="res://animations/mc/walk/ezgif-frame-041.png" id="65_1w6e3"]
 [ext_resource type="Texture2D" uid="uid://1lc3rurcy3fa" path="res://animations/mc/walk/ezgif-frame-042.png" id="66_af3sg"]
 [ext_resource type="Texture2D" uid="uid://grtokvlb0msg" path="res://animations/mc/walk/ezgif-frame-043.png" id="67_pugd4"]
+[ext_resource type="Texture2D" uid="uid://sfktumhn073q" path="res://animations/mc/slash/ezgif-frame-001.png" id="68_8n2pm"]
+[ext_resource type="Texture2D" uid="uid://lhm8a1swbwoy" path="res://textures/mc/MC_Sword.png" id="68_puabd"]
+[ext_resource type="Texture2D" uid="uid://dkk6kbhhd1kvn" path="res://animations/mc/slash/ezgif-frame-002.png" id="69_48t43"]
+[ext_resource type="Texture2D" uid="uid://dx06llq2pv4i8" path="res://animations/mc/slash/ezgif-frame-003.png" id="70_i0l3e"]
+[ext_resource type="Texture2D" uid="uid://dm2gjfhx3r043" path="res://animations/mc/slash/ezgif-frame-004.png" id="71_oswxt"]
+[ext_resource type="Texture2D" uid="uid://bcxuj546sq4r5" path="res://animations/mc/slash/ezgif-frame-005.png" id="72_j5c5j"]
+[ext_resource type="Texture2D" uid="uid://dcs8mo148kqdu" path="res://animations/mc/slash/ezgif-frame-006.png" id="73_ewl48"]
+[ext_resource type="Texture2D" uid="uid://cn7ilbcgb8bp8" path="res://animations/mc/slash/ezgif-frame-007.png" id="74_855e8"]
+[ext_resource type="Texture2D" uid="uid://xurrrogvjrth" path="res://animations/mc/slash/ezgif-frame-008.png" id="75_smp37"]
+[ext_resource type="Texture2D" uid="uid://cbdynst74oim1" path="res://animations/mc/slash/ezgif-frame-009.png" id="76_x3w10"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5hv7f"]
 shader = ExtResource("2_pgk6w")
@@ -292,11 +302,54 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2wxn"]
 size = Vector2(39.625, 96)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcwue"]
+shader = ExtResource("2_pgk6w")
+shader_parameter/chroma = Color(0.0862745, 0.929412, 0.313726, 1)
+shader_parameter/tolerance = 0.482
+shader_parameter/fadeAmount = 0.327
+shader_parameter/enabled = true
+shader_parameter/colour = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ky4a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("68_8n2pm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_48t43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_i0l3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_oswxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_j5c5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_ewl48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_855e8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_smp37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_x3w10")
+}],
+"loop": false,
+"name": &"slash",
+"speed": 40.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_urh5o"]
-size = Vector2(50, 300)
+size = Vector2(70, 250)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dmxj8"]
-size = Vector2(600, 25)
+size = Vector2(400, 25)
 
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(0.8, 0.8)
@@ -323,6 +376,33 @@ one_shot = true
 
 [node name="rotators" type="Node2D" parent="."]
 
+[node name="slashAnim" type="AnimatedSprite2D" parent="rotators"]
+visible = false
+material = SubResource("ShaderMaterial_wcwue")
+position = Vector2(135, 0)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_1ky4a")
+animation = &"slash"
+frame = 8
+frame_progress = 1.0
+
+[node name="stabSword" type="TextureRect" parent="rotators"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 149.0
+offset_top = -37.0
+offset_right = 224.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+texture = ExtResource("68_puabd")
+expand_mode = 1
+
 [node name="Node2D" type="Node2D" parent="rotators"]
 position = Vector2(30, 0)
 
@@ -331,15 +411,8 @@ metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rotators/slashArea"]
 position = Vector2(113, 0)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_urh5o")
-
-[node name="ColorRect" type="ColorRect" parent="rotators/slashArea/CollisionShape2D"]
-offset_left = -25.0
-offset_top = -150.0
-offset_right = 25.0
-offset_bottom = 150.0
-color = Color(0.0941176, 0.478431, 0.121569, 0)
-metadata/_edit_use_anchors_ = true
 
 [node name="stabArea" type="Area2D" parent="rotators"]
 scale = Vector2(1e-05, 1)
@@ -347,21 +420,6 @@ scale = Vector2(1e-05, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rotators/stabArea"]
 position = Vector2(388, 0)
 shape = SubResource("RectangleShape2D_dmxj8")
-
-[node name="ColorRect" type="ColorRect" parent="rotators/stabArea/CollisionShape2D"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -12.5
-offset_right = 300.0
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0941176, 0.478431, 0.121569, 0.494118)
-metadata/_edit_use_anchors_ = true
 
 [node name="sfxPlayer" type="AudioStreamPlayer" parent="."]
 

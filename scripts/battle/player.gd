@@ -6,7 +6,7 @@ var currentHealth = startHealth
 const DEFAULT_SPEED = 700.0
 const DASH_SPEED = 3000
 const HIT_COLOUR = Color.RED # color to turn into when hit
-
+const STAB_LENGTH = 400 # how far stab reaches in pixels
 var speed = DEFAULT_SPEED
 @export var enemy: Node2D
 
@@ -16,9 +16,9 @@ var speed = DEFAULT_SPEED
 @onready var healthLabel = get_node("../uis/health")
 @onready var dashCooldown = $dashCooldown
 @onready var rotators = $rotators
-@onready var slashAreaColour = $rotators/slashArea/CollisionShape2D/ColorRect
+@onready var slashAnim = $rotators/slashAnim
 @onready var stabArea = $rotators/stabArea
-@onready var stabAreaColour = $rotators/stabArea/CollisionShape2D/ColorRect
+@onready var stabSword = $rotators/stabSword
 @onready var slashTimer = $slashTimer
 @onready var slashArea = $rotators/slashArea
 @onready var sprite = $playerSprite
@@ -84,19 +84,23 @@ func _physics_process(_delta: float) -> void:
 		slashing = true
 		# set slashhitenemy to false to track when its been hit
 		slashHitEnemy = false
-		# set the alpha to full
-		slashAreaColour.color.a = 1
 		# start slash timer
 		slashTimer.start()
 		# play slash sound
 		sfxPlayer.stream = swordSlashSound
 		sfxPlayer.play()
+		# show sword and play animation
+		slashAnim.visible = true
+		slashAnim.play("slash")
 	if(Input.is_action_just_pressed("secondaryAttack") and !stabbing):
 		stabbing = true
-		stabAreaColour.color.a = 1
+		stabSword.visible = true
 		var tween2 = get_tree().create_tween()
 		tween2.tween_property(stabArea, "scale:x", 1.0, 0.25).set_trans(Tween.TRANS_EXPO)
 		tween2.tween_callback(stabTweenFinish)
+		var tween3 = create_tween()
+		tween3.tween_property(stabSword, "position:x", STAB_LENGTH + 100, 0.25).set_trans(Tween.TRANS_EXPO)
+		tween3.tween_property(stabSword, 'position:x', 100, 0.25).set_trans(Tween.TRANS_EXPO)
 		# play stab sound
 		sfxPlayer.stream = dashSound
 		sfxPlayer.play()
@@ -135,6 +139,7 @@ func stabTweenFinish():
 
 func stabTweenFinishFinish():
 	stabbing = false
+	stabSword.visible = false
 
 func _on_stab_area_body_entered(body: Node2D) -> void:
 	if(body == enemy and stabbing):
@@ -142,8 +147,8 @@ func _on_stab_area_body_entered(body: Node2D) -> void:
 
 # fired when the slash timer ends
 func _on_slash_timer_timeout() -> void:
-	# hide the slash area
-	slashAreaColour.color.a = 0
+	# hide the sword
+	slashAnim.visible = false
 	# reset slash tracking vars
 	slashing = false
 	slashHitEnemy = false
