@@ -477,5 +477,8 @@ process_material = SubResource("ParticleProcessMaterial_acok5")
 texture = ExtResource("20_p7l0a")
 lifetime = 0.5
 
+[node name="sfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="dashAttackHitbox" to="." method="_on_dash_attack_hit_box_body_entered"]

@@ -22,6 +22,7 @@ var speed = DEFAULT_SPEED
 @onready var slashTimer = $slashTimer
 @onready var slashArea = $rotators/slashArea
 @onready var sprite = $playerSprite
+@onready var sfxPlayer = $sfxPlayer
 # create a tween
 @onready var tween = get_tree().create_tween()
 
@@ -34,6 +35,11 @@ var stabbing = false
 #tracks if slash has already hit the enemy
 var slashHitEnemy = false 
 var slashing = false
+
+@onready var swordSlashSound = preload("res://sfx/battle/mc_sword_slash.mp3")
+@onready var dashSound = preload("res://sfx/battle/mc_dash.mp3")
+@onready var hurtSound = preload("res://sfx/battle/mc_hurt.mp3")
+@onready var stabSound = preload("res://sfx/battle/mc_stab.mp3")
 
 func _physics_process(_delta: float) -> void:
 	rotators.look_at(get_global_mouse_position())
@@ -57,6 +63,9 @@ func _physics_process(_delta: float) -> void:
 		tween.tween_callback(dashTweenFinish)
 		# start dash cooldown timer
 		dashCooldown.start()
+		# play dash sound
+		sfxPlayer.stream = dashSound
+		sfxPlayer.play()
 	elif(direction != Vector2.ZERO && sprite.animation != "dash"):
 		sprite.material.set_shader_parameter("enabled", true)
 		sprite.play("walk")
@@ -79,12 +88,18 @@ func _physics_process(_delta: float) -> void:
 		slashAreaColour.color.a = 1
 		# start slash timer
 		slashTimer.start()
+		# play slash sound
+		sfxPlayer.stream = swordSlashSound
+		sfxPlayer.play()
 	if(Input.is_action_just_pressed("secondaryAttack") and !stabbing):
 		stabbing = true
 		stabAreaColour.color.a = 1
 		var tween2 = get_tree().create_tween()
 		tween2.tween_property(stabArea, "scale:x", 1.0, 0.25).set_trans(Tween.TRANS_EXPO)
 		tween2.tween_callback(stabTweenFinish)
+		# play stab sound
+		sfxPlayer.stream = dashSound
+		sfxPlayer.play()
 	
 	# if the enemy is inside the slash area and has not already been hit, hit it
 	if(slashArea.overlaps_body(enemy) and !slashHitEnemy and slashing):
@@ -96,6 +111,9 @@ func damage(amount:int):
 	if(currentHealth - amount > 0):
 		currentHealth -= amount
 		hitAnimation()
+		# play hurt sound
+		sfxPlayer.stream = hurtSound
+		sfxPlayer.play()
 	else:
 		currentHealth = 0
 		# TODO death stuff

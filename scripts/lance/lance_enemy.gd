@@ -46,6 +46,7 @@ const SPRITE_HEIGHT = 120.0
 @onready var stabHitbox = $rotators/stabAttackHitbox
 @onready var sprite = $lanceSprite
 @onready var scissorAnim = $rotators/scissorSlash
+@onready var sfxPlayer = $sfxPlayer
 
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
@@ -53,6 +54,13 @@ var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
 # colors to turn into when hit
 const SHIELDED_HIT_COLOUR = Color.ROYAL_BLUE
 const HIT_COLOUR = Color.RED
+
+# sound effects
+@onready var shieldSound = preload("res://sfx/battle/lance_shield.mp3")
+@onready var hurtSound = preload("res://sfx/battle/lance_hurt.mp3")
+@onready var dashSound = preload("res://sfx/battle/lance_dash.mp3")
+@onready var scissorSound = preload("res://sfx/battle/lance_scissor.mp3")
+@onready var spraySound = preload("res://sfx/battle/lance_spray.mp3")
 
 func idleAction() -> void:
 	pass 
@@ -99,6 +107,9 @@ func p1DashAttack() -> void:
 		sprite.material.set_shader_parameter("enabled", true)
 		# start dashing
 		dashAttacking = true
+		# play dash sound
+		sfxPlayer.stream = dashSound
+		sfxPlayer.play()
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE)
 		tween.tween_property(self, "position", endPoint, 0.3)
 		await tween.finished
@@ -180,7 +191,9 @@ func p2ScissorAttack() -> void:
 				scissorRot
 				)
 				currentPosition += P2_SCISSOR_SIZE * 2  # move to next spot
-			
+			# play scissor sound
+			sfxPlayer.stream = scissorSound
+			sfxPlayer.play()
 			throwWaitTimer.start()
 			await throwWaitTimer.timeout
 	attackFinished()
@@ -226,6 +239,9 @@ func p3PoisonAttack() -> void:
 		P3_CLOUD_DURATION,
 		P3_CLOUD_SIZE
 		)
+		# play spray sound
+		sfxPlayer.stream = spraySound
+		sfxPlayer.play()
 	attackFinished()
 	
 
@@ -323,8 +339,14 @@ func damage(health: int) -> void:
 	if(dazed):
 		super.damage(health)
 		hitAnimation() # play hit animation
+		# play hurt sound
+		sfxPlayer.stream = hurtSound
+		sfxPlayer.play()
 	else:
 		shieldedHitAnimation() # show lance cannot be hit
+		# play shielded sound
+		sfxPlayer.stream = shieldSound
+		sfxPlayer.play()
 
 func _on_dash_attack_hit_box_body_entered(body: Node2D) -> void:
 	if(dashAttacking && body == player): #check for dash hit
