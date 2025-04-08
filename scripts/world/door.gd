@@ -23,7 +23,7 @@ func enter():
 			sceneInstance.defaultExpression = defaultExpression
 		worldBg.visible = false
 		sceneInstance.connect("tree_exited", leftBuilding)
-		get_parent().add_sibling(sceneInstance)
+		get_parent().get_parent().add_child(sceneInstance)
 
 func leftBuilding():
 	player.insideBuilding = false
