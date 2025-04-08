@@ -40,8 +40,11 @@ var textToShow = ""
 var curTextIdx = 0
 
 func _ready() -> void:
+<<<<<<< HEAD
 	if(!music.is_empty()):
 		MusicPlayer.playMusic(music)
+=======
+>>>>>>> 5ee7ec157f8b330e02b5e2c0cf79cb6a03b8a09b
 	# set the characters expression to the default
 	characterTexture.texture = expressions[defaultExpression]
 	
