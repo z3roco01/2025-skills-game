@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.646591, 0.309906, 0.524179, 0.509804)
+color = Color(0.647059, 0.309804, 0.52549, 0.560784)
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect"]
 layout_mode = 1
