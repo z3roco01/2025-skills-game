@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckuxsmprwbbq6"]
+[gd_scene load_steps=8 format=3 uid="uid://ckuxsmprwbbq6"]
 
 [ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/menus/dialogue_instance.tscn" id="1_lmm7e"]
 [ext_resource type="Texture2D" uid="uid://bkq2u873s6gr" path="res://textures/emil/Émil_Neutral.png" id="2_pchbj"]
+[ext_resource type="PackedScene" uid="uid://bdv8ta3fqmx2x" path="res://scenes/world/world.tscn" id="2_tno4a"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="3_amj6c"]
 [ext_resource type="Texture2D" uid="uid://dehnt0b70veny" path="res://textures/backgrounds/alleyway🔥.png" id="4_7hghn"]
 [ext_resource type="Texture2D" uid="uid://6p7fga0kjxux" path="res://textures/backgrounds/arenacg.png" id="5_orbc3"]
@@ -18,6 +19,7 @@ grow_vertical = 2
 
 [node name="dialogueInstance" parent="." instance=ExtResource("1_lmm7e")]
 layout_mode = 1
+nextScene = ExtResource("2_tno4a")
 expressions = {
 "mc_neutral": ExtResource("3_amj6c"),
 "oldman_empty": SubResource("ImageTexture_4qr7e"),

@@ -9,6 +9,8 @@ func _ready() -> void:
 	finished.connect(on_finished)
 
 func playMusic(id: String):
+	if(id == curMusic and playing): return
+	
 	if(id in musicBank):
 		curMusic = id
 		stream = musicBank[id]

@@ -171,9 +171,15 @@ func _on_gui_input(event: InputEvent) -> void:
 				dialogueBoxes[curDialogueBox].show()
 				curDialogueBox += 1
 			else:
-				queue_free()
+				playNextScene()
 		else: # comptely show all text
 			dialogueTextNode.text = textToShow
+
+# shows the next scene and kills this one
+func playNextScene() -> void:
+	var instance = nextScene.instantiate()
+	add_sibling(instance)
+	queue_free()
 
 # this class holds all the information about a dialogue box
 # such as the text to display and the expression to set
