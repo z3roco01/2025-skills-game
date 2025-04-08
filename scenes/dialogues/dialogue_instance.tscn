@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcne32iho2ohv"]
+[gd_scene load_steps=11 format=3 uid="uid://dcne32iho2ohv"]
 
 [ext_resource type="Script" path="res://scripts/menus/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_pn675"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="6_7n0wu"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="8_j0whe"]
+[ext_resource type="AudioStream" uid="uid://b6w06n7eynvot" path="res://sfx/dialogue/dialogue_boop.wav" id="10_hvm62"]
 
 [node name="dialogueInstance" type="Control"]
 z_index = -6
@@ -125,6 +126,10 @@ text = "Lance"
 [node name="nextCharTimer" type="Timer" parent="."]
 wait_time = 0.025
 one_shot = true
+
+[node name="boopPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_hvm62")
+bus = &"sfx"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="timeout" from="nextCharTimer" to="." method="_on_next_char_timer_timeout"]

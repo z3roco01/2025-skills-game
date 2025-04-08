@@ -22,6 +22,7 @@ extends Control
 @onready var mcTexture = $mcTexture
 @onready var background = $background
 @onready var nextCharTimer = $nextCharTimer
+@onready var boopSoundPlayer = $boopPlayer
 # used for things like black screen
 @onready var overlay = $overlay
 # the color that modulate will be set to when darkening
@@ -45,6 +46,12 @@ var curDialogueBox = 1
 var textToShow = ""
 # how far we are into showing out text
 var curTextIdx = 0
+
+# handles the boop sound effect playing
+var random = RandomNumberGenerator.new()
+var shouldPlayBoops = true # tracks whenboops should play
+const MIN_PITCH_SCALE = 3.4 # max and min of the boops pitch
+const MAX_PITCH_SCALE = 3.7
 
 func _ready() -> void:
 	if(!music.is_empty()):
@@ -172,10 +179,12 @@ func _on_gui_input(event: InputEvent) -> void:
 			if(curDialogueBox < dialogueBoxCount):
 				dialogueBoxes[curDialogueBox].show()
 				curDialogueBox += 1
+				shouldPlayBoops = true # yes boops
 			else:
 				playNextScene()
 		else: # comptely show all text
 			dialogueTextNode.text = textToShow
+			shouldPlayBoops = false # no more boops >:(
 
 # shows the next scene and kills this one
 func playNextScene() -> void:
@@ -304,6 +313,11 @@ func _on_next_char_timer_timeout() -> void:
 		curTextIdx += 1
 	if(curTextIdx < textToShow.length()):
 		nextCharTimer.start()
+	if(shouldPlayBoops): # check if boop allowed
+			# randomise boop sound pitch
+			boopSoundPlayer.pitch_scale = random.randf_range(MIN_PITCH_SCALE, MAX_PITCH_SCALE)
+			# play boop
+			boopSoundPlayer.play()
 
 class QuestionBox extends DialogueBox:
 	pass
