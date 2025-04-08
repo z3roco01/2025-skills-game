@@ -32,8 +32,8 @@ const RIGHT_WALL = 3
 const ARENA_WIDTH = 1920.0
 const ARENA_HEIGHT = 920.0
 
-const SPRITE_WIDTH = 60.0
-const SPRITE_HEIGHT = 120.0
+const SPRITE_WIDTH = 80.0
+const SPRITE_HEIGHT = 156.0
 
 @onready var dashWaitTimer = $dashWaitTimer
 @onready var dashCDTimer = $dashCDTimer
