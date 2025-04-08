@@ -1,0 +1,41 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckuxsmprwbbq6"]
+
+[ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/dialogues/dialogue_instance.tscn" id="1_xd028"]
+[ext_resource type="PackedScene" uid="uid://bdv8ta3fqmx2x" path="res://scenes/world/world.tscn" id="2_gpkt6"]
+[ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="3_k3bi4"]
+[ext_resource type="Texture2D" uid="uid://bkq2u873s6gr" path="res://textures/emil/Émil_Neutral.png" id="4_v8qe7"]
+[ext_resource type="Texture2D" uid="uid://chqj3u7uymjvh" path="res://textures/mc/MC_Awkward.png" id="5_bd8xe"]
+[ext_resource type="Texture2D" uid="uid://dehnt0b70veny" path="res://textures/backgrounds/alleyway🔥.png" id="5_cl1ya"]
+[ext_resource type="Texture2D" uid="uid://cm2qxbamwlm8h" path="res://textures/mc/MC_Surprise.png" id="6_74xmf"]
+[ext_resource type="Texture2D" uid="uid://6p7fga0kjxux" path="res://textures/backgrounds/arenacg.png" id="6_hgrs2"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_4qr7e"]
+
+[node name="intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="dialogueInstance" parent="." instance=ExtResource("1_xd028")]
+layout_mode = 1
+nextScene = ExtResource("2_gpkt6")
+expressions = {
+"mc_awkward": ExtResource("5_bd8xe"),
+"mc_neutral": ExtResource("3_k3bi4"),
+"mc_surprise": ExtResource("6_74xmf"),
+"oldman_empty": SubResource("ImageTexture_4qr7e"),
+"oldman_neutral": ExtResource("4_v8qe7")
+}
+defaultExpression = "oldman_neutral"
+mcDefaultExpression = "mc_neutral"
+backgrounds = {
+"alleyway": ExtResource("5_cl1ya"),
+"arena": ExtResource("6_hgrs2")
+}
+startingBg = "alleyway"
+darkenColor = Color(0, 0, 0, 1)
+dialogueScript = "[name mc][dark char][overlay #000000FF](In this city, fighting is the number one source of entertainment.)[nb][overlay #000000FF](Everyone from all over the country drifts into this godforsaken place for the bent laws and large profits from the fighting scene.)[nb][overlay #000000FF](Arenas are full of people betting on competitors, where mercy is given sparingly.)[nb]I’m so lost, where am I?[nb](I stand there, visibly confused.)[nb](As if the scenery couldn’t be anymore unfamiliar and eerie,)[nb](Two low and noisy male voices crescendos towards my direction, gradually filling my ears.)[nb][mcexpr mc_awkward](Suddenly, the shouting rang clearly through my ears. )[nb][name old man 1]AYE! I TOLD YA TO WATCH IT, TWERP![nb][name old man 2]THIS PLACE AIN’T FOR DIMWITS LIKE YOU![nb][name old man 1]WATCH IT PAL! I’LL USURP YA! I’LL STEAL YER WIFE![nb][name old man 2]I'M THE CHAMPION OF FIGHTING YA KNOW? THEY CALL ME….  UHHH…. REALLY STRONG…. AND COOL.[nb][name old man 1]SEE? NOBODY CALLS YA THAT—[nb][name mc][expr oldman_empty][overlay #000000FF](I’m alive? Where did I end up?)[nb][bg arena][mcexpr mc_surprise](I’m surrounded by unfamiliar neon signs and buildings. The roaring cheers from a large crowd are heard from a distance.)[nb](My vision zeros in on an open area, seeming less dangerous to explore.)[nb][mcexpr mc_neutral](Crowds turned into small groups, then to duos and individuals crossing the streets, the air felt… cleaner?)[nb]Might as well take a look around, huh?"
+music = "alleyway"

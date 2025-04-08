@@ -21,8 +21,10 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tli6n"]
 normal = Vector2(-1, 0)
 
-[node name="testworld" type="Node2D"]
+[node name="arena" type="Node2D"]
 script = ExtResource("1_jgkv1")
+winPath = "res://scenes/dialogues/win.tscn"
+losePath = "res://scenes/dialogues/lose.tscn"
 
 [node name="uis" type="Control" parent="."]
 layout_mode = 3

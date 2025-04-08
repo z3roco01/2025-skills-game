@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdv8ta3fqmx2x"]
+[gd_scene load_steps=7 format=3 uid="uid://bdv8ta3fqmx2x"]
 
 [ext_resource type="Script" path="res://scripts/change_music.gd" id="1_6kfqu"]
 [ext_resource type="Texture2D" uid="uid://tfnoqj42kaib" path="res://textures/backgrounds/map.png" id="1_lu4fd"]
 [ext_resource type="PackedScene" uid="uid://bpqfjg4bc33l8" path="res://scenes/world/world_player.tscn" id="2_hje1m"]
 [ext_resource type="PackedScene" uid="uid://b8kbsq1vlbbow" path="res://scenes/world/door.tscn" id="3_ciumx"]
+[ext_resource type="PackedScene" uid="uid://dle6g0tejujou" path="res://scenes/dialogues/parlor.tscn" id="5_01tlw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_orbvg"]
 size = Vector2(556, 43.5)
@@ -53,3 +54,4 @@ position = Vector2(-513, -515)
 position = Vector2(-766, -978)
 rotation = -0.802488
 scale = Vector2(1.85274, 1.881)
+buildingScene = ExtResource("5_01tlw")

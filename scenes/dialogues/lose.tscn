@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=3 uid="uid://uga08eqi7p8n"]
+
+[ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/dialogues/dialogue_instance.tscn" id="1_4pmhw"]
+[ext_resource type="PackedScene" uid="uid://cd6l47088vw3t" path="res://scenes/battle/arena.tscn" id="2_8ud4v"]
+[ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="3_387w7"]
+[ext_resource type="Texture2D" uid="uid://chqj3u7uymjvh" path="res://textures/mc/MC_Awkward.png" id="4_edrhd"]
+[ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_t4ve8"]
+[ext_resource type="Texture2D" uid="uid://cxa6lsi3l7joa" path="res://textures/lance/Lance_Ecstatic.png" id="6_0fjry"]
+[ext_resource type="Texture2D" uid="uid://dnsstq7w7k4o8" path="res://textures/lance/Lance_Neutral.png" id="7_15dvt"]
+[ext_resource type="Texture2D" uid="uid://6p7fga0kjxux" path="res://textures/backgrounds/arenacg.png" id="8_borpf"]
+
+[node name="lose" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="dialogueInstance" parent="." instance=ExtResource("1_4pmhw")]
+layout_mode = 1
+nextScene = ExtResource("2_8ud4v")
+expressions = {
+"lance_ecstatic": ExtResource("6_0fjry"),
+"lance_happy": ExtResource("5_t4ve8"),
+"lance_neutral": ExtResource("7_15dvt"),
+"mc_awkward": ExtResource("4_edrhd"),
+"mc_neutral": ExtResource("3_387w7")
+}
+defaultExpression = "lance_happy"
+mcDefaultExpression = "mc_neutral"
+backgrounds = {
+"arena": ExtResource("8_borpf")
+}
+startingBg = "arena"
+dialogueScript = "[name mc][dark char][light mc][expr lance_happy]You’re stronger than I thought…[nb][name lance][dark mc][light char][expr lance_ecstatic]This is why you don’t underestimate the abilities of a professional hairstylist~[nb][expr lance_happy]But hey!! Don’t keep your head low, you did awesome yourself![nb]Good job, [$name][expr lance_ecstatic]! That was a PERFECT MATCH~[nb][expr lance_neutral]Come again next time! I’d LOVE to rematch with you, dear![nb]…As long as I keep winning, hehe![nb][name mc][dark char][light mc][mcexpr mc_awkward]Sure, haha~[nb](Well, there goes all my money.)[nb]Hey! I wanna win my money back![nb][mcexpr mc_neutral]I need a rematch!![nb][name lance][dark mc][light char]Hey!!! But I won fair and square![nb]Buut… the satisfaction of winning again sounds FUN![nb]Let’s get this party started! From the beginning!~"
+music = "lanceBattle"

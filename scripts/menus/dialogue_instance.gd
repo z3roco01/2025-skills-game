@@ -84,8 +84,6 @@ func _ready() -> void:
 		newDialogueBox.showBox.connect(showBox)
 		# set the text to the split text
 		newDialogueBox.dialogueText = boxText
-		# set the default expression to the default expression for this instance
-		newDialogueBox.defaultExpression = defaultExpression
 		# format the text for this box
 		newDialogueBox.formatText()
 		
@@ -103,18 +101,20 @@ func changeExpression(expressionId: String) -> void:
 	# first strip the "expr " off of the passed string to get the raw expression id
 	# then pass that into the expression bank to get the expression texture then set the shown texture to it
 	characterTexture.texture = expressions[expressionId]
-	print(expressionId)
+	
+func mcChangeExpression(expressionId: String) -> void:
+	mcTexture.texture = expressions[expressionId]
 
 # if passed in "mc" for the char it will set the mcs darkness, and same for "char" for the other character
 # if darkness is DARKEN modulate will be set to darkenColor and if LIGTHEN will be set to lightenColor
-func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STAUTS) -> void:
+func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STATUS) -> void:
 	var darknessColor : Color
 	# set the color that the darkness is ( or return if unchanged )
-	if(darkness == DialogueBox.DARKEN_STAUTS.UNCHANGED):
+	if(darkness == DialogueBox.DARKEN_STATUS.UNCHANGED):
 		return
-	elif(darkness == DialogueBox.DARKEN_STAUTS.DARKEN):
+	elif(darkness == DialogueBox.DARKEN_STATUS.DARKEN):
 		darknessColor = darkenColor
-	elif(darkness == DialogueBox.DARKEN_STAUTS.LIGHTEN):
+	elif(darkness == DialogueBox.DARKEN_STATUS.LIGHTEN):
 		darknessColor = lightenColor
 	
 	# then set the proper textures modulate value
@@ -124,7 +124,7 @@ func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STAUTS) -> void:
 		characterTexture.modulate = darknessColor
 
 # called by a dialogue box, will show its text and expression
-func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary, overlayColor: Color, bgId: String) -> void:
+func showBox(text: String, expressionId: String, mcExpression: String, nameText: String, darknessDict: Dictionary, overlayColor: Color, bgId: String) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
 	
@@ -139,6 +139,8 @@ func showBox(text: String, expressionId: String, nameText: String, darknessDict:
 	darkenCharacter("char", darknessDict["char"])
 	if(!expressionId.is_empty()):
 		changeExpression(expressionId)
+	if(!mcExpression.is_empty()):
+		mcChangeExpression(mcExpression)
 	setOverlay(overlayColor)
 	if(!bgId.is_empty()):
 		setBg(bgId)
@@ -185,7 +187,7 @@ func playNextScene() -> void:
 # such as the text to display and the expression to set
 class DialogueBox:
 	# singal that will be connected in the main dialogue instance, will show our text
-	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color, bgId: String)
+	signal showBox(text: String, expressionId: String, mcExpression: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color, bgId: String)
 	# signal that will lookup a variable then put its value in the first element of the passed array
 	signal lookupVar(varName: String, returnArray: Array)
 	
@@ -195,10 +197,9 @@ class DialogueBox:
 	var dialogueText: String
 	# the expression that will be set at the start of the box
 	var expressionId: String
+	var mcExpression: String
 	# regex that matched to each tag
 	var tagRegex = RegEx.new()
-	# the default expression that it will default to
-	var defaultExpression: String
 	# the name being shown
 	var nameText = ""
 	# determins if characters will be darkened, lightened or unchanged
@@ -214,8 +215,8 @@ class DialogueBox:
 		tagRegex.compile("\\[[^\\]]+\\]")
 		
 		# set the darken status of all characters to unchanged
-		darkenStatus["mc"] = DARKEN_STAUTS.UNCHANGED
-		darkenStatus["char"] = DARKEN_STAUTS.UNCHANGED
+		darkenStatus["mc"] = DARKEN_STATUS.UNCHANGED
+		darkenStatus["char"] = DARKEN_STATUS.UNCHANGED
 	
 	# formats the dialogue text by replacing and parsing tags
 	func formatText() -> void:
@@ -237,6 +238,8 @@ class DialogueBox:
 			elif(matched.begins_with("expr ")): # if this tag beings with "expr " then it is an expression change
 				# set the expression id to the tag minus the "expr " at the start
 				expressionId = withoutTag(matched, "expr ")
+			elif(matched.begins_with("mcexpr ")):
+				mcExpression = withoutTag(matched, "mcexpr ")
 			elif(matched.begins_with("dec ")): # if the tag begins with "dec " then its a decider
 				# strip the tag type off of the left, then split by | up to 3 options
 				var choices = withoutTag(matched, "dec ").split("|", true, 3)
@@ -246,24 +249,24 @@ class DialogueBox:
 				tagReplacement = choice
 			elif(matched.begins_with("name ")): # when this tag appears, set the name for this box
 				# strip off the formatting and set the name
-				nameText = withoutTag(matched, "name")
+				nameText = withoutTag(matched, "name ")
 				nameText = nameText.lstrip(" ")
 			elif(matched.begins_with("dark ")): # will contain the character to darken this box
 				# get it as lowercase so case doesnt matter
 				var charsToDarken = withoutTag(matched, "dark ").to_lower()
 				
 				if(charsToDarken.contains("mc")):
-					darkenStatus["mc"] = DARKEN_STAUTS.DARKEN
+					darkenStatus["mc"] = DARKEN_STATUS.DARKEN
 				if(charsToDarken.contains("char")):
-					darkenStatus["char"] = DARKEN_STAUTS.DARKEN
+					darkenStatus["char"] = DARKEN_STATUS.DARKEN
 			elif(matched.begins_with("light ")): # will contain the characters to lighten this box
 				# get it as lowercase so case doesnt matter
 				var charsToDarken = withoutTag(matched, "lighten ").to_lower()
 				
 				if(charsToDarken.contains("mc")):
-					darkenStatus["mc"] = DARKEN_STAUTS.LIGHTEN
+					darkenStatus["mc"] = DARKEN_STATUS.LIGHTEN
 				if(charsToDarken.contains("char")):
-					darkenStatus["char"] = DARKEN_STAUTS.LIGHTEN
+					darkenStatus["char"] = DARKEN_STATUS.LIGHTEN
 			elif(matched.begins_with("overlay ")): # [overlay #041fcaff]
 				overlayColor = Color(withoutTag(matched, "overlay "))
 			elif(matched.begins_with("bg ")):
@@ -273,7 +276,7 @@ class DialogueBox:
 	
 	# returns matched without the tag
 	func withoutTag(matched: String, tag: String) -> String:
-		return matched.lstrip(tag)
+		return matched.trim_prefix(tag)
 	
 	# replaced the passed tag with the passed string in the original dialogue
 	func replaceTag(tag: String, newStr: String) -> void:
@@ -290,9 +293,9 @@ class DialogueBox:
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
-		showBox.emit(dialogueText, expressionId, nameText, darkenStatus, overlayColor, bgId)
+		showBox.emit(dialogueText, expressionId, mcExpression, nameText, darkenStatus, overlayColor, bgId)
 	
-	enum DARKEN_STAUTS { DARKEN, LIGHTEN, UNCHANGED}
+	enum DARKEN_STATUS { DARKEN, LIGHTEN, UNCHANGED}
 
 # means we are ready to show the next character
 func _on_next_char_timer_timeout() -> void:

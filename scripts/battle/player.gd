@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal death()
+
 var startHealth = 100
 var currentHealth = startHealth
 
@@ -29,7 +31,6 @@ var speed = DEFAULT_SPEED
 # damage that should be delt to the enemey each physics tick
 var enemyDamage = 0
 var stabbing = false
-
 
 #tracks if enemy is going to be hit by slash
 #tracks if slash has already hit the enemy
@@ -120,7 +121,7 @@ func damage(amount:int):
 		sfxPlayer.play()
 	else:
 		currentHealth = 0
-		# TODO death stuff
+		death.emit()
 	
 	# update health :)
 	healthLabel.text = str(currentHealth)
