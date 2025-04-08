@@ -23,6 +23,8 @@ extends Control
 @export var lightenColor = Color(1, 1, 1)
 # the script containing the script with the markup
 @export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
+# if there is music to play it can be set
+@export var music : String
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -38,6 +40,8 @@ var textToShow = ""
 var curTextIdx = 0
 
 func _ready() -> void:
+	if(!music.is_empty()):
+		MusicPlayer.playMusic(music)
 	# set the characters expression to the default
 	characterTexture.texture = expressions[defaultExpression]
 	
