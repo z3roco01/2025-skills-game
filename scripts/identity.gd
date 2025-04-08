@@ -3,7 +3,7 @@ extends Node
 
 # default values, will be used if the player does not customise it or the pref
 # file gets corrupted or deleted
-var playerName = "jop"
+var playerName = "MC"
 var descriptors = Descriptors.NEUTRAL
 var pronounSubjective = "they"
 var pronounObjective  = "them"
