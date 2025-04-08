@@ -18,11 +18,11 @@ const P2_SCISSOR_SPEED = 4000 # speed of daggers
 const P2_SCISSOR_DELAY = 0.5 # time before daggers start going
 const P2_SCISSOR_WAVES = 10 # AMT OF SCISSOR WAVES
 
-const P3_CLOUD_DURATION = 10.0 # how long clouds last
-const P3_CLOUD_SIZE = 30.0 # size of clouds
-const P3_CLOUD_AMT = 20.0 # amount of clouds
+const P3_CLOUD_DURATION = 5.0 # how long clouds last
+const P3_CLOUD_SIZE = 25.0 # size of clouds
+const P3_CLOUD_AMT = 10.0 # amount of clouds
 const P3_TIME_BETWEEN_CLOUD = 3.0 # time until lance relocates and spawns cloud
-const P3_TARGET_PLAYER_CHANCE = 0.5 # chance to teleport to player instead (out of 1)
+const P3_TARGET_PLAYER_CHANCE = 0.4 # chance to teleport to player instead (out of 1)
 
 const TOP_WALL = 0
 const BOTTOM_WALL = 1

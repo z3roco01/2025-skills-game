@@ -144,7 +144,7 @@ func stabTweenFinishFinish():
 
 func _on_stab_area_body_entered(body: Node2D) -> void:
 	if(body == enemy and stabbing):
-		enemy.damage(6)
+		enemy.damage(4)
 
 # fired when the slash timer ends
 func _on_slash_timer_timeout() -> void:

@@ -1,6 +1,6 @@
 extends Node2D
 
-const TIME_BETWEEN_DAMAGE = 0.3 # time between each damage tick
+const TIME_BETWEEN_DAMAGE = 0.35 # time between each damage tick
 const CLOUD_DAMAGE = 1 # damage to do each time
 
 # set by lance when created
