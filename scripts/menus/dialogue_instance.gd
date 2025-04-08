@@ -6,6 +6,11 @@ extends Control
 @export var expressions = {}
 # the expression that the character will start on 
 @export var defaultExpression: String
+@export var mcDefaultExpression: String
+
+# holds all the bgs, similar to expressions
+@export var backgrounds = {}
+@export var startingBg: String
 
 # the node that holds the dialogue text 
 @onready var dialogueTextNode = $dialoguePanel/text
@@ -14,6 +19,7 @@ extends Control
 # gets the node that holds the characters image
 @onready var characterTexture = $characterTexture
 @onready var mcTexture = $mcTexture
+@onready var background = $background
 @onready var nextCharTimer = $nextCharTimer
 # used for things like black screen
 @onready var overlay = $overlay
@@ -40,11 +46,11 @@ var textToShow = ""
 var curTextIdx = 0
 
 func _ready() -> void:
-<<<<<<< HEAD
 	if(!music.is_empty()):
 		MusicPlayer.playMusic(music)
-=======
->>>>>>> 5ee7ec157f8b330e02b5e2c0cf79cb6a03b8a09b
+	
+	setBg(startingBg)
+	
 	# set the characters expression to the default
 	characterTexture.texture = expressions[defaultExpression]
 	
@@ -116,7 +122,7 @@ func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STAUTS) -> void:
 		characterTexture.modulate = darknessColor
 
 # called by a dialogue box, will show its text and expression
-func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary, overlayColor: Color) -> void:
+func showBox(text: String, expressionId: String, nameText: String, darknessDict: Dictionary, overlayColor: Color, bgId: String) -> void:
 	dialogueTextNode.text = ""
 	textToShow = text
 	
@@ -130,8 +136,21 @@ func showBox(text: String, expressionId: String, nameText: String, darknessDict:
 	darkenCharacter("mc", darknessDict["mc"])
 	darkenCharacter("char", darknessDict["char"])
 	changeExpression(expressionId)
-	overlay.color = overlayColor
+	setOverlay(overlayColor)
+	if(!bgId.is_empty()):
+		setBg(bgId)
 	nextCharTimer.start()
+
+# sets the overlasy with a fade
+func setOverlay(color: Color) -> void:
+	if(color == overlay.color): return
+	
+	var tween = get_tree().create_tween()
+	tween.tween_property(overlay, "color", color, 0.25)
+
+# sets the background to the background with the supplied id
+func setBg(bgId: String) -> void:
+	background.texture = backgrounds[bgId]
 
 # called by a dialogue box, will get the variables value then put it in the array
 # array needed since its a signal and cannot directly return
@@ -157,7 +176,7 @@ func _on_gui_input(event: InputEvent) -> void:
 # such as the text to display and the expression to set
 class DialogueBox:
 	# singal that will be connected in the main dialogue instance, will show our text
-	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color)
+	signal showBox(text: String, expressionId: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color, bgId: String)
 	# signal that will lookup a variable then put its value in the first element of the passed array
 	signal lookupVar(varName: String, returnArray: Array)
 	
@@ -176,6 +195,8 @@ class DialogueBox:
 	# determins if characters will be darkened, lightened or unchanged
 	# key for mc is "mc" key for the other character is "char"
 	var darkenStatus : Dictionary
+	# the bg that will be shown when this box is
+	var bgId: String
 	
 	# create the regex and format the text
 	func _init() -> void:
@@ -239,6 +260,8 @@ class DialogueBox:
 					darkenStatus["char"] = DARKEN_STAUTS.LIGHTEN
 			elif(matched.begins_with("overlay ")): # [overlay #041fcaff]
 				overlayColor = Color(withoutTag(matched, "overlay "))
+			elif(matched.begins_with("bg ")):
+				bgId = withoutTag(matched, "bg ")
 			
 			replaceTag(matched, tagReplacement)
 	
@@ -261,7 +284,7 @@ class DialogueBox:
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
-		showBox.emit(dialogueText, expressionId, nameText, darkenStatus, overlayColor)
+		showBox.emit(dialogueText, expressionId, nameText, darkenStatus, overlayColor, bgId)
 	
 	enum DARKEN_STAUTS { DARKEN, LIGHTEN, UNCHANGED}
 

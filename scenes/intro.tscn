@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckuxsmprwbbq6"]
+[gd_scene load_steps=6 format=3 uid="uid://ckuxsmprwbbq6"]
 
 [ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/menus/dialogue_instance.tscn" id="1_lmm7e"]
 [ext_resource type="Texture2D" uid="uid://bkq2u873s6gr" path="res://textures/emil/Émil_Neutral.png" id="2_pchbj"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="3_amj6c"]
+[ext_resource type="Texture2D" uid="uid://dehnt0b70veny" path="res://textures/backgrounds/alleyway🔥.png" id="4_7hghn"]
+[ext_resource type="Texture2D" uid="uid://6p7fga0kjxux" path="res://textures/backgrounds/arenacg.png" id="5_orbc3"]
 
 [node name="intro" type="Control"]
 layout_mode = 3
@@ -19,5 +21,16 @@ expressions = {
 "oldman_neutral": ExtResource("2_pchbj")
 }
 defaultExpression = "oldman_neutral"
+mcDefaultExpression = "mc_neutral"
+backgrounds = {
+"alleyway": ExtResource("4_7hghn"),
+"arena": ExtResource("5_orbc3")
+}
+startingBg = "alleyway"
 darkenColor = Color(0, 0, 0, 1)
+<<<<<<< Updated upstream
 dialogueScript = "asdasd[nb][bg arena]farttt"
+=======
+dialogueScript = "[name mc][dark char][overlay #000000FF](In this city, fighting is the number one source of entertainment.)[nb][overlay #000000FF](Everyone from all over the country drifts into this godforsaken place for the bent laws and large profits from the fighting scene.)[nb][overlay #000000FF](Arenas are full of people betting on competitors, where mercy is given sparingly.)[nb]I’m so lost, where am I?[nb](I stand there, visibly confused.)[nb](As if the scenery couldn’t be anymore unfamiliar and eerie,)[nb](Two low and noisy male voices crescendos towards my direction, gradually filling my ears.)[nb](Suddenly, the shouting rang clearly through my ears. )[nb][name old man 1]AYE! I TOLD YA TO WATCH IT, TWERP![nb][name old man 2]THIS PLACE AIN’T FOR DIMWITS LIKE YOU![nb][name old man 1]WATCH IT PAL! I’LL USURP YA! I’LL STEAL YER WIFE![nb][name old man 2]I'M THE CHAMPION OF FIGHTING YA KNOW? THEY CALL ME….  UHHH…. REALLY STRONG…. AND COOL.[nb][name old man 1]SEE? NOBODY CALLS YA THAT—[nb][name mc][overlay #000000FF][bg arena](I’m alive? Where did I end up?)[nb](I’m surrounded by unfamiliar neon signs and buildings. The roaring cheers from a large crowd are heard from a distance.)[nb](My vision zeros in on an open area, seeming less dangerous to explore.)[nb](Crowds turned into small groups, then to duos and individuals crossing the streets, the air felt… cleaner?)[nb]Might as well take a look around, huh?"
+music = "alleyway"
+>>>>>>> Stashed changes
