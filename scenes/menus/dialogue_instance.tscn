@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/menus/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
+[ext_resource type="Texture2D" uid="uid://bkq2u873s6gr" path="res://textures/emil/Émil_Neutral.png" id="3_uewkw"]
 [ext_resource type="Texture2D" uid="uid://iscucwpdb2an" path="res://ui/textures/Textbox.png" id="3_uxotw"]
 [ext_resource type="Texture2D" uid="uid://c5gyl7lhfjdw7" path="res://textures/lance/Lance_Blush_1.png" id="4_t4qme"]
 [ext_resource type="Texture2D" uid="uid://bwlv35ivqvykb" path="res://textures/backgrounds/parlour.png" id="4_yg5ib"]
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_pn675"]
-[ext_resource type="Texture2D" uid="uid://c4cyfofvw5xop" path="res://textures/emil/Émil_Angry_1.png" id="5_qsmhr"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="6_7n0wu"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="8_j0whe"]
 
@@ -21,10 +21,12 @@ grow_vertical = 2
 theme = ExtResource("1_ofy3w")
 script = ExtResource("1_g7hym")
 expressions = {
-"anger": ExtResource("5_qsmhr"),
-"content": ExtResource("4_t4qme")
+"anger": ExtResource("3_uewkw"),
+"content": ExtResource("4_t4qme"),
+"mc": ExtResource("6_7n0wu")
 }
 defaultExpression = "content"
+mcDefaultExpression = "mc"
 dialogueScript = "[name LANCE][overlay #000000ff][dark mc] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][dark char][light mc] peeeee[nb][name mc] but i hate [$object] [expr anger]"
 
 [node name="background" type="TextureRect" parent="."]
@@ -49,6 +51,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_pn675")
+expand_mode = 4
 stretch_mode = 4
 
 [node name="mcTexture" type="TextureRect" parent="."]
@@ -108,6 +111,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 text = "welcome to my parlor lil bro"
+autowrap_mode = 3
 
 [node name="nameText" type="Label" parent="dialoguePanel"]
 layout_mode = 0

@@ -19,11 +19,11 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("1_lu4fd")
 
 [node name="buildingCollider" type="StaticBody2D" parent="."]
-position = Vector2(-3219, 1109)
+position = Vector2(-1035, -129)
 metadata/_edit_group_ = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="buildingCollider"]
-polygon = PackedVector2Array(-6, -3, 6, -272, 60, -360, 170, -407, 175, -431, -25, -500, -25, -531, 154, -568, 324, -561, 356, -594, 362, -639, 422, -623, 611, -734, 507, -771, 505, -828, 554, -856, 762, -847, 838, -901, 866, -967, 978, -997, 1048, -960, 1346, -1037, 1555, -1038, 1576, -1182, -132, -703)
+polygon = PackedVector2Array(0, -4, -2, -113, 5, -246, 28, -387, 65, -540, 91, -609, 262, -799, 385, -1018, 662, -1082, 726, -1124, 918, -1100, 730, -1154, 329, -1031, 38, -552, -43, -54)
 
 [node name="blockage1" type="StaticBody2D" parent="."]
 position = Vector2(-885, -91)
