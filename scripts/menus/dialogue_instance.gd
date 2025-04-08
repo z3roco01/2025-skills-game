@@ -1,6 +1,7 @@
 extends Control
 
-
+# the scene to show when this one is done
+@export var nextScene: PackedScene
 # dictionary of expressions for this character
 # you cant type hint on export, but this will have string keys and CompressedTexture2D values
 @export var expressions = {}
@@ -102,6 +103,7 @@ func changeExpression(expressionId: String) -> void:
 	# first strip the "expr " off of the passed string to get the raw expression id
 	# then pass that into the expression bank to get the expression texture then set the shown texture to it
 	characterTexture.texture = expressions[expressionId]
+	print(expressionId)
 
 # if passed in "mc" for the char it will set the mcs darkness, and same for "char" for the other character
 # if darkness is DARKEN modulate will be set to darkenColor and if LIGTHEN will be set to lightenColor
@@ -135,7 +137,8 @@ func showBox(text: String, expressionId: String, nameText: String, darknessDict:
 	curTextIdx = 0
 	darkenCharacter("mc", darknessDict["mc"])
 	darkenCharacter("char", darknessDict["char"])
-	changeExpression(expressionId)
+	if(!expressionId.is_empty()):
+		changeExpression(expressionId)
 	setOverlay(overlayColor)
 	if(!bgId.is_empty()):
 		setBg(bgId)
@@ -210,9 +213,6 @@ class DialogueBox:
 	
 	# formats the dialogue text by replacing and parsing tags
 	func formatText() -> void:
-		# start the expression id off at the default incase the expression is not set in this box
-		expressionId = defaultExpression
-		
 		# match every tag in the text ( [] )
 		for result in tagRegex.search_all(dialogueText):
 			# gets the string that we matched to, does still have the brackets that need to be stripped
