@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://brc4t4klq30nq"]
+[gd_scene load_steps=9 format=3 uid="uid://brc4t4klq30nq"]
 
 [ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/dialogues/dialogue_instance.tscn" id="1_d2khl"]
 [ext_resource type="Texture2D" uid="uid://6p7fga0kjxux" path="res://textures/backgrounds/arenacg.png" id="2_20xxk"]
 [ext_resource type="Texture2D" uid="uid://bms20qf5avsw5" path="res://textures/lance/Lance_Defeat_1.png" id="2_80d7f"]
+[ext_resource type="PackedScene" uid="uid://rapwkjg8o0r3" path="res://scenes/credits.tscn" id="2_p0br7"]
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="3_8lbfw"]
 [ext_resource type="Texture2D" uid="uid://nky442fpwvde" path="res://textures/lance/Lance_Pout.png" id="4_a5mg6"]
 [ext_resource type="Texture2D" uid="uid://cxa6lsi3l7joa" path="res://textures/lance/Lance_Ecstatic.png" id="5_h0nn1"]
@@ -18,6 +19,7 @@ grow_vertical = 2
 
 [node name="dialogueInstance" parent="." instance=ExtResource("1_d2khl")]
 layout_mode = 1
+nextScene = ExtResource("2_p0br7")
 expressions = {
 "lance_defeat1": ExtResource("2_80d7f"),
 "lance_ecstatic": ExtResource("5_h0nn1"),

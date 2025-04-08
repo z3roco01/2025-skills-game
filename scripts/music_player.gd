@@ -18,3 +18,7 @@ func playMusic(id: String):
 
 func on_finished() -> void:
 	playMusic(curMusic)
+
+func stopMusic() -> void:
+	curMusic = ""
+	stop()

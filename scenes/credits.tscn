@@ -1,0 +1,208 @@
+[gd_scene load_steps=5 format=3 uid="uid://rapwkjg8o0r3"]
+
+[ext_resource type="Theme" uid="uid://bc6xnfmqmpusn" path="res://ui/theme/credits.theme" id="1_yeojo"]
+[ext_resource type="Script" path="res://scripts/stop_music.gd" id="2_7wtak"]
+[ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="2_fsj1a"]
+[ext_resource type="Script" path="res://scripts/menus/quit_button.gd" id="3_virl1"]
+
+[node name="credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_yeojo")
+script = ExtResource("2_7wtak")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0497766, 0.0497766, 0.0497766, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 1146.0
+grow_horizontal = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+alignment = 1
+
+[node name="devs" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.772951, 0.772951, 0.772951, 1)
+theme_override_fonts/font = ExtResource("2_fsj1a")
+theme_override_font_sizes/font_size = 78
+text = "DEVELOPERS"
+horizontal_alignment = 1
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="brook" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/brook"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Brook"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/brook"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/brook"]
+layout_mode = 2
+text = "Lead Developer"
+
+[node name="drew" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/drew"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Drew"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/drew"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/drew"]
+layout_mode = 2
+text = "Developer"
+
+[node name="artists" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.772951, 0.772951, 0.772951, 1)
+theme_override_fonts/font = ExtResource("2_fsj1a")
+theme_override_font_sizes/font_size = 78
+text = "ARTISTS"
+horizontal_alignment = 1
+
+[node name="spacer2" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="venice" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/venice"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Venice"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/venice"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/venice"]
+layout_mode = 2
+text = "Lead Artist"
+
+[node name="herminey" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/herminey"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Herminey"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/herminey"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/herminey"]
+layout_mode = 2
+text = "Character Artist"
+
+[node name="teagean" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/teagean"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Teagean"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/teagean"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/teagean"]
+layout_mode = 2
+text = "Background Artist"
+
+[node name="composers" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.772951, 0.772951, 0.772951, 1)
+theme_override_fonts/font = ExtResource("2_fsj1a")
+theme_override_font_sizes/font_size = 78
+text = "COMPOSERS"
+horizontal_alignment = 1
+
+[node name="spacer3" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="teagean2" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/teagean2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Teagean"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/teagean2"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/teagean2"]
+layout_mode = 2
+text = "Composer"
+
+[node name="annika" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/annika"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Annika"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/annika"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/annika"]
+layout_mode = 2
+text = "Composer Aid"
+
+[node name="spacer4" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(231, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "leave"
+script = ExtResource("3_virl1")
