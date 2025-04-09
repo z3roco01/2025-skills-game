@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3rj44358t1hs"]
+[gd_scene load_steps=8 format=3 uid="uid://c3rj44358t1hs"]
 
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_nujkm"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="3_5lxlk"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dfyug0ly7cnnn" path="res://ui/fonts/Rosamby.ttf" id="4_v3sct"]
 [ext_resource type="Script" path="res://scripts/menus/action_bind_button.gd" id="4_y445r"]
 [ext_resource type="Script" path="res://scripts/menus/back_button.gd" id="5_5rv80"]
+[ext_resource type="Script" path="res://scripts/menus/identity_input.gd" id="6_mouqk"]
 
 [node name="options_screen" type="Control"]
 layout_mode = 3
@@ -68,7 +69,7 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 theme_override_constants/separation = 30
 
-[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer"]
+[node name="soundTitle" type="Control" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -150,7 +151,7 @@ busName = "sfx"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="controlsTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.185247, 0.0884369, 0.150192, 1)
 theme_override_fonts/font = ExtResource("3_5lxlk")
@@ -357,6 +358,37 @@ theme_override_font_sizes/font_size = 50
 text = "???"
 script = ExtResource("4_y445r")
 actionName = "pause"
+
+[node name="spacer3" type="Control" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="identityTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.185247, 0.0884369, 0.150192, 1)
+theme_override_fonts/font = ExtResource("3_5lxlk")
+theme_override_font_sizes/font_size = 50
+text = "identity"
+horizontal_alignment = 1
+
+[node name="nameOption" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/nameOption"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5lxlk")
+text = "NAME"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/nameOption"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="nameInput" type="LineEdit" parent="ScrollContainer/VBoxContainer/nameOption"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+placeholder_text = "name"
+script = ExtResource("6_mouqk")
 
 [node name="backButton" type="Button" parent="ScrollContainer/VBoxContainer" node_paths=PackedStringArray("root")]
 custom_minimum_size = Vector2(350, 100)
