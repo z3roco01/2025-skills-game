@@ -15,14 +15,29 @@ var vel = Vector2.ZERO
 @onready var healthText = get_parent().get_node("./uis/enemyHealth")
 # node that holds everything that will rotates around the enemy when they rotate
 @onready var rotators = $rotators
+@onready var arena = get_parent()
 # tracks if attacks can happen
 var attackBlocking = false
+# for when the player pauses the game
+var paused = false
 
 signal death()
 
+func _ready() -> void:
+	arena.pause.connect(pause)
+	arena.unpause.connect(unpause)
+
+func pause() -> void:
+	paused = true
+	process_mode = PROCESS_MODE_DISABLED
+
+func unpause() -> void:
+	paused = false
+	process_mode = PROCESS_MODE_INHERIT
+
 # Called every physics tick
 func _physics_process(_delta: float) -> void:
-	if(alive()):
+	if(alive() and !paused):
 		# if we can attack then run attack selection logic
 		if(attackCooldown <= 0 and !attackBlocking):
 			attack()

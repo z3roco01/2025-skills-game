@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=15 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/battle/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/battle/arena.gd" id="1_jgkv1"]
+[ext_resource type="PackedScene" uid="uid://bpby85o5a8q54" path="res://scenes/menus/pause_menu.tscn" id="2_opn2y"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="2_ujqbu"]
 [ext_resource type="Texture2D" uid="uid://bb4jjm2rm142y" path="res://textures/backgrounds/arena.png" id="2_waway"]
 [ext_resource type="Texture2D" uid="uid://e6lrlw3fvxnt" path="res://ui/textures/MC health bar.png" id="3_gnibq"]
@@ -25,6 +26,7 @@ normal = Vector2(-1, 0)
 script = ExtResource("1_jgkv1")
 winPath = "res://scenes/dialogues/win.tscn"
 losePath = "res://scenes/dialogues/lose.tscn"
+pauseMenu = ExtResource("2_opn2y")
 
 [node name="uis" type="Control" parent="."]
 layout_mode = 3

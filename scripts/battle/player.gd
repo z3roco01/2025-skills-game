@@ -27,6 +27,7 @@ var speed = DEFAULT_SPEED
 @onready var sfxPlayer = $sfxPlayer
 # create a tween
 @onready var tween = get_tree().create_tween()
+@onready var arena = get_parent()
 
 # damage that should be delt to the enemey each physics tick
 var enemyDamage = 0
@@ -37,12 +38,25 @@ var stabbing = false
 var slashHitEnemy = false 
 var slashing = false
 
+var paused = false
+
 @onready var swordSlashSound = preload("res://sfx/battle/mc_sword_slash.mp3")
 @onready var dashSound = preload("res://sfx/battle/mc_dash.mp3")
 @onready var hurtSound = preload("res://sfx/battle/mc_hurt.mp3")
 @onready var stabSound = preload("res://sfx/battle/mc_stab.mp3")
 
+func _ready() -> void:
+	arena.pause.connect(pause)
+	arena.unpause.connect(unpause)
+
+func pause() -> void:
+	paused = true
+
+func unpause() -> void:
+	paused = false
+
 func _physics_process(_delta: float) -> void:
+	if(paused): return
 	rotators.look_at(get_global_mouse_position())
 	var direction := Input.get_vector("left", "right", "up", "back")
 	
