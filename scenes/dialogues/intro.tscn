@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://ckuxsmprwbbq6"]
+[gd_scene load_steps=11 format=3 uid="uid://ckuxsmprwbbq6"]
 
 [ext_resource type="PackedScene" uid="uid://dcne32iho2ohv" path="res://scenes/dialogues/dialogue_instance.tscn" id="1_xd028"]
 [ext_resource type="PackedScene" uid="uid://bdv8ta3fqmx2x" path="res://scenes/world/world.tscn" id="2_gpkt6"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="3_k3bi4"]
-[ext_resource type="Texture2D" uid="uid://bkq2u873s6gr" path="res://textures/emil/Émil_Neutral.png" id="4_v8qe7"]
 [ext_resource type="Texture2D" uid="uid://chqj3u7uymjvh" path="res://textures/mc/MC_Awkward.png" id="5_bd8xe"]
 [ext_resource type="Texture2D" uid="uid://dehnt0b70veny" path="res://textures/backgrounds/alleyway🔥.png" id="5_cl1ya"]
 [ext_resource type="Texture2D" uid="uid://cm2qxbamwlm8h" path="res://textures/mc/MC_Surprise.png" id="6_74xmf"]
 [ext_resource type="Texture2D" uid="uid://6p7fga0kjxux" path="res://textures/backgrounds/arenacg.png" id="6_hgrs2"]
+[ext_resource type="Texture2D" uid="uid://b17tmehhk2g7h" path="res://textures/old_men/Oldman_2.png" id="6_ioubp"]
+[ext_resource type="Texture2D" uid="uid://br5wq5w3uh2kc" path="res://textures/old_men/Oldman_1.png" id="7_5a2v0"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_4qr7e"]
 
@@ -26,10 +27,11 @@ expressions = {
 "mc_awkward": ExtResource("5_bd8xe"),
 "mc_neutral": ExtResource("3_k3bi4"),
 "mc_surprise": ExtResource("6_74xmf"),
-"oldman_empty": SubResource("ImageTexture_4qr7e"),
-"oldman_neutral": ExtResource("4_v8qe7")
+"oldman_1": ExtResource("7_5a2v0"),
+"oldman_2": ExtResource("6_ioubp"),
+"oldman_empty": SubResource("ImageTexture_4qr7e")
 }
-defaultExpression = "oldman_neutral"
+defaultExpression = "oldman_1"
 mcDefaultExpression = "mc_neutral"
 backgrounds = {
 "alleyway": ExtResource("5_cl1ya"),
