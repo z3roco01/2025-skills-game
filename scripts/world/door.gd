@@ -16,6 +16,7 @@ func enter():
 		worldBg.visible = false
 		sceneInstance.connect("tree_exited", leftBuilding)
 		get_parent().get_parent().add_child(sceneInstance)
+		get_parent().queue_free()
 
 func leftBuilding():
 	player.insideBuilding = false
