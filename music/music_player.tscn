@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dtw714uo57n5r" path="res://music/Basic_Ambiance_TestCityscape.wav" id="6_mw2s2"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
+volume_db = -7.0
 bus = &"music"
 script = ExtResource("1_7l0s8")
 musicBank = {
