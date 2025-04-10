@@ -48,6 +48,7 @@ var paused = false
 func _ready() -> void:
 	arena.pause.connect(pause)
 	arena.unpause.connect(unpause)
+	sprite.material.set_shader_parameter("enabled", false)
 
 func pause() -> void:
 	paused = true

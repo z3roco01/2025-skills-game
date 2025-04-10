@@ -77,6 +77,7 @@ func _ready() -> void:
 	min_y = SPRITE_HEIGHT / 2
 	max_y = ARENA_HEIGHT - SPRITE_HEIGHT / 2
 	attackCooldown = START_ATTACK_CD
+	sprite.material.set_shader_parameter("enabled", false)
 	super._ready()
 
 func idleAction() -> void:
