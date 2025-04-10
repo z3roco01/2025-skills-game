@@ -17,6 +17,7 @@ signal pause()
 signal unpause()
 
 func _ready() -> void:
+	MusicPlayer.stopMusic()
 	enemy.connect("death", onenemyDeath)
 	player.death.connect(onPlayerDeath)
 	# load our scens, needed to get around cyclic dependacies
@@ -40,7 +41,7 @@ func switchToScene(scene: PackedScene) -> void:
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("pause") and !paused):
 		var pauseMenuInstance = pauseMenu.instantiate()
-		pauseMenuInstance.position = self.position - Vector2(960, 380)
+		pauseMenuInstance.position = self.position
 		pauseMenuInstance.connect("tree_exited", pauseMenuClose)
 		add_sibling(pauseMenuInstance)
 		pause.emit()
