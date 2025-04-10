@@ -33,7 +33,7 @@ const ARENA_WIDTH = 1920
 const ARENA_HEIGHT = 920
 
 const SPRITE_WIDTH = 80
-const SPRITE_HEIGHT = 156
+const SPRITE_HEIGHT = 158
 
 @onready var dashWaitTimer = $dashWaitTimer
 @onready var dashCDTimer = $dashCDTimer
@@ -63,6 +63,22 @@ const HIT_COLOUR = Color.RED
 @onready var scissorSound = preload("res://sfx/battle/lance_scissor.mp3")
 @onready var spraySound = preload("res://sfx/battle/lance_spray.mp3")
 
+var min_x
+var max_x
+var min_y
+var max_y
+
+const START_ATTACK_CD = 50 # small attack cd
+
+func _ready() -> void:
+	# calculate where enemy can be
+	min_x = SPRITE_WIDTH / 2
+	max_x = ARENA_WIDTH - SPRITE_WIDTH / 2
+	min_y = SPRITE_HEIGHT / 2
+	max_y = ARENA_HEIGHT - SPRITE_HEIGHT / 2
+	attackCooldown = START_ATTACK_CD
+	super._ready()
+
 func idleAction() -> void:
 	pass 
 
@@ -91,7 +107,7 @@ func p1DashAttack() -> void:
 		sprite.rotation = 0
 		sprite.look_at(endPoint)
 		# check if needed to invert based on pos
-		if(position.x < 0):
+		if(position.x < ARENA_WIDTH/2):
 			sprite.flip_h = true
 			sprite.flip_v = false
 		else:
@@ -170,25 +186,25 @@ func p2ScissorAttack() -> void:
 				if(scissorWall == TOP_WALL):
 					# top left
 					scissorPos = Vector2(
-						currentPosition -ARENA_WIDTH/2, 
-						-ARENA_HEIGHT/2 - P2_SCISSOR_SIZE)
+						currentPosition, 
+						- P2_SCISSOR_SIZE)
 				elif(scissorWall == LEFT_WALL):
 					# top left
 					scissorPos = Vector2(
-						-ARENA_WIDTH/2 - P2_SCISSOR_SIZE, 
-						-ARENA_HEIGHT/2 + currentPosition
+						- P2_SCISSOR_SIZE, 
+						currentPosition
 						)
 				elif(scissorWall == BOTTOM_WALL):
 					# bottom left
 					scissorPos = Vector2(
-						-ARENA_WIDTH/2 + currentPosition, 
-						ARENA_HEIGHT/2 + P2_SCISSOR_SIZE
+						currentPosition, 
+						ARENA_HEIGHT + P2_SCISSOR_SIZE
 						)
 				elif(scissorWall == RIGHT_WALL):
 					# top right
 					scissorPos = Vector2(
-						ARENA_WIDTH/2 + P2_SCISSOR_SIZE, 
-						-ARENA_HEIGHT/2 + currentPosition
+						ARENA_WIDTH + P2_SCISSOR_SIZE, 
+						currentPosition
 						)
 				
 				# spawn scissor
@@ -216,12 +232,12 @@ func p3PoisonAttack() -> void:
 			# randomise a spot in the arena if not
 			targetPos = Vector2(
 				random.randf_range(
-					-ARENA_WIDTH/2 + SPRITE_WIDTH, 
-					ARENA_WIDTH/2 - SPRITE_WIDTH
+					min_x,
+					max_x
 				),
 				random.randf_range(
-					-ARENA_HEIGHT/2 + SPRITE_HEIGHT, 
-					ARENA_HEIGHT/2 - SPRITE_HEIGHT
+					min_y,
+					max_y
 				)
 			)
 		# move lance to spot with a tween
@@ -320,17 +336,17 @@ func randomiseWallPosition(wall: int) -> Vector2:
 	
 	# decide where the attack will start and end
 	if(wall == TOP_WALL):
-		wallPos.y += (-ARENA_HEIGHT/2 + SPRITE_HEIGHT/2)
-		wallPos.x += random.randi_range(-ARENA_WIDTH/2, ARENA_WIDTH/2)
+		wallPos.y += min_y
+		wallPos.x += random.randi_range(min_x, max_x)
 	elif(wall == LEFT_WALL):
-		wallPos.x += (-ARENA_WIDTH/2 + SPRITE_WIDTH/2)
-		wallPos.y += random.randi_range(-ARENA_HEIGHT/2, ARENA_HEIGHT/2)
+		wallPos.x += min_x
+		wallPos.y += random.randi_range(min_y, max_y)
 	elif(wall == BOTTOM_WALL):
-		wallPos.y += ARENA_HEIGHT/2 - SPRITE_HEIGHT/2
-		wallPos.x += random.randi_range(-ARENA_WIDTH/2, ARENA_WIDTH/2)
+		wallPos.y += max_y
+		wallPos.x += random.randi_range(min_x, max_x)
 	elif(wall == RIGHT_WALL):
-		wallPos.x += ARENA_WIDTH/2 - SPRITE_WIDTH/2
-		wallPos.y += random.randi_range(-ARENA_HEIGHT/2, ARENA_HEIGHT/2)
+		wallPos.x += max_x
+		wallPos.y += random.randi_range(min_y, max_y)
 	
 	return wallPos
 

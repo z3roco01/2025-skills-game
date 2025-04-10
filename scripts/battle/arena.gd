@@ -10,18 +10,20 @@ var loseScene: PackedScene
 @onready var enemy = $lanceEnemy
 @onready var player = $player
 @onready var waittimer = $waittimer
+@onready var videoPlayer = $uis/AspectRatioContainer/VideoStreamPlayer
 var paused = false
 
 signal pause()
 signal unpause()
 
 func _ready() -> void:
-	MusicPlayer.playMusic("lanceBattle")
 	enemy.connect("death", onenemyDeath)
 	player.death.connect(onPlayerDeath)
 	# load our scens, needed to get around cyclic dependacies
 	winScene = ResourceLoader.load(winPath)
 	loseScene = ResourceLoader.load(losePath)
+	pause.emit() # pause game for videoplayer
+	paused = true
 
 func onenemyDeath() -> void:
 	switchToScene(winScene)
@@ -47,3 +49,9 @@ func _input(event: InputEvent) -> void:
 func pauseMenuClose() -> void:
 	paused = false
 	unpause.emit()
+
+
+func _on_video_stream_player_finished() -> void:
+	paused = false # unpause game
+	unpause.emit()
+	MusicPlayer.playMusic("lanceBattle") # play music 
