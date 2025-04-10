@@ -47,6 +47,7 @@ const SPRITE_HEIGHT = 156
 @onready var sprite = $lanceSprite
 @onready var scissorAnim = $rotators/scissorSlash
 @onready var sfxPlayer = $sfxPlayer
+@onready var collider = $CollisionShape2D
 
 var scissor_throwable = preload("res://scenes/lance/lance_scissor.tscn")
 var poison_cloud = preload("res://scenes/lance/lance_poison_cloud.tscn")
@@ -126,6 +127,7 @@ func p1DashAttack() -> void:
 		# wait a little more before starting next dash
 		dashCDTimer.start()
 		await dashCDTimer.timeout
+		resetSprite()
 	attackFinished()
 
 func p2ScissorAttack() -> void:
@@ -393,6 +395,7 @@ func resetSprite() -> void:
 	sprite.rotation = 0 # reset sprite rotation
 	sprite.flip_h = false # reset sprite flips
 	sprite.flip_v = false
+	collider.rotation = 0 # reset collider rotation
 
 func hitAnimation() -> void:
 	colorFade(set_color_hitAnimation)
