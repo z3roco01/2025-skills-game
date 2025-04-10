@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cd6l47088vw3t"]
+[gd_scene load_steps=16 format=3 uid="uid://cd6l47088vw3t"]
 
 [ext_resource type="PackedScene" uid="uid://6vtbxytds8cv" path="res://scenes/battle/player.tscn" id="1_52pld"]
 [ext_resource type="Script" path="res://scripts/battle/arena.gd" id="1_jgkv1"]
@@ -11,7 +11,6 @@
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="6_uvmqu"]
 [ext_resource type="Texture2D" uid="uid://231o8i766cy3" path="res://ui/textures/VS_background.png" id="6_yjiww"]
 [ext_resource type="VideoStream" path="res://animations/misc/fight_countdown.ogv" id="11_6nptt"]
-[ext_resource type="Shader" path="res://shaders/chromaKey.gdshader" id="11_swkbg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vgk6v"]
 normal = Vector2(0, 1)
@@ -23,14 +22,6 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tli6n"]
 normal = Vector2(-1, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_amm8x"]
-shader = ExtResource("11_swkbg")
-shader_parameter/chroma = Color(0, 0, 0, 1)
-shader_parameter/tolerance = 0.6
-shader_parameter/fadeAmount = 0.245
-shader_parameter/enabled = true
-shader_parameter/colour = Color(1, 1, 1, 1)
 
 [node name="arena" type="Node2D"]
 script = ExtResource("1_jgkv1")
@@ -208,7 +199,6 @@ position = Vector2(1920, 540)
 shape = SubResource("WorldBoundaryShape2D_tli6n")
 
 [node name="player" parent="." node_paths=PackedStringArray("enemy") instance=ExtResource("1_52pld")]
-material = SubResource("ShaderMaterial_amm8x")
 position = Vector2(1471, 427)
 scale = Vector2(1.3, 1.3)
 enemy = NodePath("../lanceEnemy")

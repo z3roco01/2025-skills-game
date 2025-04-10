@@ -26,10 +26,11 @@ color = Color(0.0497766, 0.0497766, 0.0497766, 1)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 1146.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
@@ -196,6 +197,53 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Composer Aid"
 
+[node name="composers2" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.772951, 0.772951, 0.772951, 1)
+theme_override_fonts/font = ExtResource("2_fsj1a")
+theme_override_font_sizes/font_size = 78
+text = "ADDITIONAL"
+horizontal_alignment = 1
+
+[node name="spacer5" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+
+[node name="annabell" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/annabell"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Annabelle"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/annabell"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/annabell"]
+layout_mode = 2
+text = "Chibi + Other Art"
+
+[node name="pixabay" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="name" type="Label" parent="ScrollContainer/VBoxContainer/pixabay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Pixabay"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/pixabay"]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="ScrollContainer/VBoxContainer/pixabay"]
+layout_mode = 2
+text = "Sound Effects"
+
 [node name="spacer4" type="Control" parent="ScrollContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
@@ -204,5 +252,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(231, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "leave"
+text = "Leave"
 script = ExtResource("3_virl1")
+shouldGrow = false
