@@ -21,6 +21,7 @@ extends Control
 @onready var characterTexture = $characterTexture
 @onready var mcTexture = $mcTexture
 @onready var background = $background
+@onready var cgTexture = $cgTexture
 @onready var nextCharTimer = $nextCharTimer
 @onready var boopSoundPlayer = $boopPlayer
 # used for things like black screen
@@ -33,6 +34,8 @@ extends Control
 @export var dialogueScript = "[name LANCE] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb] peeeee[nb][name BALLS] but i hate [$object] [expr anger]"
 # if there is music to play it can be set
 @export var music : String
+# very similar to the backgrounds dict, but for cgs
+@export var cgs : Dictionary
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -131,27 +134,39 @@ func darkenCharacter(char: String, darkness: DialogueBox.DARKEN_STATUS) -> void:
 		characterTexture.modulate = darknessColor
 
 # called by a dialogue box, will show its text and expression
-func showBox(text: String, expressionId: String, mcExpression: String, nameText: String, darknessDict: Dictionary, overlayColor: Color, bgId: String) -> void:
+func showBox(box: DialogueBox) -> void:
 	dialogueTextNode.text = ""
-	textToShow = text
+	textToShow = box.dialogueText
 	
 	var lookupReturn : Array[String]
-	if(!nameText.is_empty()): # only set name when it is being changed
-		nameTextNode.text = nameText
-	if(nameText == "mc"): # replace mc with the players name
+	if(!box.nameText.is_empty()): # only set name when it is being changed
+		nameTextNode.text = box.nameText
+	if(box.nameText == "mc"): # replace mc with the players name
 		nameTextNode.text = getVar("name")
 	
 	curTextIdx = 0
-	darkenCharacter("mc", darknessDict["mc"])
-	darkenCharacter("char", darknessDict["char"])
-	if(!expressionId.is_empty()):
-		changeExpression(expressionId)
-	if(!mcExpression.is_empty()):
-		mcChangeExpression(mcExpression)
-	setOverlay(overlayColor)
-	if(!bgId.is_empty()):
-		setBg(bgId)
+	darkenCharacter("mc", box.darkenStatus["mc"])
+	darkenCharacter("char", box.darkenStatus["char"])
+	if(!box.expressionId.is_empty()):
+		changeExpression(box.expressionId)
+	if(!box.mcExpression.is_empty()):
+		mcChangeExpression(box.mcExpression)
+	setOverlay(box.overlayColor)
+	if(!box.bgId.is_empty()):
+		setBg(box.bgId)
+	if(!box.cgId.is_empty()):
+		setCg(box.cgId)
+	else:
+		clearCg()
 	nextCharTimer.start()
+
+# fades between the past cg and this cg
+func setCg(id: String) -> void:
+	cgTexture.texture = cgs[id]
+
+# empty the cg texture
+func clearCg() -> void:
+	cgTexture.texture = null
 
 # sets the overlasy with a fade
 func setOverlay(color: Color) -> void:
@@ -196,7 +211,7 @@ func playNextScene() -> void:
 # such as the text to display and the expression to set
 class DialogueBox:
 	# singal that will be connected in the main dialogue instance, will show our text
-	signal showBox(text: String, expressionId: String, mcExpression: String, nameText: String, darkenStatus: Dictionary, overlayColor: Color, bgId: String)
+	signal showBox(tbox: DialogueBox)
 	# signal that will lookup a variable then put its value in the first element of the passed array
 	signal lookupVar(varName: String, returnArray: Array)
 	
@@ -216,6 +231,8 @@ class DialogueBox:
 	var darkenStatus : Dictionary
 	# the bg that will be shown when this box is
 	var bgId: String
+	# if set, is the cg that will be shown
+	var cgId: String
 	
 	# create the regex and format the text
 	func _init() -> void:
@@ -280,6 +297,8 @@ class DialogueBox:
 				overlayColor = Color(withoutTag(matched, "overlay "))
 			elif(matched.begins_with("bg ")):
 				bgId = withoutTag(matched, "bg ")
+			elif(matched.begins_with("cg ")): # for cgs, will obscure everything but the dialogue
+				cgId = withoutTag(matched, "cg ")
 			
 			replaceTag(matched, tagReplacement)
 	
@@ -302,7 +321,7 @@ class DialogueBox:
 	
 	# shows this dialogue box by setting the shown text to its text and setting the expression
 	func show() -> void:
-		showBox.emit(dialogueText, expressionId, mcExpression, nameText, darkenStatus, overlayColor, bgId)
+		showBox.emit(self)
 	
 	enum DARKEN_STATUS { DARKEN, LIGHTEN, UNCHANGED}
 

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/menus/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
-[ext_resource type="Texture2D" uid="uid://bkq2u873s6gr" path="res://textures/emil/Émil_Neutral.png" id="3_uewkw"]
+[ext_resource type="Texture2D" uid="uid://b1bnq8j2xa3tx" path="res://textures/cgs/Lance CG_1 UPDATED.png" id="3_a2mmb"]
 [ext_resource type="Texture2D" uid="uid://iscucwpdb2an" path="res://ui/textures/Textbox.png" id="3_uxotw"]
-[ext_resource type="Texture2D" uid="uid://c5gyl7lhfjdw7" path="res://textures/lance/Lance_Blush_1.png" id="4_t4qme"]
+[ext_resource type="Texture2D" uid="uid://v51csf2l2sna" path="res://textures/cgs/Lance CG2.png" id="4_b0u2b"]
 [ext_resource type="Texture2D" uid="uid://bwlv35ivqvykb" path="res://textures/backgrounds/parlour.png" id="4_yg5ib"]
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_pn675"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="6_7n0wu"]
@@ -21,13 +21,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ofy3w")
 script = ExtResource("1_g7hym")
-expressions = {
-"anger": ExtResource("3_uewkw"),
-"content": ExtResource("4_t4qme"),
-"mc": ExtResource("6_7n0wu")
+dialogueScript = "[cg lance_kiss]poop"
+cgs = {
+"lance_kiss": ExtResource("4_b0u2b"),
+"lance_talk": ExtResource("3_a2mmb")
 }
-defaultExpression = "content"
-dialogueScript = "[name LANCE][overlay #000000ff][dark mc] i like [$name], [$subject] [$is] very [dec pretty|handsome|beautiful] [expr content]! [nb][dark char][light mc] peeeee[nb][name mc] but i hate [$object] [expr anger]"
 
 [node name="background" type="TextureRect" parent="."]
 layout_mode = 1
@@ -75,6 +73,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="cgTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
 
 [node name="textBox" type="TextureRect" parent="."]
 layout_mode = 0
