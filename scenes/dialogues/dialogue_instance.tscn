@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcne32iho2ohv"]
+[gd_scene load_steps=12 format=3 uid="uid://dcne32iho2ohv"]
 
 [ext_resource type="Script" path="res://scripts/menus/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://iscucwpdb2an" path="res://ui/textures/Textbox.png" id="3_uxotw"]
 [ext_resource type="Texture2D" uid="uid://v51csf2l2sna" path="res://textures/cgs/Lance CG2.png" id="4_b0u2b"]
 [ext_resource type="Texture2D" uid="uid://bwlv35ivqvykb" path="res://textures/backgrounds/parlour.png" id="4_yg5ib"]
+[ext_resource type="AudioStream" uid="uid://bxvafpkinuwxo" path="res://sfx/dialogue/075653_cinematic-punches-35912.mp3" id="5_k3cem"]
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_pn675"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="6_7n0wu"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="8_j0whe"]
@@ -21,10 +22,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ofy3w")
 script = ExtResource("1_g7hym")
-dialogueScript = "[cg lance_kiss]poop"
+dialogueScript = "[cg lance_kiss][sfx punch]poop"
 cgs = {
 "lance_kiss": ExtResource("4_b0u2b"),
 "lance_talk": ExtResource("3_a2mmb")
+}
+sounds = {
+"punch": ExtResource("5_k3cem")
 }
 
 [node name="background" type="TextureRect" parent="."]
@@ -88,6 +92,9 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 texture = ExtResource("3_uxotw")
+
+[node name="sfxPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"sfx"
 
 [node name="dialoguePanel" type="Panel" parent="."]
 layout_mode = 1

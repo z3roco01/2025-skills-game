@@ -22,6 +22,7 @@ extends Control
 @onready var mcTexture = $mcTexture
 @onready var background = $background
 @onready var cgTexture = $cgTexture
+@onready var sfxPlayer = $sfxPlayer
 @onready var nextCharTimer = $nextCharTimer
 @onready var boopSoundPlayer = $boopPlayer
 # used for things like black screen
@@ -36,6 +37,8 @@ extends Control
 @export var music : String
 # very similar to the backgrounds dict, but for cgs
 @export var cgs : Dictionary
+# much like other dictionaries
+@export var sounds : Dictionary
 # a dictionary that holds all the variables used in dialogue
 var dialogueVariables = {}
 # an array which holds all the dialogue boxes, in the order they play in
@@ -145,19 +148,30 @@ func showBox(box: DialogueBox) -> void:
 		nameTextNode.text = getVar("name")
 	
 	curTextIdx = 0
+	
 	darkenCharacter("mc", box.darkenStatus["mc"])
 	darkenCharacter("char", box.darkenStatus["char"])
+	
 	if(!box.expressionId.is_empty()):
 		changeExpression(box.expressionId)
+	
 	if(!box.mcExpression.is_empty()):
 		mcChangeExpression(box.mcExpression)
+	
 	setOverlay(box.overlayColor)
+	
 	if(!box.bgId.is_empty()):
 		setBg(box.bgId)
+	
 	if(!box.cgId.is_empty()):
 		setCg(box.cgId)
 	else:
 		clearCg()
+	
+	if(!box.sfxId.is_empty()):
+		sfxPlayer.stop()
+		sfxPlayer.stream = sounds[box.sfxId]
+		sfxPlayer.play()
 	nextCharTimer.start()
 
 # fades between the past cg and this cg
@@ -233,6 +247,8 @@ class DialogueBox:
 	var bgId: String
 	# if set, is the cg that will be shown
 	var cgId: String
+	# sound effect that will play on the start of this box
+	var sfxId: String
 	
 	# create the regex and format the text
 	func _init() -> void:
@@ -299,6 +315,8 @@ class DialogueBox:
 				bgId = withoutTag(matched, "bg ")
 			elif(matched.begins_with("cg ")): # for cgs, will obscure everything but the dialogue
 				cgId = withoutTag(matched, "cg ")
+			elif(matched.begins_with("sfx ")): # for sound, will play on the start of box and wont stop till its done
+				sfxId = withoutTag(matched, "sfx ")
 			
 			replaceTag(matched, tagReplacement)
 	
