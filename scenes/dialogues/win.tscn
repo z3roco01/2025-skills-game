@@ -34,4 +34,4 @@ backgrounds = {
 }
 startingBg = "arena"
 dialogueScript = "[name mc][dark char][light mc][expr lance_defeat1][mcexpr mc_happy]Wow! You’re much stronger than I thought you’d be![nb][name lance][dark mc][light char]Wha…[nb][expr lance_pout]Hmph! Seems like you really are a challenge… I could say you’re strong yourself.[nb]I haven’t had a GOOD opponent in awhile, safe to say you’re the first one these past few years![nb]…[nb][expr lance_ecstatic]THAT WAS FUN!!![nb]You may have beaten me this time! But not NEXT TIME![nb]Just you watch! I’ll get you next time![nb][expr lance_happy]And you won’t be able to keep up with me~[nb][name mc][dark char][light mc]Tee hee~[nb]Sure, Lance~ wink"
-music = "lanceBattle"
+music = "parlour"

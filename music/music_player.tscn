@@ -1,16 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba3ie4ej2hnb4"]
+[gd_scene load_steps=7 format=3 uid="uid://ba3ie4ej2hnb4"]
 
 [ext_resource type="Script" path="res://scripts/music_player.gd" id="1_7l0s8"]
 [ext_resource type="AudioStream" uid="uid://4g5qr48obsrf" path="res://music/Alleyway.wav" id="2_cp5li"]
 [ext_resource type="AudioStream" uid="uid://dl2nmsq48kaer" path="res://music/Inside_the_Parlour.wav" id="3_2emhi"]
 [ext_resource type="AudioStream" uid="uid://cp3j7fbilbyxa" path="res://music/Lance_Battle_Music_VER3.wav" id="3_48j2d"]
 [ext_resource type="AudioStream" uid="uid://d0fv2tbsy12pi" path="res://music/Title_Screen.wav" id="5_rotjn"]
+[ext_resource type="AudioStream" uid="uid://dtw714uo57n5r" path="res://music/Basic_Ambiance_TestCityscape.wav" id="6_mw2s2"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
 bus = &"music"
 script = ExtResource("1_7l0s8")
 musicBank = {
 "alleyway": ExtResource("2_cp5li"),
+"city": ExtResource("6_mw2s2"),
 "lanceBattle": ExtResource("3_48j2d"),
 "parlour": ExtResource("3_2emhi"),
 "title": ExtResource("5_rotjn")
