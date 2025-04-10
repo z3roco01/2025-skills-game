@@ -255,3 +255,7 @@ size_flags_horizontal = 4
 text = "Leave"
 script = ExtResource("3_virl1")
 shouldGrow = false
+
+[node name="spacer6" type="Control" parent="ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
