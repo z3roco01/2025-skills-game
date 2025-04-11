@@ -1,14 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcne32iho2ohv"]
+[gd_scene load_steps=15 format=3 uid="uid://dcne32iho2ohv"]
 
-[ext_resource type="Script" path="res://scripts/menus/dialogue_instance.gd" id="1_g7hym"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
 [ext_resource type="Texture2D" uid="uid://b1bnq8j2xa3tx" path="res://textures/cgs/Lance CG_1 UPDATED.png" id="3_a2mmb"]
+[ext_resource type="Texture2D" uid="uid://dnsstq7w7k4o8" path="res://textures/lance/Lance_Neutral.png" id="3_pjyws"]
 [ext_resource type="Texture2D" uid="uid://iscucwpdb2an" path="res://ui/textures/Textbox.png" id="3_uxotw"]
+[ext_resource type="Texture2D" uid="uid://cxa6lsi3l7joa" path="res://textures/lance/Lance_Ecstatic.png" id="4_6qp15"]
 [ext_resource type="Texture2D" uid="uid://v51csf2l2sna" path="res://textures/cgs/Lance CG2.png" id="4_b0u2b"]
 [ext_resource type="Texture2D" uid="uid://bwlv35ivqvykb" path="res://textures/backgrounds/parlour.png" id="4_yg5ib"]
 [ext_resource type="AudioStream" uid="uid://bxvafpkinuwxo" path="res://sfx/dialogue/075653_cinematic-punches-35912.mp3" id="5_k3cem"]
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_pn675"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="6_7n0wu"]
+[ext_resource type="Texture2D" uid="uid://c6ep5wfbqkdlx" path="res://textures/mc/MC_Happy.png" id="6_h044f"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="8_j0whe"]
 [ext_resource type="AudioStream" uid="uid://b6w06n7eynvot" path="res://sfx/dialogue/dialogue_boop.wav" id="10_hvm62"]
 
@@ -22,7 +25,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ofy3w")
 script = ExtResource("1_g7hym")
-dialogueScript = "[cg lance_kiss][sfx punch]poop"
+expressions = {
+"lance_ecstatic": ExtResource("4_6qp15"),
+"lance_neutral": ExtResource("3_pjyws"),
+"mc_happy": ExtResource("6_h044f"),
+"mc_neutral": ExtResource("6_7n0wu")
+}
+defaultExpression = "lance_neutral"
+mcDefaultExpression = "mc_neutral"
+backgrounds = {
+"parlour": ExtResource("4_yg5ib")
+}
+startingBg = "parlour"
+dialogueScript = "[cg lance_kiss]poop"
 cgs = {
 "lance_kiss": ExtResource("4_b0u2b"),
 "lance_talk": ExtResource("3_a2mmb")

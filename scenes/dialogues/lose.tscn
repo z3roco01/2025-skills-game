@@ -28,7 +28,6 @@ expressions = {
 "mc_neutral": ExtResource("3_387w7")
 }
 defaultExpression = "lance_happy"
-mcDefaultExpression = "mc_neutral"
 backgrounds = {
 "arena": ExtResource("8_borpf")
 }
