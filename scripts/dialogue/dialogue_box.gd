@@ -55,12 +55,15 @@ func formatText() -> void:
 		
 		# what the tag will be replaced with in the original script
 		var tagReplacement = ""
-		# now find which type of tag it is
-		# if it starts with a $ then its a varaible tag
-		if(TAG_TYPES[0].doesMatch(matched)):
-			# pass the variable name with the $ over to getVar, which will get the value for replacement
-			tagReplacement = TAG_TYPES[0].matched(matched, self)
-		elif(matched.begins_with("expr ")): # if this tag beings with "expr " then it is an expression change
+		
+		# loop over every tag type and check if it matches
+		for tagType in TAG_TYPES:
+			# if it does match, run its logic and get the replacement
+			# then break from the loop
+			if(tagType.doesMatch(matched)):
+				tagReplacement = tagType.matched(matched, self)
+		
+		if(matched.begins_with("expr ")): # if this tag beings with "expr " then it is an expression change
 			# set the expression id to the tag minus the "expr " at the start
 			expressionId = withoutTag(matched, "expr ")
 		elif(matched.begins_with("mcexpr ")):

@@ -37,6 +37,7 @@ backgrounds = {
 "parlour": ExtResource("4_yg5ib")
 }
 startingBg = "parlour"
+darkenColor = Color(0.458405, 0.458405, 0.458405, 1)
 dialogueScript = "[cg lance_kiss]poop"
 cgs = {
 "lance_kiss": ExtResource("4_b0u2b"),
