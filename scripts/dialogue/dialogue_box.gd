@@ -10,6 +10,9 @@ signal showBox(tbox: DialogueBox)
 # signal that will lookup a variable then put its value in the first element of the passed array
 signal lookupVar(varName: String, returnArray: Array)
 
+# holds an instance of all the tags for comparing
+static var TAG_TYPES = [VarTag.new()]
+
 # the color the overlay will be set to for this box
 var overlayColor = Color(0, 0, 0, 0)
 # the text that well be shown in the text box
@@ -52,12 +55,11 @@ func formatText() -> void:
 		
 		# what the tag will be replaced with in the original script
 		var tagReplacement = ""
-		
 		# now find which type of tag it is
 		# if it starts with a $ then its a varaible tag
-		if(matched.begins_with("$")):
+		if(TAG_TYPES[0].doesMatch(matched)):
 			# pass the variable name with the $ over to getVar, which will get the value for replacement
-			tagReplacement = getVar(matched)
+			tagReplacement = TAG_TYPES[0].matched(matched, self)
 		elif(matched.begins_with("expr ")): # if this tag beings with "expr " then it is an expression change
 			# set the expression id to the tag minus the "expr " at the start
 			expressionId = withoutTag(matched, "expr ")
