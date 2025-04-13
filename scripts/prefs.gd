@@ -13,9 +13,11 @@ func _init() -> void:
 	if prefsErr == OK:
 		# if the prefs file exists and is readable, load all preferences
 		Identity.loadFromConfig(_prefs)
+		Settings.loadFromConfig(_prefs)
 	else:
 		# there is a problem with the config, most likely need to create the file
 		# create a prefs file with the default values
 		Identity.saveToConfig(_prefs, _PREFS_PATH)
+		Settings.saveToConfig(_prefs, _PREFS_PATH)
 	
 	print(Identity)
