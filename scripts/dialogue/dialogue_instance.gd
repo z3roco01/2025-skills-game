@@ -120,7 +120,7 @@ func mcChangeExpression(expressionId: String) -> void:
 
 # if passed in "mc" for the char it will set the mcs darkness, and same for "char" for the other character
 # if darkness is DARKEN modulate will be set to darkenColor and if LIGTHEN will be set to lightenColor
-func darkenCharacter(char: String, darkness: int) -> void:
+func darkenCharacter(chr: String, darkness: int) -> void:
 	var darknessColor : Color
 	# set the color that the darkness is ( or return if unchanged )
 	if(darkness == DarknessStatus.UNCHANGED):
@@ -131,9 +131,9 @@ func darkenCharacter(char: String, darkness: int) -> void:
 		darknessColor = lightenColor
 	
 	# then set the proper textures modulate value
-	if(char == "mc"):
+	if(chr == "mc"):
 		mcTexture.modulate = darknessColor
-	elif(char == "char"):
+	elif(chr == "char"):
 		characterTexture.modulate = darknessColor
 
 # called by a dialogue box, will show its text and expression
@@ -141,7 +141,6 @@ func showBox(box: DialogueBox) -> void:
 	dialogueTextNode.text = ""
 	textToShow = box.dialogueText
 	
-	var lookupReturn : Array[String]
 	if(!box.nameText.is_empty()): # only set name when it is being changed
 		nameTextNode.text = box.nameText
 	if(box.nameText == "mc"): # replace mc with the players name
@@ -217,8 +216,10 @@ func _on_gui_input(event: InputEvent) -> void:
 
 # shows the next scene and kills this one
 func playNextScene() -> void:
-	var instance = nextScene.instantiate()
-	add_sibling(instance)
+	# obv dont wanna cause errors if its not there, just kill it
+	if(nextScene != null):
+		var instance = nextScene.instantiate()
+		add_sibling(instance)
 	queue_free()
 
 # means we are ready to show the next character

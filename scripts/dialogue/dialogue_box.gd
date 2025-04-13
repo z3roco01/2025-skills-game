@@ -61,7 +61,7 @@ func formatText() -> void:
 			# if it does match, run its logic and get the replacement
 			# then break from the loop
 			if(tagType.doesMatch(matched)):
-				tagReplacement = tagType.matched(matched, self)
+				tagReplacement = tagType.matched(tagType.stripPrefix(matched), self)
 		
 		if(matched.begins_with("expr ")): # if this tag beings with "expr " then it is an expression change
 			# set the expression id to the tag minus the "expr " at the start
@@ -119,7 +119,7 @@ func getVar(varName: String) -> String:
 	var returnedVal = [""]
 	# emit a signal to the dialogue instance that looks up the variable and puts it in the passed array
 	# need to remove the $ first
-	lookupVar.emit(varName.lstrip("$"), returnedVal)
+	lookupVar.emit(varName, returnedVal)
 	
 	return returnedVal[0]
 

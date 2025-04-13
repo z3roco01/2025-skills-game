@@ -4,8 +4,8 @@ extends Tag
 
 class_name VarTag
 
-func doesMatch(tag: String) -> bool:
-	return tag.begins_with("$")
-
 func matched(tag: String, box: DialogueBox) -> String:
 	return box.getVar(tag)
+
+func getPrefix() -> String:
+	return "$"

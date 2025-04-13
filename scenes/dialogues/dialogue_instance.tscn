@@ -38,7 +38,7 @@ backgrounds = {
 }
 startingBg = "parlour"
 darkenColor = Color(0.458405, 0.458405, 0.458405, 1)
-dialogueScript = "[cg lance_kiss]poop"
+dialogueScript = "[cg lance_kiss][$name]"
 cgs = {
 "lance_kiss": ExtResource("4_b0u2b"),
 "lance_talk": ExtResource("3_a2mmb")
