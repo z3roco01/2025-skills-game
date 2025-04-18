@@ -11,7 +11,19 @@ signal showBox(tbox: DialogueBox)
 signal lookupVar(varName: String, returnArray: Array)
 
 # holds an instance of all the tags for comparing
-static var TAG_TYPES = [VarTag.new()]
+static var TAG_TYPES: Array[Tag] = [
+	VarTag.new(),
+	VarRepTag.create("expressionId", "expr "), # expression tag [expr lance_ecstatic]
+	VarRepTag.create("mcExpression", "mcexpr "), # mc expression tag [mcexpr mc_happy]
+	DecTag.new(),
+	VarRepTag.create("nameText", "name"), # name tag [name MC]
+	DarkTag.new(),
+	LightTag.new(),
+	OverylayTag.new(),
+	VarRepTag.create("bgId", "bg "), # background tag [bg parlour]
+	VarRepTag.create("cgId", "cg "), # cg tag [cg lance_kiss]
+	VarRepTag.create("sfxId", "sfx "), # sound effect tag [sfx punch]
+	]
 
 # the color the overlay will be set to for this box
 var overlayColor = Color(0, 0, 0, 0)
@@ -62,47 +74,6 @@ func formatText() -> void:
 			# then break from the loop
 			if(tagType.doesMatch(matched)):
 				tagReplacement = tagType.matched(tagType.stripPrefix(matched), self)
-		
-		if(matched.begins_with("expr ")): # if this tag beings with "expr " then it is an expression change
-			# set the expression id to the tag minus the "expr " at the start
-			expressionId = withoutTag(matched, "expr ")
-		elif(matched.begins_with("mcexpr ")):
-			mcExpression = withoutTag(matched, "mcexpr ")
-		elif(matched.begins_with("dec ")): # if the tag begins with "dec " then its a decider
-			# strip the tag type off of the left, then split by | up to 3 options
-			var choices = withoutTag(matched, "dec ").split("|", true, 3)
-			# choose the one that lines up with the players descriptor choice
-			var choice = choices[Identity.descriptors]
-			# then replace the tag with the chosen string
-			tagReplacement = choice
-		elif(matched.begins_with("name ")): # when this tag appears, set the name for this box
-			# strip off the formatting and set the name
-			nameText = withoutTag(matched, "name ")
-			nameText = nameText.lstrip(" ")
-		elif(matched.begins_with("dark ")): # will contain the character to darken this box
-			# get it as lowercase so case doesnt matter
-			var charsToDarken = withoutTag(matched, "dark ").to_lower()
-			
-			if(charsToDarken.contains("mc")):
-				darkenStatus["mc"] = DarknessStatus.DARKEN
-			if(charsToDarken.contains("char")):
-				darkenStatus["char"] = DarknessStatus.DARKEN
-		elif(matched.begins_with("light ")): # will contain the characters to lighten this box
-			# get it as lowercase so case doesnt matter
-			var charsToDarken = withoutTag(matched, "lighten ").to_lower()
-			
-			if(charsToDarken.contains("mc")):
-				darkenStatus["mc"] = DarknessStatus.LIGHTEN
-			if(charsToDarken.contains("char")):
-				darkenStatus["char"] = DarknessStatus.LIGHTEN
-		elif(matched.begins_with("overlay ")): # [overlay #041fcaff]
-			overlayColor = Color(withoutTag(matched, "overlay "))
-		elif(matched.begins_with("bg ")):
-			bgId = withoutTag(matched, "bg ")
-		elif(matched.begins_with("cg ")): # for cgs, will obscure everything but the dialogue
-			cgId = withoutTag(matched, "cg ")
-		elif(matched.begins_with("sfx ")): # for sound, will play on the start of box and wont stop till its done
-			sfxId = withoutTag(matched, "sfx ")
 		
 		replaceTag(matched, tagReplacement)
 

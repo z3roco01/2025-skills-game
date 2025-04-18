@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dcne32iho2ohv"]
+[gd_scene load_steps=16 format=3 uid="uid://dcne32iho2ohv"]
 
 [ext_resource type="Script" path="res://scripts/dialogue/dialogue_instance.gd" id="1_g7hym"]
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_ofy3w"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bu0446mkkjxj6" path="res://textures/lance/Lance_Happy.png" id="5_pn675"]
 [ext_resource type="Texture2D" uid="uid://dsvfoskvdshar" path="res://textures/mc/MC_Sprite.png" id="6_7n0wu"]
 [ext_resource type="Texture2D" uid="uid://c6ep5wfbqkdlx" path="res://textures/mc/MC_Happy.png" id="6_h044f"]
+[ext_resource type="Texture2D" uid="uid://bb4jjm2rm142y" path="res://textures/backgrounds/arena.png" id="8_apf0v"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="8_j0whe"]
 [ext_resource type="AudioStream" uid="uid://b6w06n7eynvot" path="res://sfx/dialogue/dialogue_boop.wav" id="10_hvm62"]
 
@@ -34,11 +35,12 @@ expressions = {
 defaultExpression = "lance_neutral"
 mcDefaultExpression = "mc_neutral"
 backgrounds = {
+"arena": ExtResource("8_apf0v"),
 "parlour": ExtResource("4_yg5ib")
 }
 startingBg = "parlour"
 darkenColor = Color(0.458405, 0.458405, 0.458405, 1)
-dialogueScript = "[cg lance_kiss][$name]"
+dialogueScript = "[dec asd|abc|123][sfx punch]"
 cgs = {
 "lance_kiss": ExtResource("4_b0u2b"),
 "lance_talk": ExtResource("3_a2mmb")

@@ -4,8 +4,8 @@ extends Tag
 
 class_name VarTag
 
-func matched(tag: String, box: DialogueBox) -> String:
-	return box.getVar(tag)
+func matched(varName: String, box: DialogueBox) -> String:
+	return box.getVar(varName)
 
 func getPrefix() -> String:
 	return "$"

@@ -12,7 +12,7 @@ func doesMatch(tag: String) -> bool:
 # is passed the tag with the tag prefix removed
 # returns what it will be replaced with
 # this does have access to all of the boxes properties, methods and signals
-func matched(_tag: String, _box: DialogueBox) -> String:
+func matched(_tagArgs: String, _box: DialogueBox) -> String:
 	return ""
 
 # used to match the tag and to remove it automatically
