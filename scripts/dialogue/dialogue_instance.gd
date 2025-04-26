@@ -63,6 +63,9 @@ func _ready() -> void:
 	if(!music.is_empty()):
 		MusicPlayer.playMusic(music)
 	
+	# load in the text speed
+	nextCharTimer.wait_time /= Settings.scrollSpeedMul
+	
 	setBg(startingBg)
 	
 	# set the characters expression to the default

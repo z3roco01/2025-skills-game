@@ -4,6 +4,8 @@ const _VOLUME_CONFIG_SECT = "volume"
 const _VOLUME_MASTER_KEY = "master"
 const _VOLUME_MUSIC_KEY = "music"
 const _VOLUME_SFX_KEY = "sfx"
+var scrollSpeedMul = 1
+
 # holds callables to set the vars, so we can do things easy
 var busVolDict = {
 	"Master": setMasterVol,

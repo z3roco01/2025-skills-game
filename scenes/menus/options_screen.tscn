@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3rj44358t1hs"]
+[gd_scene load_steps=9 format=3 uid="uid://c3rj44358t1hs"]
 
 [ext_resource type="Theme" uid="uid://pitvhinrum0q" path="res://ui/theme/ui.theme" id="1_nujkm"]
 [ext_resource type="FontFile" uid="uid://dsq807dy0tn51" path="res://ui/fonts/Laquile Serif.ttf" id="3_5lxlk"]
 [ext_resource type="Script" path="res://scripts/menus/volume_slider.gd" id="3_stadj"]
+[ext_resource type="Script" path="res://scripts/menus/text_speed_scroll.gd" id="4_t25iw"]
 [ext_resource type="FontFile" uid="uid://dfyug0ly7cnnn" path="res://ui/fonts/Rosamby.ttf" id="4_v3sct"]
 [ext_resource type="Script" path="res://scripts/menus/action_bind_button.gd" id="4_y445r"]
 [ext_resource type="Script" path="res://scripts/menus/back_button.gd" id="5_5rv80"]
@@ -60,7 +61,6 @@ offset_top = 149.0
 offset_bottom = -5.39001
 grow_horizontal = 2
 grow_vertical = 2
-scroll_vertical = 934
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
@@ -147,6 +147,42 @@ max_value = 1.0
 step = 0.01
 script = ExtResource("3_stadj")
 busName = "sfx"
+
+[node name="spacerAgain" type="Control" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="gameplay" type="Label" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.185247, 0.0884369, 0.150192, 1)
+theme_override_fonts/font = ExtResource("3_5lxlk")
+theme_override_font_sizes/font_size = 50
+text = "GAMEPLAY
+"
+horizontal_alignment = 1
+
+[node name="textSpeed" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 90
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/textSpeed"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_5lxlk")
+text = "TEXT SPEED"
+
+[node name="spacer" type="Control" parent="ScrollContainer/VBoxContainer/textSpeed"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="textSpeed" type="HSlider" parent="ScrollContainer/VBoxContainer/textSpeed"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = 0.25
+max_value = 1.5
+step = 0.01
+value = 0.25
+script = ExtResource("4_t25iw")
 
 [node name="spacer2" type="Control" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
