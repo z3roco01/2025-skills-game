@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://scripts/menus/text_speed_scroll.gd" id="4_t25iw"]
 [ext_resource type="FontFile" uid="uid://dfyug0ly7cnnn" path="res://ui/fonts/Rosamby.ttf" id="4_v3sct"]
 [ext_resource type="Script" path="res://scripts/menus/action_bind_button.gd" id="4_y445r"]
-[ext_resource type="Script" path="res://scripts/menus/back_button.gd" id="5_5rv80"]
 [ext_resource type="Script" path="res://scripts/menus/identity_input.gd" id="6_mouqk"]
+[ext_resource type="Script" path="res://scripts/menus/settings_back_button.gd" id="8_o766f"]
 
 [node name="options_screen" type="Control"]
 layout_mode = 3
@@ -436,5 +436,5 @@ size_flags_stretch_ratio = 0.0
 theme_override_font_sizes/font_size = 50
 text = "Back
 "
-script = ExtResource("5_5rv80")
+script = ExtResource("8_o766f")
 root = NodePath("../../..")

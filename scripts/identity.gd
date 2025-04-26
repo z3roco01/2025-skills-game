@@ -17,11 +17,11 @@ enum Descriptors {FEMININE, MASCULINE, NEUTRAL}
 const _CONFIG_SECTION = "identity"
 const NAME_KEY = "name"
 const DESCRIPTORS_KEY = "descriptors"
-const PRONOUN_SUBJ_KEY = "pronounSubjective"
-const PRONOUN_OBJ_KEY  = "pronounObjective"
-const PRONOUN_DETRM_KEY = "pronounDeterminer"
-const PRONOUN_POSS_KEY = "pronounPossessive"
-const PRONOUN_REFL_KEY  = "pronounReflexive"
+const PRONOUN_SUBJ_KEY = "pronoun_subjective"
+const PRONOUN_OBJ_KEY  = "pronoun_objective"
+const PRONOUN_DETRM_KEY = "pronoun_determiner"
+const PRONOUN_POSS_KEY = "pronoun_possessive"
+const PRONOUN_REFL_KEY  = "pronoun_reflexive"
 
 # saves this identity object to a passed ConfigFile
 func saveToConfig(config: ConfigFile, path: String) -> void:

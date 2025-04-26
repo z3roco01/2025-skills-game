@@ -13,4 +13,3 @@ func _value_changed(new_value: float) -> void:
 	# set new volume
 	AudioServer.set_bus_volume_db(idx, linear_to_db(value))
 	Settings.busVolDict[busName].call(value)
-	Settings.saveToConfig(Prefs._prefs, Prefs._PREFS_PATH)

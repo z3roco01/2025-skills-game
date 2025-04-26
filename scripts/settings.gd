@@ -4,7 +4,9 @@ const _VOLUME_CONFIG_SECT = "volume"
 const _VOLUME_MASTER_KEY = "master"
 const _VOLUME_MUSIC_KEY = "music"
 const _VOLUME_SFX_KEY = "sfx"
-var scrollSpeedMul = 1
+
+const _GAMEPLAY_CONFIG_SECT = "gameplay"
+const _TEXT_SPEED_KEY = "text_speed"
 
 # holds callables to set the vars, so we can do things easy
 var busVolDict = {
@@ -16,16 +18,19 @@ var busVolDict = {
 var masterVolume = 0.0
 var musicVolume = 0.0
 var sfxVolume = 0.0
+var textSpeed = 1.0
 
 func loadFromConfig(config: ConfigFile) -> void:
 	masterVolume = loadVolume(config, _VOLUME_CONFIG_SECT, _VOLUME_MASTER_KEY, "Master")
 	musicVolume = loadVolume(config, _VOLUME_CONFIG_SECT, _VOLUME_MUSIC_KEY, "music")
 	sfxVolume = loadVolume(config, _VOLUME_CONFIG_SECT, _VOLUME_SFX_KEY, "sfx")
+	textSpeed = config.get_value(_GAMEPLAY_CONFIG_SECT, _TEXT_SPEED_KEY)
 
 func saveToConfig(config: ConfigFile, path: String) -> void:
 	config.set_value(_VOLUME_CONFIG_SECT, _VOLUME_MASTER_KEY, masterVolume)
 	config.set_value(_VOLUME_CONFIG_SECT, _VOLUME_MUSIC_KEY, musicVolume)
 	config.set_value(_VOLUME_CONFIG_SECT, _VOLUME_SFX_KEY, sfxVolume)
+	config.set_value(_GAMEPLAY_CONFIG_SECT, _TEXT_SPEED_KEY, textSpeed)
 	
 	config.save(path)
 
