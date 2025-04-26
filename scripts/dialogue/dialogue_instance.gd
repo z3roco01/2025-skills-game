@@ -55,7 +55,6 @@ var curTextIdx = 0
 
 # handles the boop sound effect playing
 var random = RandomNumberGenerator.new()
-var shouldPlayBoops = true # tracks whenboops should play
 const MIN_PITCH_SCALE = 3.4 # max and min of the boops pitch
 const MAX_PITCH_SCALE = 3.7
 
@@ -210,12 +209,10 @@ func _on_gui_input(event: InputEvent) -> void:
 			if(curDialogueBox < dialogueBoxCount):
 				dialogueBoxes[curDialogueBox].show()
 				curDialogueBox += 1
-				shouldPlayBoops = true # yes boops
 			else:
 				playNextScene()
 		else: # comptely show all text
 			dialogueTextNode.text = textToShow
-			shouldPlayBoops = false # no more boops >:(
 
 # shows the next scene and kills this one
 func playNextScene() -> void:
@@ -230,10 +227,9 @@ func _on_next_char_timer_timeout() -> void:
 	if(!textToShow.is_empty() and dialogueTextNode.text != textToShow and curTextIdx < textToShow.length()):
 		dialogueTextNode.text += textToShow[curTextIdx]
 		curTextIdx += 1
+		# randomise boop sound pitch
+		boopSoundPlayer.pitch_scale = random.randf_range(MIN_PITCH_SCALE, MAX_PITCH_SCALE)
+		# play boop
+		boopSoundPlayer.play()
 	if(curTextIdx < textToShow.length()):
 		nextCharTimer.start()
-	if(shouldPlayBoops): # check if boop allowed
-			# randomise boop sound pitch
-			boopSoundPlayer.pitch_scale = random.randf_range(MIN_PITCH_SCALE, MAX_PITCH_SCALE)
-			# play boop
-			boopSoundPlayer.play()
