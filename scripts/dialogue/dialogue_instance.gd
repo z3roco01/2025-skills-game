@@ -64,7 +64,7 @@ func _ready() -> void:
 		MusicPlayer.playMusic(music)
 	
 	# load in the text speed
-	nextCharTimer.wait_time /= Settings.scrollSpeedMul
+	nextCharTimer.wait_time /= Settings.textSpeed
 	
 	setBg(startingBg)
 	
